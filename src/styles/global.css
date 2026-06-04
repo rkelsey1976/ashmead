@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "@fontsource/barlow-condensed/700.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/700.css";
+
+@theme {
+  --color-primary: #0F1923;
+  --color-section: #1A2332;
+  --color-card: #1E293B;
+  --color-accent: #D4641C;
+  --color-accent-light: #E87722;
+  --color-heading: #F1F5F9;
+  --color-body: #94A3B8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  color: var(--color-body);
+  background-color: var(--color-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Barlow Condensed", sans-serif;
+  color: var(--color-heading);
+}
