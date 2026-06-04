@@ -1,28 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import ProductGrid from '../components/ProductGrid.astro';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
-import { brands } from '../data/site';
+import { brands, PHONE, PHONE_HREF } from '../data/site';
 ---
 
 <Layout title="Roofing Supplies Bristol | Ashmead Roofing Supplies" description="Bristol's trusted roofing trade counter. Concrete tiles, slates, flat roofing, membranes, fixings & more. Trade prices, expert advice. Call 0117 986 0600.">
   <!-- Hero -->
-  <section class="bg-gradient-to-br from-primary via-section to-primary py-16 md:py-24 lg:py-32">
+  <section class="bg-section-highlight py-16 md:py-24 lg:py-32 border-b-4 border-primary">
     <div class="max-w-7xl mx-auto px-4">
       <div class="max-w-3xl">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading uppercase tracking-wide text-heading mb-6">Roofing Supplies Bristol</h1>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Roofing Supplies Bristol</h1>
         <p class="text-lg md:text-xl text-body mb-8">Bristol's trusted roofing trade counter. We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with tiles, slates, flat roofing, membranes, fixings and everything in between.</p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="tel:+441179860600" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-light text-white font-bold px-8 py-4 rounded text-lg transition-colors">
+          <a href={PHONE_HREF} class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-bold px-8 py-4 rounded text-lg transition-colors">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.502 5.502l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            0117 986 0600
+            {PHONE}
           </a>
-          <a href="/products" class="inline-block bg-card hover:bg-card/80 text-heading border border-card hover:border-accent/50 font-bold px-8 py-4 rounded transition-colors text-lg text-center">
+          <a href="/products" class="inline-block bg-white hover:bg-gray-50 text-charcoal border border-border hover:border-primary font-bold px-8 py-4 rounded transition-colors text-lg text-center">
             View Products
           </a>
         </div>
@@ -31,35 +30,35 @@ import { brands } from '../data/site';
   </section>
 
   <!-- Why Choose Ashmead -->
-  <section class="bg-section py-16 md:py-20">
+  <section class="bg-section-highlight py-16 md:py-20">
     <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-heading text-center mb-12">Why Choose Ashmead?</h2>
+      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal text-center mb-12">Why Choose Ashmead?</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-card rounded-lg p-8 border border-card">
-          <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-lg p-8 border border-border hover:border-primary hover:shadow-lg transition-all">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 class="text-heading font-heading text-xl font-bold uppercase tracking-wide mb-3">Trade Expertise</h3>
+          <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-3">Trade Expertise</h3>
           <p class="text-body text-sm leading-relaxed">Our team has decades of combined roofing experience. We don't just sell materials — we advise on product selection, calculate quantities and help you specify the right system for every project.</p>
         </div>
-        <div class="bg-card rounded-lg p-8 border border-card">
-          <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-lg p-8 border border-border hover:border-primary hover:shadow-lg transition-all">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
           </div>
-          <h3 class="text-heading font-heading text-xl font-bold uppercase tracking-wide mb-3">Massive Stock</h3>
+          <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-3">Massive Stock</h3>
           <p class="text-body text-sm leading-relaxed">Our Bristol depot holds one of the widest ranges of roofing materials in the South West. From concrete tiles to EPDM membranes, battens to lead sheet — it's on the shelf and ready for collection or delivery.</p>
         </div>
-        <div class="bg-card rounded-lg p-8 border border-card">
-          <div class="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="bg-white rounded-lg p-8 border border-border hover:border-primary hover:shadow-lg transition-all">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <h3 class="text-heading font-heading text-xl font-bold uppercase tracking-wide mb-3">Fast Delivery</h3>
+          <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-3">Fast Delivery</h3>
           <p class="text-body text-sm leading-relaxed">We deliver across Bristol, Bath, Somerset, Gloucester and Wiltshire — often next day. Need it faster? Our Bristol depot is open for trade collection, so you can pick up what you need when you need it.</p>
         </div>
       </div>
@@ -71,11 +70,11 @@ import { brands } from '../data/site';
   <!-- Brands -->
   <section class="bg-section py-16 md:py-20">
     <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-heading text-center mb-12">Brands We Supply</h2>
+      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal text-center mb-12">Brands We Supply</h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {brands.map(brand => (
-          <div class="bg-card rounded-lg p-4 text-center border border-card hover:border-accent/50 transition-colors">
-            <span class="text-heading font-heading text-base font-bold uppercase tracking-wide">{brand}</span>
+          <div class="bg-white rounded-lg p-4 text-center border border-border hover:border-primary transition-colors">
+            <span class="text-charcoal font-heading text-base font-bold uppercase tracking-wide">{brand}</span>
           </div>
         ))}
       </div>

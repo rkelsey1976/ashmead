@@ -16,7 +16,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Ashmead Roofing Supplies Ltd",
-  "telephone": "0117 986 0600",
+  "telephone": "+441179860600",
   "url": "https://www.ashmeadroofing.co.uk",
   "address": {
     "@type": "PostalAddress",
@@ -48,7 +48,7 @@ const allSchema = [localBusinessSchema, ...schema];
   <title>{title}</title>
   <script type="application/ld+json" set:html={JSON.stringify(allSchema)} />
 </head>
-<body class="bg-primary text-body font-body min-h-screen flex flex-col">
+<body class="bg-white text-body font-body min-h-screen flex flex-col">
   <Header />
   <main class="flex-1">
     <slot />

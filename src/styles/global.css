@@ -5,13 +5,17 @@
 @import "@fontsource/dm-sans/700.css";
 
 @theme {
-  --color-primary: #0F1923;
-  --color-section: #1A2332;
-  --color-card: #1E293B;
-  --color-accent: #D4641C;
-  --color-accent-light: #E87722;
-  --color-heading: #F1F5F9;
-  --color-body: #94A3B8;
+  --color-primary: #009900;
+  --color-primary-hover: #007700;
+  --color-charcoal: #393939;
+  --color-body: #555555;
+  --color-section: #F5F5F5;
+  --color-section-highlight: #F0F7F0;
+  --color-card: #FFFFFF;
+  --color-border: #E0E0E0;
+  --color-accent: #009900;
+  --color-accent-light: #007700;
+  --color-heading: #393939;
 }
 
 html {
@@ -21,7 +25,7 @@ html {
 body {
   font-family: "DM Sans", sans-serif;
   color: var(--color-body);
-  background-color: var(--color-primary);
+  background-color: #FFFFFF;
 }
 
 h1, h2, h3, h4, h5, h6 {
