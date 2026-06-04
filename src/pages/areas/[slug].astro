@@ -3,85 +3,73 @@ import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
-import SectionHeading from '../../components/SectionHeading.astro';
-import AreaCard from '../../components/AreaCard.astro';
-import ProductCard from '../../components/ProductCard.astro';
+import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../../data/site';
 import { areas } from '../../data/areas';
-import { products } from '../../data/products';
-import { PHONE, heroImages } from '../../data/site';
+import { heroImages } from '../../data/site';
 
 export function getStaticPaths() {
   return areas.map(area => ({
     params: { slug: area.slug },
-    props: { area }
+    props: { area },
   }));
 }
 
 const { area } = Astro.props;
-const heroImage = heroImages[area.slug as keyof typeof heroImages] || heroImages.home;
-
+const heroImage = heroImages[area.slug] || heroImages.home;
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
-  { label: 'Areas', href: '/areas' },
-  { label: area.name, href: `/areas/${area.slug}` }
+  { label: 'Areas We Cover', href: '/areas' },
+  { label: area.name },
 ];
 ---
 
-<Layout title={area.metaTitle} description={area.metaDescription}>
-  <!-- Area Hero — full-width image with dark overlay -->
-  <section class="relative overflow-hidden min-h-[320px]">
+<Layout title={`${area.h1} | Ashmead Roofing Supplies`} description={area.metaDesc}>
+  <!-- Area Hero — diagonal split -->
+  <section class="relative overflow-hidden min-h-[400px] md:min-h-[500px]">
     <div class="absolute inset-0">
-      <img src={heroImage} alt={area.name} class="w-full h-full object-cover" loading="eager" />
-      <div class="absolute inset-0 bg-charcoal/70"></div>
+      <img src={heroImage} alt="" class="w-full h-full object-cover" loading="eager" />
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28 flex items-center justify-center min-h-[320px]">
-      <div class="text-center max-w-3xl mx-auto">
-        <div class="text-white/70 text-sm font-heading uppercase tracking-widest mb-3">
+    <div class="absolute inset-0 bg-charcoal" style="clip-path: polygon(0 0, 65% 0, 40% 100%, 0 100%)"></div>
+    <div class="absolute inset-0" style="clip-path: polygon(64.5% 0, 65.5% 0, 40.5% 100%, 39.5% 100%); background: #009900;"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 flex items-center min-h-[400px] md:min-h-[500px]">
+      <div class="max-w-xl">
+        <div class="text-white/60 text-sm font-heading uppercase tracking-widest mb-4">
           {breadcrumbItems.map((item, i) => (
             <>{i > 0 && <span class="mx-2">/</span>}<a href={item.href} class="hover:text-white transition-colors">{item.label}</a></>
           ))}
         </div>
-        <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-primary mb-4">{area.h1}</h1>
-        <p class="text-lg text-white/90 mb-8">{area.shortDesc}</p>
-        <Button variant="white" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-primary mb-6">{area.h1}</h1>
+        <p class="text-lg text-white/80 mb-8">{area.shortDesc}</p>
+        <Button variant="primary" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
       </div>
     </div>
   </section>
 
-  <!-- Area Description -->
-  <section class="section-white section-padding">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="max-w-3xl">
-        <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Roofing Supplies in {area.name}</h2>
-        <p class="text-body leading-relaxed">{area.longDesc}</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Cross-link: Products available in this area -->
-  <section class="section-grey section-padding">
-    <div class="container">
-      <SectionHeading text={`Products Available in ${area.name}`} />
-      <p class="text-body text-center max-w-2xl mx-auto mb-10">We supply roofing materials across {area.name}. Click on any product for details, pricing and availability.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map(product => (
-          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Other areas -->
+  <!-- Area Content -->
   <section class="section-white section-padding">
     <div class="container">
-      <SectionHeading text="Other Areas We Cover" />
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {areas.filter(a => a.slug !== area.slug).map(a => (
-          <AreaCard name={a.name} shortDesc={a.shortDesc} href={`/areas/${a.slug}`} />
-        ))}
+      <div class="max-w-4xl">
+        <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">{area.h1} — Expert Roofing Supply</h2>
+        <div class="prose prose-lg text-body leading-relaxed space-y-4" set:html={area.longDesc} />
       </div>
+
+      {area.products && area.products.length > 0 && (
+        <div class="mt-12">
+          <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Roofing Supplies in {area.name}</h2>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {area.products.map(product => (
+              <li class="flex items-center gap-2 text-body">
+                <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <a href={`/products/${product.slug}`} class="hover:text-primary transition-colors">{product.name}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   </section>
 
-  <CtaBanner title={`Roofing Supplies ${area.name}`} subtitle={`Call our trade team for pricing and delivery across ${area.name} and the surrounding area.`} />
+  <CtaBanner />
 </Layout>

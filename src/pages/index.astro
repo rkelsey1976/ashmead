@@ -5,26 +5,31 @@ import FeatureCard from '../components/FeatureCard.astro';
 import ProductCard from '../components/ProductCard.astro';
 import AreaCard from '../components/AreaCard.astro';
 import BrandBar from '../components/BrandBar.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import Button from '../components/Button.astro';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, heroImages } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
-import { heroImages } from '../data/site';
 ---
 
-<Layout title="Roofing Supplies Bristol | Ashmead Roofing Supplies" description="Bristol's trusted roofing trade counter. Concrete tiles, slates, flat roofing, membranes, fixings & more. Trade prices, expert advice. Call 0117 986 0600.">
-  <!-- Hero -->
-  <section class="relative overflow-hidden min-h-[400px] md:min-h-[500px] lg:min-h-[600px]">
+<Layout title="Roofing Supplies Bristol | Ashmead Roofing Supplies" description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter. Tiles, slates, flat roofing, membranes, battens, fixings & more. Trade pricing, expert advice, fast delivery. Call 0117 986 0600.">
+  <!-- Hero — diagonal split: dark left with text, image/gradient right -->
+  <section class="relative overflow-hidden min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+    <!-- Right side: subtle gradient (will become a photo later) -->
     <div class="absolute inset-0">
-      <img src={heroImages.home} alt="Ashmead Roofing Supplies depot" class="w-full h-full object-cover" loading="eager" />
-      <div class="absolute inset-0 bg-charcoal/70"></div>
+      <img src={heroImages.home} alt="" class="w-full h-full object-cover" loading="eager" />
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28 lg:py-36 flex items-center justify-center min-h-[400px] md:min-h-[500px] lg:min-h-[600px]">
-      <div class="text-center max-w-3xl mx-auto">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading uppercase tracking-wide text-primary mb-6">Roofing Supplies Bristol</h1>
-        <p class="text-lg md:text-xl text-white/90 mb-8">Bristol's trusted roofing trade counter. We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with tiles, slates, flat roofing, membranes, fixings and everything in between.</p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button variant="white" href="phone" icon="phone" size="lg" />
+    <!-- Diagonal dark overlay — clips from left, sweeping diagonal -->
+    <div class="absolute inset-0 bg-charcoal" style="clip-path: polygon(0 0, 65% 0, 40% 100%, 0 100%)"></div>
+    <!-- Green accent line along the diagonal -->
+    <div class="absolute inset-0" style="clip-path: polygon(64.5% 0, 65.5% 0, 40.5% 100%, 39.5% 100%); background: #009900;"></div>
+    <!-- Content on dark side -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-24 lg:py-32 flex items-center min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+      <div class="max-w-xl">
+        <p class="text-primary font-heading uppercase tracking-widest text-sm mb-4">Bristol's Trade Counter</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading uppercase tracking-wide text-white mb-6">Roofing Supplies Bristol</h1>
+        <p class="text-lg md:text-xl text-white/80 mb-8">We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with tiles, slates, flat roofing, membranes, fixings and everything in between.</p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <Button variant="primary" href="phone" icon="phone" size="lg" />
           <a href="/products" class="inline-block border-2 border-white text-white hover:bg-white hover:text-charcoal font-bold px-8 py-4 rounded transition-colors text-lg text-center">View Products</a>
         </div>
       </div>
@@ -32,34 +37,37 @@ import { heroImages } from '../data/site';
   </section>
 
   <!-- Why Choose Ashmead -->
-  <section class="section-green section-padding">
-    <div class="container">
-      <SectionHeading text="Why Choose Ashmead?" />
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <FeatureCard title="Trade Expertise" description="Our team has decades of combined roofing experience. We don't just sell materials — we advise on product selection, calculate quantities and help you specify the right system for every project." icon="trade" />
-        <FeatureCard title="Massive Stock" description="Our Bristol depot holds one of the widest ranges of roofing materials in the South West. From concrete tiles to EPDM membranes, battens to lead sheet — it's on the shelf and ready for collection or delivery." icon="stock" />
-        <FeatureCard title="Fast Delivery" description="We deliver across Bristol, Bath, Somerset, Gloucester and Wiltshire — often next day. Need it faster? Our Bristol depot is open for trade collection, so you can pick up what you need when you need it." icon="delivery" />
-      </div>
-    </div>
-  </section>
-
-  <!-- Products Grid -->
   <section class="section-white section-padding">
     <div class="container">
-      <SectionHeading text="Our Products" />
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map(product => (
-          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} />
-        ))}
+      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Why Choose Ashmead?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <FeatureCard title="Trade Expertise" description="Our team has years of on-the-tools experience. We advise on products, calculate quantities and help specify the right system first time." icon="trade" />
+        <FeatureCard title="Massive Stock" description="One of the widest ranges of roofing materials in the South West, ready for immediate collection or next-day delivery." icon="stock" />
+        <FeatureCard title="Fast Delivery" description="Our fleet covers Bristol, Bath, Somerset, Gloucester and Wiltshire. Need it faster? Collect from our Bristol depot." icon="delivery" />
       </div>
     </div>
   </section>
 
-  <!-- Areas Grid -->
+  <!-- Products Preview -->
   <section class="section-grey section-padding">
     <div class="container">
-      <SectionHeading text="Areas We Cover" />
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Our Products</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {products.slice(0, 8).map(product => (
+          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} />
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/products" class="inline-block bg-primary hover:bg-primary-hover text-white font-bold px-8 py-4 rounded transition-colors text-lg">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Areas Preview -->
+  <section class="section-white section-padding">
+    <div class="container">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Areas We Cover</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {areas.map(area => (
           <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} />
         ))}

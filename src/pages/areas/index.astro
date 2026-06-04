@@ -1,23 +1,23 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
-import SectionHeading from '../../components/SectionHeading.astro';
 import AreaCard from '../../components/AreaCard.astro';
 import { areas } from '../../data/areas';
 import { heroImages } from '../../data/site';
 ---
 
 <Layout title="Areas We Cover | Roofing Supplies Bristol, Bath, Somerset & Beyond | Ashmead" description="Ashmead Roofing Supplies delivers across Bristol, Bath, Somerset, Gloucester and Wiltshire. Trade prices, fast delivery. Call 0117 986 0600.">
-  <!-- Areas Hero — full-width background image -->
-  <section class="relative overflow-hidden min-h-[320px]">
+  <!-- Areas Hero — diagonal split -->
+  <section class="relative overflow-hidden min-h-[400px] md:min-h-[500px]">
     <div class="absolute inset-0">
-      <img src={heroImages.areas} alt="Areas we cover" class="w-full h-full object-cover" loading="eager" />
-      <div class="absolute inset-0 bg-charcoal/70"></div>
+      <img src={heroImages.areas} alt="" class="w-full h-full object-cover" loading="eager" />
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28 flex items-center justify-center min-h-[320px]">
-      <div class="text-center max-w-3xl mx-auto">
-        <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-primary mb-4">Areas We Cover</h1>
-        <p class="text-lg text-white/90 mb-8">We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with trade pricing and fast delivery.</p>
+    <div class="absolute inset-0 bg-charcoal" style="clip-path: polygon(0 0, 65% 0, 40% 100%, 0 100%)"></div>
+    <div class="absolute inset-0" style="clip-path: polygon(64.5% 0, 65.5% 0, 40.5% 100%, 39.5% 100%); background: #009900;"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24 flex items-center min-h-[400px] md:min-h-[500px]">
+      <div class="max-w-xl">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-primary mb-6">Areas We Cover</h1>
+        <p class="text-lg text-white/80 mb-8">We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with trade pricing and fast delivery.</p>
       </div>
     </div>
   </section>
