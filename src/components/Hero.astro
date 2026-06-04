@@ -1,31 +1,61 @@
 ---
 import Breadcrumb from './Breadcrumb.astro';
-
-interface BreadcrumbItem {
-  label: string;
-  href: string;
-}
+import { PHONE, PHONE_HREF } from '../data/site';
 
 interface Props {
   title: string;
   subtitle?: string;
-  breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: Array<{ label: string; href?: string }>;
+  variant?: 'default' | 'image';
+  image?: string;
 }
 
-const { title, subtitle, breadcrumbs } = Astro.props;
+const { title, subtitle, breadcrumbs, variant = 'default', image } = Astro.props;
 ---
 
-<section class="bg-section-highlight py-16 md:py-24 border-b-4 border-primary">
-  <div class="max-w-7xl mx-auto px-4 text-center">
-    {breadcrumbs && breadcrumbs.length > 0 && (
-      <div class="text-left mb-2">
-        <Breadcrumb items={breadcrumbs} />
+{variant === 'image' && image ? (
+  <!-- Hero with house-clipped image on the right -->
+  <section class="bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 lg:py-28">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="relative z-10">
+          {breadcrumbs && <Breadcrumb items={breadcrumbs} />}
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">{title}</h1>
+          {subtitle && (
+            <p class="text-lg md:text-xl text-body mb-8">{subtitle}</p>
+          )}
+          <div class="flex flex-col sm:flex-row gap-4">
+            <slot />
+          </div>
+        </div>
+        <div class="hidden lg:block relative">
+          <div class="hero-house-image w-full h-80 rounded-lg">
+            <img src={image} alt="" class="w-full h-full object-cover hero-house-image" loading="eager" />
+          </div>
+        </div>
       </div>
-    )}
-    <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-4">{title}</h1>
-    {subtitle && (
-      <p class="text-lg md:text-xl text-body max-w-2xl mx-auto mb-8">{subtitle}</p>
-    )}
-    <slot />
-  </div>
-</section>
+    </div>
+    <!-- Subtle house watermark behind text -->
+    <div class="house-watermark absolute inset-0 pointer-events-none"></div>
+  </section>
+) : (
+  <!-- Default hero: light green bg with house accent border -->
+  <section class="bg-section-highlight relative hero-house-accent">
+    <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-10">
+      {breadcrumbs && <Breadcrumb items={breadcrumbs} />}
+      <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-4">{title}</h1>
+      {subtitle && (
+        <p class="text-lg text-body max-w-2xl mb-8">{subtitle}</p>
+      )}
+      <div class="flex flex-col sm:flex-row gap-4">
+        <slot />
+      </div>
+    </div>
+    <!-- Decorative house watermark -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2/5 max-w-md opacity-[0.04] pointer-events-none">
+      <svg viewBox="0 0 120 69" fill="currentColor" class="text-charcoal w-full h-auto">
+        <polygon points="60,0 120,69 0,69" />
+      </svg>
+    </div>
+  </section>
+)}
