@@ -34,11 +34,17 @@ const breadcrumbItems = [
       <img src={heroImage} alt={area.name} class="w-full h-full object-cover" loading="eager" />
       <div class="absolute inset-0 bg-charcoal/70"></div>
     </div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 py-16 md:py-24">
-      <Breadcrumb items={breadcrumbItems} />
-      <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-white mb-4">{area.h1}</h1>
-      <p class="text-lg text-white/90 max-w-2xl mb-8">{area.shortDesc}</p>
-      <Button variant="white" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28 flex items-center justify-center min-h-[320px]">
+      <div class="text-center max-w-3xl mx-auto">
+        <div class="text-white/70 text-sm font-heading uppercase tracking-widest mb-3">
+          {breadcrumbItems.map((item, i) => (
+            <>{i > 0 && <span class="mx-2">/</span>}<a href={item.href} class="hover:text-white transition-colors">{item.label}</a></>
+          ))}
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-white mb-4">{area.h1}</h1>
+        <p class="text-lg text-white/90 mb-8">{area.shortDesc}</p>
+        <Button variant="white" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
+      </div>
     </div>
   </section>
 
