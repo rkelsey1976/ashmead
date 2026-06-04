@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
@@ -9,7 +8,7 @@ import AreaCard from '../../components/AreaCard.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { areas } from '../../data/areas';
 import { products } from '../../data/products';
-import { PHONE } from '../../data/site';
+import { PHONE, heroImages } from '../../data/site';
 
 export function getStaticPaths() {
   return areas.map(area => ({
@@ -19,6 +18,7 @@ export function getStaticPaths() {
 }
 
 const { area } = Astro.props;
+const heroImage = heroImages[area.slug as keyof typeof heroImages] || heroImages.home;
 
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
@@ -28,13 +28,17 @@ const breadcrumbItems = [
 ---
 
 <Layout title={area.metaTitle} description={area.metaDescription}>
-  <!-- Area Hero -->
-  <section class="bg-section-highlight py-16 md:py-24 border-b-4 border-primary">
-    <div class="max-w-7xl mx-auto px-4">
+  <!-- Area Hero — full-width image with dark overlay -->
+  <section class="relative overflow-hidden min-h-[320px]">
+    <div class="absolute inset-0">
+      <img src={heroImage} alt={area.name} class="w-full h-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-charcoal/70"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 py-16 md:py-24">
       <Breadcrumb items={breadcrumbItems} />
-      <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">{area.h1}</h1>
-      <p class="text-lg text-body max-w-3xl mb-8">{area.shortDesc}</p>
-      <Button variant="primary" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
+      <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-white mb-4">{area.h1}</h1>
+      <p class="text-lg text-white/90 max-w-2xl mb-8">{area.shortDesc}</p>
+      <Button variant="white" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
     </div>
   </section>
 

@@ -1,14 +1,24 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { products } from '../../data/products';
+import { heroImages } from '../../data/site';
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
-  <Hero title="Roofing Products" subtitle="Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings." />
+  <!-- Products Hero — full-width background image -->
+  <section class="relative overflow-hidden min-h-[320px]">
+    <div class="absolute inset-0">
+      <img src={heroImages.products} alt="Roofing products" class="w-full h-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-charcoal/70"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 py-16 md:py-24">
+      <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-white mb-4">Roofing Products</h1>
+      <p class="text-lg text-white/90 max-w-2xl mb-8">Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings.</p>
+    </div>
+  </section>
 
   <section class="section-white section-padding">
     <div class="container">

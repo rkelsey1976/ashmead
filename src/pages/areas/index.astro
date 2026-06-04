@@ -1,24 +1,30 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
 import AreaCard from '../../components/AreaCard.astro';
 import { areas } from '../../data/areas';
+import { heroImages } from '../../data/site';
 ---
 
 <Layout title="Areas We Cover | Roofing Supplies Bristol, Bath, Somerset & Beyond | Ashmead" description="Ashmead Roofing Supplies delivers across Bristol, Bath, Somerset, Gloucester and Wiltshire. Trade prices, fast delivery. Call 0117 986 0600.">
-  <Hero title="Areas We Cover" subtitle="We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with trade pricing and fast delivery." />
+  <!-- Areas Hero — full-width background image -->
+  <section class="relative overflow-hidden min-h-[320px]">
+    <div class="absolute inset-0">
+      <img src={heroImages.areas} alt="Areas we cover" class="w-full h-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-charcoal/70"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 py-16 md:py-24">
+      <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-white mb-4">Areas We Cover</h1>
+      <p class="text-lg text-white/90 max-w-2xl mb-8">We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with trade pricing and fast delivery.</p>
+    </div>
+  </section>
 
   <section class="section-white section-padding">
     <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {areas.map(area => (
-          <a href={`/areas/${area.slug}`} class="group bg-white rounded-lg p-8 transition-all border border-border hover:border-primary hover:shadow-lg">
-            <h2 class="text-charcoal font-heading text-2xl font-bold uppercase tracking-wide mb-3 group-hover:text-primary transition-colors">{area.h1}</h2>
-            <p class="text-body text-sm leading-relaxed mb-4">{area.shortDesc}</p>
-            <span class="text-primary font-medium group-hover:text-primary-hover transition-colors">View supplies in {area.name} →</span>
-          </a>
+          <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} />
         ))}
       </div>
     </div>

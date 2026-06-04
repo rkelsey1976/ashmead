@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Hero from '../../components/Hero.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
@@ -9,7 +8,7 @@ import AreaCard from '../../components/AreaCard.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { products, getProduct } from '../../data/products';
 import { areas } from '../../data/areas';
-import { PHONE } from '../../data/site';
+import { PHONE, heroImages } from '../../data/site';
 
 export function getStaticPaths() {
   return products.map(product => ({
@@ -19,6 +18,7 @@ export function getStaticPaths() {
 }
 
 const { product } = Astro.props;
+const heroImage = heroImages[product.slug as keyof typeof heroImages] || heroImages.home;
 
 const productSchema = {
   "@context": "https://schema.org",
@@ -46,13 +46,23 @@ const breadcrumbItems = [
 ---
 
 <Layout title={product.metaTitle} description={product.metaDescription} schema={[productSchema]}>
-  <!-- Product Hero -->
-  <section class="bg-section-highlight py-16 md:py-24 border-b-4 border-primary">
-    <div class="max-w-7xl mx-auto px-4">
-      <Breadcrumb items={breadcrumbItems} />
-      <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">{product.h1}</h1>
-      <p class="text-lg text-body max-w-3xl mb-8">{product.shortDesc}</p>
-      <Button variant="primary" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
+  <!-- Product Hero — split layout: charcoal text left, image right -->
+  <section class="overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 min-h-[320px]">
+        <div class="bg-charcoal flex flex-col justify-center px-6 py-16 md:px-12 md:py-20 lg:py-24">
+          <Breadcrumb items={breadcrumbItems} />
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-white mb-4">{product.h1}</h1>
+          <p class="text-lg text-white/80 mb-8">{product.shortDesc}</p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button variant="white" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
+            <a href="/contact" class="inline-block border-2 border-white text-white hover:bg-white hover:text-charcoal font-bold px-8 py-4 rounded transition-colors text-lg text-center">Contact Us</a>
+          </div>
+        </div>
+        <div class="hidden lg:block relative bg-charcoal/50">
+          <img src={heroImage} alt={product.name} class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+        </div>
+      </div>
     </div>
   </section>
 
