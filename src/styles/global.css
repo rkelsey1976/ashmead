@@ -69,12 +69,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-heading);
 }
 
-/* ── Section backgrounds ── */
+/* Section backgrounds */
 .section-white { background-color: #FFFFFF; }
 .section-grey { background-color: var(--color-section); }
 .section-green { background-color: var(--color-section-highlight); }
 
-/* ── Section padding ── */
+/* Section padding */
 .section-padding {
   padding-top: 4rem;
   padding-bottom: 4rem;
@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* ── Container ── */
+/* Container */
 .container {
   max-width: 80rem;
   margin-left: auto;
@@ -99,169 +99,4 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (min-width: 768px) {
   .container { padding-left: 1.5rem; padding-right: 1.5rem; }
-}
-
-/* ──────────────────────────────────────────────
-   BRAND MARKS — Ashmead house shape system
-   The logo icon is a solid house pentagon (roof peak
-   at centre top, walls widening down). Extracted from
-   the Ashmead logo at 434×105px, the green icon is
-   ~120×69px.
-
-   Clip-path coordinates (normalised 0–1):
-   peak:        0.50  0.00
-   right-eaves: 1.00  0.72
-   bottom-right: 1.00  1.00
-   bottom-left:  0.00  1.00
-   left-eaves:   0.00  0.72
-   ────────────────────────────────────────────── */
-
-/* House clip-path for image masks */
-.clip-house {
-  clip-path: polygon(
-    50% 0%,
-    100% 72%,
-    100% 100%,
-    0%   100%,
-    0%   72%
-  );
-}
-
-/* Hero: house-shaped image reveal on the right side */
-.hero-house-mask {
-  position: relative;
-}
-
-.hero-house-mask::after {
-  content: '';
-  position: absolute;
-  right: -2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 45%;
-  max-width: 480px;
-  aspect-ratio: 120 / 69;
-  background: var(--color-primary);
-  clip-path: polygon(
-    50% 0%,
-    100% 72%,
-    100% 100%,
-    0%   100%,
-    0%   72%
-  );
-  opacity: 0.07;
-  z-index: 0;
-}
-
-/* Hero variant: image clipped to house shape */
-.hero-house-image {
-  clip-path: polygon(
-    50% 0%,
-    100% 72%,
-    100% 100%,
-    0%   100%,
-    0%   72%
-  );
-  object-fit: cover;
-}
-
-/* Background watermark: large faint house shape behind content */
-.house-watermark {
-  position: relative;
-}
-
-.house-watermark::before {
-  content: '';
-  position: absolute;
-  right: -5%;
-  top: -10%;
-  width: 55%;
-  max-width: 600px;
-  aspect-ratio: 120 / 69;
-  background: var(--color-primary);
-  clip-path: polygon(
-    50% 0%,
-    100% 72%,
-    100% 100%,
-    0%   100%,
-    0%   72%
-  );
-  opacity: 0.04;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Accent: house shape as a coloured banner stripe */
-.house-accent-bar {
-  position: relative;
-  overflow: hidden;
-}
-
-.house-accent-bar::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--color-primary);
-}
-
-/* Hero: house shape cutout at the bottom border */
-.hero-house-accent {
-  position: relative;
-}
-
-.hero-house-accent::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -20px;
-  width: 60px;
-  height: 35px;
-  background: var(--color-primary);
-  clip-path: polygon(
-    50% 0%,
-    100% 72%,
-    100% 100%,
-    0%   100%,
-    0%   72%
-  );
-  z-index: 10;
-}
-
-/* Floating house icon as decorative accent */
-.house-icon-float {
-  position: absolute;
-  opacity: 0.06;
-  pointer-events: none;
-}
-
-.house-icon-float svg {
-  fill: var(--color-primary);
-}
-
-/* Product card: small house accent on hover */
-.product-card-house::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 32px;
-  height: 19px;
-  background: var(--color-primary);
-  clip-path: polygon(
-    50% 0%,
-    100% 72%,
-    100% 100%,
-    0%   100%,
-    0%   72%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.product-card-house:hover::before {
-  opacity: 0.15;
 }

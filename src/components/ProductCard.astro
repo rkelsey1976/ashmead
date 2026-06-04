@@ -9,11 +9,7 @@ interface Props {
 const { name, shortDesc, href, brands = [] } = Astro.props;
 ---
 
-<a href={href} class="group relative bg-white rounded-lg p-6 pt-10 transition-all border border-border hover:border-primary hover:shadow-lg overflow-hidden">
-  <!-- House accent on hover -->
-  <div class="absolute top-0 left-4 w-6 h-4 opacity-0 group-hover:opacity-100 transition-opacity">
-    <svg viewBox="0 0 120 69" fill="currentColor" class="text-primary w-full h-auto"><polygon points="60,0 120,69 0,69" /></svg>
-  </div>
+<a href={href} class="group bg-white rounded-lg p-6 transition-all border border-border hover:border-primary hover:shadow-lg">
   <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2 group-hover:text-primary transition-colors">{name}</h3>
   <p class="text-body text-sm leading-relaxed mb-4">{shortDesc}</p>
   {brands.length > 0 && (

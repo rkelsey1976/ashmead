@@ -28,12 +28,9 @@ const breadcrumbItems = [
 ---
 
 <Layout title={area.metaTitle} description={area.metaDescription}>
-  <!-- Area Hero with house watermark -->
-  <section class="bg-section-highlight py-16 md:py-24 border-b-4 border-primary relative overflow-hidden">
-    <div class="absolute right-[-5%] top-1/2 -translate-y-1/2 w-2/5 max-w-md opacity-[0.04] pointer-events-none">
-      <svg viewBox="0 0 120 69" fill="currentColor" class="text-charcoal w-full h-auto"><polygon points="60,0 120,69 0,69" /></svg>
-    </div>
-    <div class="max-w-7xl mx-auto px-4 relative z-10">
+  <!-- Area Hero -->
+  <section class="bg-section-highlight py-16 md:py-24 border-b-4 border-primary">
+    <div class="max-w-7xl mx-auto px-4">
       <Breadcrumb items={breadcrumbItems} />
       <h1 class="text-3xl md:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">{area.h1}</h1>
       <p class="text-lg text-body max-w-3xl mb-8">{area.shortDesc}</p>
