@@ -1,23 +1,22 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import CtaBanner from '../../components/CtaBanner.astro';
-import ProductCard from '../../components/ProductCard.astro';
-import { products } from '../../data/products';
-import { heroImages } from '../../data/site';
+import Layout from '../layouts/Layout.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+import { heroImages } from '../data/site';
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
-  <!-- Products Hero — diagonal split -->
+  <!-- Products Hero -->
   <section class="relative overflow-hidden min-h-[400px] md:min-h-[500px]">
     <div class="absolute inset-0">
       <img src={heroImages.products} alt="" class="w-full h-full object-cover" loading="eager" />
+      <div class="absolute inset-0 bg-charcoal/80"></div>
     </div>
-    <div class="absolute inset-0 bg-charcoal" style="clip-path: polygon(0 0, 75% 0, 50% 100%, 0 100%)"></div>
-    <div class="absolute inset-0" style="clip-path: polygon(74.5% 0, 75.5% 0, 50.5% 100%, 49.5% 100%); background: #009900;"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 py-16 md:py-24 flex items-center min-h-[400px] md:min-h-[500px]">
-      <div class="max-w-2xl">
+    <div class="relative z-10 max-w-7xl mx-auto px-8 md:px-12 lg:px-16 py-20 md:py-28 flex items-center min-h-[400px] md:min-h-[500px]">
+      <div class="max-w-3xl">
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-primary mb-6">Roofing Products</h1>
-        <p class="text-lg text-white/80 mb-8">Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings.</p>
+        <p class="text-lg text-white/80 mb-8 max-w-2xl">Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings.</p>
       </div>
     </div>
   </section>
