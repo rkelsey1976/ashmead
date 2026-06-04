@@ -1,0 +1,15 @@
+---
+interface Props {
+  name: string;
+  shortDesc: string;
+  href: string;
+}
+
+const { name, shortDesc, href } = Astro.props;
+---
+
+<a href={href} class="group bg-white rounded-lg p-6 text-center transition-all border border-border hover:border-primary hover:shadow-lg">
+  <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2 group-hover:text-primary transition-colors">{name}</h3>
+  <p class="text-body text-sm">{shortDesc}</p>
+  <span class="text-primary text-sm mt-3 inline-block group-hover:text-primary-hover transition-colors">View supplies →</span>
+</a>

@@ -2,26 +2,19 @@
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ProductCard from '../../components/ProductCard.astro';
 import { products } from '../../data/products';
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
   <Hero title="Roofing Products" subtitle="Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings." />
 
-  <section class="bg-white py-16 md:py-20">
-    <div class="max-w-7xl mx-auto px-4">
+  <section class="section-white section-padding">
+    <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map(product => (
-          <a href={`/products/${product.slug}`} class="group bg-white rounded-lg p-6 transition-all border border-border hover:border-primary hover:shadow-lg">
-            <h2 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2 group-hover:text-primary transition-colors">{product.name}</h2>
-            <p class="text-body text-sm leading-relaxed mb-4">{product.shortDesc}</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-              {product.brands.map(brand => (
-                <span class="bg-primary/10 text-primary text-xs font-medium px-2 py-1 rounded">{brand}</span>
-              ))}
-            </div>
-            <span class="text-primary text-sm font-medium group-hover:text-primary-hover transition-colors">Learn more →</span>
-          </a>
+          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} />
         ))}
       </div>
     </div>

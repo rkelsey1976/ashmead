@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CtaBanner from '../components/CtaBanner.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME, brands } from '../data/site';
-import { products } from '../data/products';
+import BrandBar from '../components/BrandBar.astro';
+import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
 ---
 
-<Layout title="About Ashmead Roofing Supplies | Bristol's Trade Counter" description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter supplying professional roofers across the South West. Expert advice, massive stock, fast delivery.">
+<Layout title={`About ${BUSINESS_NAME} | Bristol's Trade Counter`} description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter supplying professional roofers across the South West. Expert advice, massive stock, fast delivery.">
   <!-- About Hero -->
   <section class="bg-section-highlight py-16 md:py-24 border-b-4 border-primary">
     <div class="max-w-7xl mx-auto px-4">
@@ -21,8 +21,8 @@ import { products } from '../data/products';
   </section>
 
   <!-- Our Story -->
-  <section class="bg-white py-16 md:py-20">
-    <div class="max-w-7xl mx-auto px-4">
+  <section class="section-white section-padding">
+    <div class="container">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Our Story</h2>
@@ -69,19 +69,7 @@ import { products } from '../data/products';
     </div>
   </section>
 
-  <!-- Brands -->
-  <section class="bg-section py-16 md:py-20">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal text-center mb-12">Brands We Supply</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {brands.map(brand => (
-          <div class="bg-white rounded-lg p-4 text-center border border-border hover:border-primary transition-colors">
-            <span class="text-charcoal font-heading text-base font-bold uppercase tracking-wide">{brand}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <BrandBar />
 
   <CtaBanner />
 </Layout>
