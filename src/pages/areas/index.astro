@@ -2,22 +2,32 @@
 import Layout from '../../layouts/Layout.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import AreaCard from '../../components/AreaCard.astro';
+import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+import { PHONE, PHONE_HREF, heroImages } from '../../data/site';
 import { areas } from '../../data/areas';
+import { brands } from '../../data/brands';
+import BrandMarquee from '../../components/BrandMarquee.astro';
 ---
 
 <Layout title="Areas We Cover | Roofing Supplies Bristol, Bath, Somerset & Beyond | Ashmead" description="Ashmead Roofing Supplies delivers across Bristol, Bath, Somerset, Gloucester and Wiltshire. Trade prices, fast delivery. Call 0117 986 0600.">
-  <section class="bg-section-highlight section-padding">
-    <div class="container">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Areas We Cover</h1>
-      <p class="text-lg text-body max-w-2xl mb-8">We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with trade pricing and fast delivery.</p>
-    </div>
-  </section>
+  <Hero
+    title="Areas We Cover"
+    subtitle="We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with trade pricing and fast delivery."
+    image={heroImages.areas}
+    variant="full"
+  >
+    <Button variant="primary" href={PHONE_HREF} icon="phone" size="lg">Call {PHONE}</Button>
+    <Button variant="white" href="/contact" size="lg">Get a Quote</Button>
+  </Hero>
+
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 
   <section class="section-white section-padding">
     <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {areas.map(area => (
-          <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} />
+          <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} image={area.image} />
         ))}
       </div>
     </div>

@@ -3,8 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
+import Hero from '../../components/Hero.astro';
 import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../../data/site';
 import { areas } from '../../data/areas';
+import { brands } from '../../data/brands';
+import BrandMarquee from '../../components/BrandMarquee.astro';
 
 export function getStaticPaths() {
   return areas.map(area => ({
@@ -22,18 +25,18 @@ const breadcrumbItems = [
 ---
 
 <Layout title={`${area.h1} | Ashmead Roofing Supplies`} description={area.metaDesc}>
-  <section class="bg-section-highlight section-padding">
-    <div class="container">
-      <div class="text-body/60 text-sm font-heading uppercase tracking-widest mb-4">
-        {breadcrumbItems.map((item, i) => (
-          <>{i > 0 && <span class="mx-2">/</span>}<a href={item.href} class="hover:text-primary transition-colors">{item.label}</a></>
-        ))}
-      </div>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">{area.h1}</h1>
-      <p class="text-lg text-body max-w-2xl mb-8">{area.shortDesc}</p>
-      <Button variant="primary" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
-    </div>
-  </section>
+  <Hero
+    title={area.h1}
+    subtitle={area.shortDesc}
+    image={area.image}
+    variant="full"
+    breadcrumbs={breadcrumbItems}
+  >
+    <Button variant="primary" href={PHONE_HREF} icon="phone" size="lg">Call {PHONE}</Button>
+    <Button variant="white" href="/contact" size="lg">Get a Quote</Button>
+  </Hero>
+
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 
   <section class="section-white section-padding">
     <div class="container">

@@ -1,20 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
+import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME, EMAIL } from '../data/site';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, EMAIL, heroImages } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
+import { brands } from '../data/brands';
+import BrandMarquee from '../components/BrandMarquee.astro';
 ---
 
 <Layout title="Contact Ashmead Roofing Supplies | Call 0117 986 0600" description="Contact Ashmead Roofing Supplies Ltd in Bristol. Call 0117 986 0600 for trade pricing, expert advice and fast delivery across the South West.">
-  <section class="bg-section-highlight section-padding">
-    <div class="container">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Contact Us</h1>
-      <p class="text-lg text-body max-w-2xl mb-8">Get in touch with our trade team for pricing, availability and expert advice. We're here to help professional roofers across the South West.</p>
-      <Button variant="primary" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
-    </div>
-  </section>
+  <Hero
+    title="Contact Us"
+    subtitle="Get in touch with our trade team for pricing, availability and expert advice. We're here to help professional roofers across the South West."
+    image={heroImages.contact}
+    variant="full"
+  >
+    <Button variant="primary" href={PHONE_HREF} icon="phone" size="lg">Call {PHONE}</Button>
+    <Button variant="white" href="/products" size="lg">View Products</Button>
+  </Hero>
+
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 
   <section class="section-white section-padding">
     <div class="max-w-7xl mx-auto px-4">

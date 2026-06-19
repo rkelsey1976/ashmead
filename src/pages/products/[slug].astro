@@ -5,7 +5,8 @@ import Button from '../../components/Button.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import BrandBar from '../../components/BrandBar.astro';
 import BrandMarquee from '../../components/BrandMarquee.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../../data/site';
+import Hero from '../../components/Hero.astro';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, heroImages } from '../../data/site';
 import { products } from '../../data/products';
 import { brandByName, brands } from '../../data/brands';
 
@@ -22,24 +23,21 @@ const breadcrumbItems = [
   { label: 'Products', href: '/products' },
   { label: product.name },
 ];
+
+const heroImage = heroImages[product.slug as keyof typeof heroImages] || heroImages.products;
 ---
 
 <Layout title={`${product.h1} | Ashmead Roofing Supplies Bristol`} description={product.metaDesc}>
-  <section class="bg-section-highlight py-12 md:py-16">
-    <div class="container">
-      <div class="text-body/60 text-sm font-heading uppercase tracking-widest mb-3">
-        {breadcrumbItems.map((item, i) => (
-          <>{i > 0 && <span class="mx-2">/</span>}<a href={item.href} class="hover:text-primary transition-colors">{item.label}</a></>
-        ))}
-      </div>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-4">{product.h1}</h1>
-      <p class="text-lg text-body max-w-4xl mb-6">{product.shortDesc}</p>
-      <div class="flex flex-col sm:flex-row gap-3">
-        <Button variant="primary" href="phone" icon="phone" size="md">Call {PHONE}</Button>
-        <a href="/contact" class="inline-block bg-white hover:bg-gray-100 text-charcoal font-bold px-6 py-3 rounded border-2 border-charcoal transition-colors text-base text-center">Contact Us</a>
-      </div>
-    </div>
-  </section>
+  <Hero
+    title={product.h1}
+    subtitle={product.shortDesc}
+    image={heroImage}
+    variant="full"
+    breadcrumbs={breadcrumbItems}
+  >
+    <Button variant="primary" href={PHONE_HREF} icon="phone" size="md">Call {PHONE}</Button>
+    <Button variant="white" href="/contact" size="md">Get a Quote</Button>
+  </Hero>
 
   {product.brands && product.brands.length > 0 && (
     <BrandMarquee label="Recommended Brands" brands={product.brands.map(name => brandByName[name]).filter(Boolean)} theme="green" />

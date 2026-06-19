@@ -4,34 +4,34 @@ import CtaBanner from '../components/CtaBanner.astro';
 import BrandBar from '../components/BrandBar.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
 import Button from '../components/Button.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
+import Hero from '../components/Hero.astro';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, heroImages } from '../data/site';
 import { brands } from '../data/brands';
 ---
 
 <Layout title={`About ${BUSINESS_NAME} | Bristol's Trade Counter`} description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter supplying professional roofers across the South West. Expert advice, massive stock, fast delivery.">
-  <section class="bg-section-highlight section-padding">
-    <div class="container">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">More About Ashmead</h1>
-      <h2 class="text-xl md:text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Roofing Supplies Bristol</h2>
-      <p class="text-lg text-body max-w-3xl mb-4">Ashmead Roofing Supplies Ltd Bristol supply roofing supplies to the Bristol and Bath roofing and building trades. With a dedicated team and a diverse wealth of roofing knowledge, we believe we can source and supply just about any roofing product you may require.</p>
-      <p class="text-lg text-body max-w-3xl mb-4">All our tiles are stocked at our own warehouse depot in Bristol and are often available for immediate delivery – we supply hundreds of contractors, homeowners and property builders on a daily basis.</p>
-      <p class="text-lg text-body max-w-3xl mb-4">Our aim is to continuously increase our range to provide you with competitive and quality products for all your roofing needs. Can’t see something you are looking for? Give us a call and we will be happy to source it for you. We can also offer friendly, helpful advice and an estimation service. Our knowledgeable staff can provide you with extensive product information and help you open a trade account if needed.</p>
-      <p class="text-lg text-body max-w-3xl mb-8">Take some time to look around our website where you will be able to find information on all the products you may need. When it comes to roofing supplies in Bristol we are your one-stop shop.</p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <Button variant="primary" href="phone" icon="phone" size="lg">Call {PHONE}</Button>
-        <a href="/contact" class="inline-block bg-white hover:bg-gray-100 text-charcoal font-bold px-8 py-4 rounded border-2 border-charcoal transition-colors text-lg text-center">Contact Us</a>
-      </div>
-    </div>
-  </section>
+  <Hero
+    title="More About Ashmead"
+    subtitle="Bristol's trusted roofing trade counter — supplying professional roofers with quality materials, expert advice and fast delivery across the South West."
+    image={heroImages.about}
+    variant="full"
+  >
+    <Button variant="primary" href={PHONE_HREF} icon="phone" size="lg">Call {PHONE}</Button>
+    <Button variant="white" href="/contact" size="lg">Contact Us</Button>
+  </Hero>
+
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 
   <section class="section-white section-padding">
     <div class="container">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
           <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Our Story</h2>
-          <p class="text-body leading-relaxed mb-4">{BUSINESS_NAME} was founded on a simple principle: give professional roofers the materials they need, when they need them, at prices that keep them competitive. From our Bristol depot we've built a reputation for stock availability, trade expertise and reliable delivery that keeps projects on track.</p>
-          <p class="text-body leading-relaxed mb-4">We understand roofing because we come from roofing. Our trade counter team has years of on-the-tools experience, which means they can advise on product selection, calculate quantities, and help specify the right system for any project — from a single garage flat roof to a 200-unit housing development.</p>
-          <p class="text-body leading-relaxed">That expertise, combined with one of the widest product ranges in the South West, makes Ashmead the first call for professional roofers across Bristol, Bath, Somerset, Gloucester and Wiltshire.</p>
+          <p class="text-body leading-relaxed mb-4">Ashmead Roofing Supplies Ltd Bristol supply roofing supplies to the Bristol and Bath roofing and building trades. With a dedicated team and a diverse wealth of roofing knowledge, we believe we can source and supply just about any roofing product you may require.</p>
+          <p class="text-body leading-relaxed mb-4">All our tiles are stocked at our own warehouse depot in Bristol and are often available for immediate delivery – we supply hundreds of contractors, homeowners and property builders on a daily basis.</p>
+          <p class="text-body leading-relaxed mb-4">Our aim is to continuously increase our range to provide you with competitive and quality products for all your roofing needs. Can’t see something you are looking for? Give us a call and we will be happy to source it for you. We can also offer friendly, helpful advice and an estimation service. Our knowledgeable staff can provide you with extensive product information and help you open a trade account if needed.</p>
+          <p class="text-body leading-relaxed mb-4">Take some time to look around our website where you will be able to find information on all the products you may need. When it comes to roofing supplies in Bristol we are your one-stop shop.</p>
+          <p class="text-body leading-relaxed">{BUSINESS_NAME} was founded on a simple principle: give professional roofers the materials they need, when they need them, at prices that keep them competitive. From our Bristol depot we've built a reputation for stock availability, trade expertise and reliable delivery that keeps projects on track.</p>
         </div>
         <div>
           <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Why Trade Roofers Choose Us</h2>

@@ -3,17 +3,23 @@ import Layout from '../../layouts/Layout.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import BrandMarquee from '../../components/BrandMarquee.astro';
+import Hero from '../../components/Hero.astro';
+import Button from '../../components/Button.astro';
+import { PHONE, PHONE_HREF, heroImages } from '../../data/site';
 import { products } from '../../data/products';
 import { brands } from '../../data/brands';
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
-  <section class="bg-section-highlight py-12 md:py-16">
-    <div class="container">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-4">Roofing Products</h1>
-      <p class="text-lg text-body max-w-4xl mb-0">Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings.</p>
-    </div>
-  </section>
+  <Hero
+    title="Roofing Products"
+    subtitle="Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings."
+    image={heroImages.products}
+    variant="full"
+  >
+    <Button variant="primary" href={PHONE_HREF} icon="phone" size="lg">Call {PHONE}</Button>
+    <Button variant="white" href="/contact" size="lg">Get a Quote</Button>
+  </Hero>
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 

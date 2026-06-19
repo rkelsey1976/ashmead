@@ -39,6 +39,7 @@ export const heroImages = {
   contact: "/images/hero-contact.jpg",
   products: "/images/hero-products.jpg",
   areas: "/images/hero-areas.jpg",
+  training: "/images/hero-products.jpg",
   // Product pages — key matches product slug
   "concrete-tiles": "/images/hero-concrete-tiles.jpg",
   "clay-tiles": "/images/hero-clay-tiles.jpg",
