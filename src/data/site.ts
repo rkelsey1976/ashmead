@@ -8,6 +8,7 @@ export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/products", label: "Products" },
   { href: "/areas", label: "Areas We Cover" },
+  { href: "/training", label: "Training" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" }
 ];

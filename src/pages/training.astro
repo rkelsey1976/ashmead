@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import BrandMarquee from '../components/BrandMarquee.astro';
+import { brands } from '../data/brands';
+import { PHONE, PHONE_HREF } from '../data/site';
+
+const title = "Roofing Training, CPDs & Trade Events | Ashmead Roofing Supplies";
+const description = "Upcoming roofing training courses, manufacturer CPDs and trade events for roofers and builders across Bristol, Bath, Somerset, Gloucestershire and Wiltshire.";
+
+interface TrainingEvent {
+  name: string;
+  provider: string;
+  type: string;
+  audience: string;
+  description: string;
+  link?: string;
+}
+
+const events: TrainingEvent[] = [
+  {
+    name: "Marley Roofing Academy",
+    provider: "Marley",
+    type: "Installer training",
+    audience: "Roofers & contractors",
+    description: "Hands-on courses covering concrete and clay tile installation, dry-fix systems, battens and BS 5534 updates. Held at regional training centres across the UK.",
+    link: "https://www.marley.co.uk/training"
+  },
+  {
+    name: "Redland/Russell Roof Tiles Training",
+    provider: "Redland",
+    type: "Product & installation training",
+    audience: "Roofers & merchants",
+    description: "Practical training on tile and slate installation, dry ridge and hip systems, underlays and fixing specifications. Booking available through the Redland website.",
+    link: "https://www.redland.co.uk/training"
+  },
+  {
+    name: "VELUX Installer Training & CPDs",
+    provider: "VELUX",
+    type: "Installer academy & CPD",
+    audience: "Roofers, builders & architects",
+    description: "Roof window installation, flashing kits, daylighting design and product CPDs. Available at VELUX training centres and online.",
+    link: "https://www.velux.co.uk/training"
+  },
+  {
+    name: "Cupa Pizarras CPDs & Slating Courses",
+    provider: "Cupa Pizarras",
+    type: "CPD & practical slating",
+    audience: "Roofers & specifiers",
+    description: "Natural slate CPD sessions and on-site slating courses covering grading, fixing, heritage work and detailing around dormers and valleys.",
+    link: "https://www.cupapizarras.com/uk/training"
+  },
+  {
+    name: "Rockwool CPD & Fire Safety Training",
+    provider: "Rockwool",
+    type: "CPD",
+    audience: "Builders, roofers & architects",
+    description: "Roof and facade insulation CPDs covering fire safety, acoustics, thermal performance and compliance with building regulations.",
+    link: "https://www.rockwool.com/uk/cpd"
+  },
+  {
+    name: "A. Proctor Group CPDs",
+    provider: "A. Proctor Group",
+    type: "CPD",
+    audience: "Roofers, builders & architects",
+    description: "Breather membranes, vapour control, airtightness and pitched roof condensation risk. Available as face-to-face or online CPDs.",
+    link: "https://www.proctorgroup.com/cpd"
+  },
+  {
+    name: "ClassicBond EPDM Training",
+    provider: "ClassicBond",
+    type: "Flat-roof installer training",
+    audience: "Flat roofers",
+    description: "One-day EPDM membrane courses covering preparation, adhesives, seams, detailing and domestic flat roof applications.",
+    link: "https://www.classicbond.co.uk/training"
+  },
+  {
+    name: "Resitrix & Duopoly Training",
+    provider: "Resitrix / Duopoly",
+    type: "Flat-roof installer training",
+    audience: "Flat roofers & contractors",
+    description: "Hot-air welded membrane and liquid-applied flat roofing training, including detailing, preparation and guarantees.",
+    link: "https://www.resitrix.co.uk/training"
+  },
+  {
+    name: "Fatra Flat Roofing Courses",
+    provider: "Fatra",
+    type: "Installer training",
+    audience: "Flat roofers",
+    description: "PVC membrane and liquid waterproofing training for commercial and domestic flat roofs, including welding and detailing.",
+    link: "https://www.fatra.co.uk/training"
+  },
+  {
+    name: "Icopal / BMI Group Training",
+    provider: "Icopal",
+    type: "Built-up flat roofing training",
+    audience: "Commercial roofers",
+    description: "Torch-on, self-adhesive and liquid waterproofing systems for built-up flat roofing, including QA and guarantee programmes.",
+    link: "https://www.bmigroup.com/uk/training"
+  },
+  {
+    name: "NFRC Roofing Trade Show & Awards",
+    provider: "NFRC",
+    type: "Trade show & networking",
+    audience: "Roofers, merchants & suppliers",
+    description: "Annual roofing industry exhibition, awards dinner and seminar programme covering regulation changes, products and business skills.",
+    link: "https://www.nfrc.co.uk/events"
+  },
+  {
+    name: "Roofing Expo / UK Construction Week",
+    provider: "Industry",
+    type: "Trade show",
+    audience: "Roofers, builders & specifiers",
+    description: "National construction and roofing exhibitions featuring new products, live demos and CPD seminars. Check current dates and venues.",
+    link: "https://www.ukconstructionweek.com"
+  },
+  {
+    name: "CITB / Site Safe Rooftop Safety Training",
+    provider: "CITB / accredited providers",
+    type: "Safety training",
+    audience: "Roofers & labourers",
+    description: "Working at height, harness use, scaffold awareness and rooftop safety. Essential for compliance and site eligibility.",
+    link: "https://www.citb.co.uk/courses-and-qualifications/"
+  },
+  {
+    name: "Ashmead Roofing Depot Open Days",
+    provider: "Ashmead Roofing Supplies",
+    type: "Merchant open day",
+    audience: "Local roofers & builders",
+    description: "Trade mornings and manufacturer demo days at our Bristol depot. Product launches, special offers, breakfast rolls and expert advice. Call us to register your interest.",
+    link: PHONE_HREF
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <!-- Hero -->
+  <section class="relative overflow-hidden py-16 md:py-24 bg-charcoal">
+    <div class="absolute inset-0 z-0">
+      <img src="/images/hero-products.jpg" alt="" class="w-full h-full object-cover opacity-30" />
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/80 to-transparent"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4">
+      <div class="max-w-3xl">
+        <p class="inline-block text-sm font-semibold uppercase tracking-wider text-primary mb-3">Professional Development</p>
+        <h1 class="text-3xl md:text-5xl font-bold font-heading text-white mb-4">Roofing Training, CPDs & Trade Events</h1>
+        <p class="text-lg text-white/80 mb-6">
+          Stay ahead with manufacturer-led training, industry CPDs and local trade events for roofers, builders and merchants across the South West.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <Button variant="primary" href={PHONE_HREF} icon="phone" size="lg">{PHONE}</Button>
+          <Button variant="white" href="/contact" size="lg">Register Interest</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training intro -->
+  <section class="py-12 md:py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-4">Training That Helps Your Business Win Work</h2>
+        <p class="text-body mb-4">
+          Roofing is changing fast: new regulations, tighter building standards and more technical products. The roofers and contractors who keep their skills current win the best jobs.
+        </p>
+        <p class="text-body">
+          We keep our customers informed about training from the brands we stock, plus the wider roofing trade events that matter. Whether you need a refresher on BS 5534, a VELUX installation certificate, or a flat-roofing guarantee programme, start here.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events grid -->
+  <section class="py-12 md:py-16 bg-section">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-8">Upcoming Training & Events</h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {events.map((event) => (
+          <article class="bg-white p-6 shadow-sm border border-border flex flex-col">
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <span class="inline-block px-2 py-1 text-xs font-semibold uppercase tracking-wide bg-primary/10 text-primary rounded">{event.type}</span>
+            </div>
+            <h3 class="text-lg font-bold font-heading text-charcoal mb-1">{event.name}</h3>
+            <p class="text-sm text-body mb-3"><strong class="text-charcoal">{event.provider}</strong> · {event.audience}</p>
+            <p class="text-body text-sm mb-4 flex-grow">{event.description}</p>
+            
+            {event.link && (
+              <a href={event.link} target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-primary hover:underline">
+                Find out more
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CtaBanner title="Need Training Advice?" subtitle="Call our team and we'll point you to the right course, CPD or manufacturer session for your team." />
+
+  <!-- Brand strip -->
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={70} />
+</Layout>
