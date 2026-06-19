@@ -171,6 +171,88 @@ const events: TrainingEvent[] = [
     </div>
   </section>
 
+  <!-- Ashmead-hosted training feature -->
+  <section class="py-12 md:py-16 bg-primary">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wide text-white/80 mb-2">At Our Bristol Depot</p>
+          <h2 class="text-2xl md:text-4xl font-bold font-heading text-white mb-4">Training Events Hosted by Ashmead</h2>
+          <p class="text-white/90 text-lg mb-6">
+            We run regular trade mornings, product demos and manufacturer-led sessions at our Bristol depot. Get hands-on with the latest materials, ask our suppliers direct questions, and pick up trade-only deals — all over a bacon roll and a brew.
+          </p>
+
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3 text-white">
+              <svg class="w-6 h-6 shrink-0 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Manufacturer demo days with Marley, Redland, VELUX, Cupa Pizarras and more</span>
+            </li>
+            <li class="flex items-start gap-3 text-white">
+              <svg class="w-6 h-6 shrink-0 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Flat-roofing practical sessions — ClassicBond, Resitrix, Duopoly and Fatra</span>
+            </li>
+            <li class="flex items-start gap-3 text-white">
+              <svg class="w-6 h-6 shrink-0 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>BS 5534, insulation and ventilation updates for pitched roofs</span>
+            </li>
+            <li class="flex items-start gap-3 text-white">
+              <svg class="w-6 h-6 shrink-0 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span>Trade-only pricing, breakfast rolls and networking with local roofers</span>
+            </li>
+          </ul>
+
+          <div class="flex flex-wrap gap-3">
+            <Button variant="white" href={PHONE_HREF} icon="phone" size="lg">Call {PHONE}</Button>
+            <Button variant="secondary" href="/contact" size="lg">Register Interest</Button>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 md:p-8 shadow-lg">
+          <h3 class="text-xl font-bold font-heading text-charcoal mb-4">Register for Ashmead Training</h3>
+          <p class="text-body mb-4">Leave your details and we'll add you to our training mailing list. You'll get first notice of upcoming depot events, manufacturer demo days and exclusive trade offers.</p>
+
+          <form action="/contact" method="get" class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-charcoal mb-1">Name</label>
+              <input type="text" id="name" name="name" required class="w-full px-3 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div>
+              <label for="company" class="block text-sm font-medium text-charcoal mb-1">Company</label>
+              <input type="text" id="company" name="company" class="w-full px-3 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-charcoal mb-1">Email</label>
+              <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div>
+              <label for="interest" class="block text-sm font-medium text-charcoal mb-1">I'm interested in</label>
+              <select id="interest" name="interest" class="w-full px-3 py-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-primary bg-white">
+                <option value="">Select an option</option>
+                <option value="tile-and-slate">Tile & slate training</option>
+                <option value="flat-roofing">Flat roofing training</option>
+                <option value="roof-windows">Roof windows / VELUX</option>
+                <option value="insulation-ventilation">Insulation & ventilation</option>
+                <option value="cpd">CPD / specification</option>
+                <option value="trade-mornings">Depot trade mornings</option>
+              </select>
+            </div>
+            <button type="submit" class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-3 px-4 transition-colors">
+              Register Interest
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Events grid -->
   <section class="py-12 md:py-16 bg-section">
     <div class="max-w-7xl mx-auto px-4">
