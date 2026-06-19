@@ -7,6 +7,20 @@ import BrandBar from '../../components/BrandBar.astro';
 import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../../data/site';
 import { products } from '../../data/products';
 
+const logoMap: Record<string, string> = {
+  "Redland": "/images/logos/redland.svg",
+  "Marley": "/images/logos/marley.svg",
+  "Velux": "/images/logos/velux.svg",
+  "Kober": "/images/logos/kober.png",
+  "Kytun": "/images/logos/kytun.svg",
+  "A. Proctor Group": "/images/logos/a-proctor-group.svg",
+  "Rockwool": "/images/logos/rockwool.jpg",
+  "Roto": "/images/logos/roto.png",
+  "FloPlast": "/images/logos/floplast.png",
+  "British Lead Mills": "/images/logos/british-lead-mills.svg",
+  "Cupa Pizarras": "/images/logos/cupa-pizarras.jpg",
+};
+
 export function getStaticPaths() {
   return products.map(product => ({
     params: { slug: product.slug },
@@ -39,6 +53,21 @@ const breadcrumbItems = [
     </div>
   </section>
 
+  {product.brands && product.brands.length > 0 && (
+    <div class="bg-primary border-t border-white/10">
+      <div class="container py-4">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider text-center sm:text-left">Recommended Brands</span>
+          <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+            {product.brands.map(brand => (
+              logoMap[brand] && <img src={logoMap[brand]} alt={brand} class="h-7 md:h-8 w-auto object-contain" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
   <section class="section-white section-padding">
     <div class="container">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
@@ -52,15 +81,6 @@ const breadcrumbItems = [
           <div class="prose prose-lg text-body leading-relaxed space-y-4" set:html={product.longDesc} />
         </div>
       </div>
-
-      {product.brands && product.brands.length > 0 && (
-        <div class="mt-10 flex flex-wrap items-center gap-3">
-          <span class="text-sm font-heading uppercase tracking-wide text-body/70 mr-2">Recommended brands:</span>
-          {product.brands.map(brand => (
-            <span class="bg-section-highlight text-charcoal font-heading font-bold uppercase tracking-wide text-sm px-4 py-2 rounded">{brand}</span>
-          ))}
-        </div>
-      )}
 
       {product.applications && product.applications.length > 0 && (
         <div class="mt-12">
