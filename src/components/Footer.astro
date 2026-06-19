@@ -2,13 +2,31 @@
 import { PHONE, PHONE_HREF, BUSINESS_NAME, navLinks } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
+
+const footerColumns = [
+  {
+    title: 'Quick Links',
+    links: navLinks.map(link => ({ label: link.label, href: link.href })),
+  },
+  {
+    title: 'Products',
+    links: [
+      ...products.slice(0, 8).map(p => ({ label: p.name, href: `/products/${p.slug}` })),
+      { label: 'View all products →', href: '/products', highlight: true },
+    ],
+  },
+  {
+    title: 'Areas We Cover',
+    links: areas.map(a => ({ label: a.name, href: `/areas/${a.slug}` })),
+  },
+];
 ---
 
 <footer class="bg-charcoal text-white">
   <div class="max-w-7xl mx-auto px-4 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <!-- Company -->
-      <div>
+      <div class="md:col-span-2 lg:col-span-1">
         <div class="mb-4">
           <img src="/logo-original.png" alt="Ashmead Roofing Supplies" class="h-10 w-auto" />
         </div>
@@ -21,40 +39,48 @@ import { areas } from '../data/areas';
         </a>
       </div>
 
-      <!-- Quick Links -->
-      <div>
-        <h3 class="text-white font-heading text-lg font-bold uppercase tracking-wide mb-4">Quick Links</h3>
-        <ul class="space-y-2">
-          {navLinks.map(link => (
-            <li><a href={link.href} class="text-gray-300 hover:text-primary transition-colors text-sm">{link.label}</a></li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Products -->
-      <div>
-        <h3 class="text-white font-heading text-lg font-bold uppercase tracking-wide mb-4">Products</h3>
-        <ul class="space-y-2">
-          {products.slice(0, 8).map(p => (
-            <li><a href={`/products/${p.slug}`} class="text-gray-300 hover:text-primary transition-colors text-sm">{p.name}</a></li>
-          ))}
-          <li><a href="/products" class="text-primary hover:text-primary-hover transition-colors text-sm font-medium">View all products →</a></li>
-        </ul>
-      </div>
-
-      <!-- Areas -->
-      <div>
-        <h3 class="text-white font-heading text-lg font-bold uppercase tracking-wide mb-4">Areas We Cover</h3>
-        <ul class="space-y-2">
-          {areas.map(a => (
-            <li><a href={`/areas/${a.slug}`} class="text-gray-300 hover:text-primary transition-colors text-sm">{a.name}</a></li>
-          ))}
-        </ul>
-      </div>
+      {footerColumns.map(col => (
+        <div class="footer-accordion md:block">
+          <button type="button" class="footer-accordion-heading md:hidden w-full flex items-center justify-between text-left py-3 border-b border-gray-600">
+            <span class="text-white font-heading text-lg font-bold uppercase tracking-wide">{col.title}</span>
+            <svg class="footer-accordion-icon w-5 h-5 text-primary transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
+          <h3 class="hidden md:block text-white font-heading text-lg font-bold uppercase tracking-wide mb-4">{col.title}</h3>
+          <ul class="footer-accordion-body hidden md:space-y-2 px-1 pb-4">
+            {col.links.map(link => (
+              <li class="py-2 md:py-0 border-b border-gray-700/50 md:border-0">
+                <a href={link.href} class:list={['hover:text-primary transition-colors text-sm', link.highlight ? 'text-primary hover:text-primary-hover font-medium' : 'text-gray-300']}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
 
     <div class="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-400">
       <p>&copy; {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.</p>
     </div>
   </div>
+
+  <script>
+    document.querySelectorAll('.footer-accordion').forEach(acc => {
+      const heading = acc.querySelector('.footer-accordion-heading');
+      const body = acc.querySelector('.footer-accordion-body');
+      const icon = acc.querySelector('.footer-accordion-icon');
+      if (heading && body && icon) {
+        heading.addEventListener('click', () => {
+          const isOpen = !body.classList.contains('hidden');
+          if (isOpen) {
+            body.classList.add('hidden');
+            icon.classList.remove('rotate-45');
+          } else {
+            body.classList.remove('hidden');
+            icon.classList.add('rotate-45');
+          }
+        });
+      }
+    });
+  </script>
 </footer>
