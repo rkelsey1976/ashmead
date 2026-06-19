@@ -30,7 +30,11 @@ const duration = `${speed}s`;
         aria-label={brand.name}
       >
         {brand.logo ? (
-          <img src={brand.logo} alt={brand.name} class="h-full w-auto object-contain" />
+          <img
+            src={brand.logo}
+            alt={brand.name}
+            class:list={['h-full w-auto object-contain transition-all duration-300', isGreen ? 'logo-white hover:logo-color' : 'opacity-90 hover:opacity-100']}
+          />
         ) : (
           <span class:list={['font-heading text-base md:text-lg font-bold uppercase tracking-wide', isGreen ? 'text-white' : 'text-charcoal']}>{brand.name}</span>
         )}
@@ -45,6 +49,13 @@ const duration = `${speed}s`;
   }
   .marquee-track:hover {
     animation-play-state: paused;
+  }
+  .logo-white {
+    filter: brightness(0) invert(1);
+  }
+  .logo-white:hover,
+  a:hover .logo-white {
+    filter: none;
   }
   @keyframes marquee {
     0% { transform: translateX(0); }
