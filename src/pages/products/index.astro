@@ -3,6 +3,21 @@ import Layout from '../../layouts/Layout.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { products } from '../../data/products';
+import { brands } from '../../data/site';
+
+const logoMap: Record<string, string> = {
+  "Redland": "/images/logos/redland.svg",
+  "Marley": "/images/logos/marley.svg",
+  "Velux": "/images/logos/velux.svg",
+  "Kober": "/images/logos/kober.png",
+  "Kytun": "/images/logos/kytun.svg",
+  "A. Proctor Group": "/images/logos/a-proctor-group.svg",
+  "Rockwool": "/images/logos/rockwool.jpg",
+  "Roto": "/images/logos/roto.png",
+  "FloPlast": "/images/logos/floplast.png",
+  "British Lead Mills": "/images/logos/british-lead-mills.svg",
+  "Cupa Pizarras": "/images/logos/cupa-pizarras.jpg",
+};
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
@@ -12,6 +27,19 @@ import { products } from '../../data/products';
       <p class="text-lg text-body max-w-4xl mb-0">Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings.</p>
     </div>
   </section>
+
+  <div class="bg-primary border-t border-white/10">
+    <div class="container py-4">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider text-center sm:text-left">Brands We Supply</span>
+        <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+          {brands.map(brand => (
+            logoMap[brand] && <img src={logoMap[brand]} alt={brand} class="h-6 md:h-7 w-auto object-contain" />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
 
   <section class="section-white section-padding">
     <div class="container">
