@@ -12,14 +12,97 @@ import { areas } from '../data/areas';
 ---
 
 <Layout title="Roofing Supplies Bristol | Ashmead Roofing Supplies" description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter. Tiles, slates, flat roofing, membranes, battens, fixings & more. Trade pricing, expert advice, fast delivery. Call 0117 986 0600.">
-  <section class="bg-section-highlight section-padding">
-    <div class="container">
-      <p class="text-primary font-heading uppercase tracking-widest text-sm mb-4">Bristol's Trade Counter</p>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Roofing Supplies Bristol</h1>
-      <p class="text-lg md:text-xl text-body max-w-2xl mb-8">We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with tiles, slates, flat roofing, membranes, fixings and everything in between.</p>
-      <div class="flex flex-col sm:flex-row gap-4">
-        <Button variant="primary" href="phone" icon="phone" size="lg" />
-        <a href="/products" class="inline-block bg-white hover:bg-gray-100 text-charcoal font-bold px-8 py-4 rounded border-2 border-charcoal transition-colors text-lg text-center">View Products</a>
+  <section class="relative min-h-[85vh] flex items-center overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/hero-home.jpg"
+        alt="Roofing supplies stacked at Ashmead Roofing Supplies Bristol depot"
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/50"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-charcoal/50"></div>
+    </div>
+    <div class="container relative z-10 py-20 md:py-28">
+      <div class="max-w-5xl">
+        <!-- Eyebrow -->
+        <div class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded text-sm font-bold uppercase tracking-wider mb-6 shadow-md">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+          South West's Roofing Trade Counter
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-5xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-heading font-bold uppercase leading-[0.92] tracking-tight text-white mb-6"
+          style="text-shadow: 0 2px 20px rgba(0,0,0,0.5);"
+        >
+          <span class="text-primary">Roofing Supplies</span>
+          <span class="block text-white drop-shadow-lg">Built for Trade</span>
+        </h1>
+
+        <!-- Subhead -->
+        <p class="text-lg md:text-xl lg:text-2xl text-white max-w-4xl mb-8 leading-relaxed"
+          style="text-shadow: 0 1px 10px rgba(0,0,0,0.4);"
+        >
+          Tiles, slates, flat roofing, membranes, fixings and battens — stocked ready for immediate collection or next-day delivery across Bristol, Bath, Somerset, Gloucester and Wiltshire.
+        </p>
+
+        <!-- Trust strip -->
+        <div class="flex flex-wrap items-center gap-4 md:gap-8 mb-10 text-white text-sm md:text-base"
+          style="text-shadow: 0 1px 8px rgba(0,0,0,0.4);"
+        >
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="font-medium">Bristol Depot</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span class="font-medium">Trade Pricing</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-6-7a1 1 0 11-2 0 1 1 0 012 0zM5 5a2 2 0 114 0 2 2 0 01-4 0zm12 0a2 2 0 114 0 2 2 0 01-4 0z" />
+            </svg>
+            <span class="font-medium">Fast Delivery</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="font-medium">40+ Years Experience</span>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <Button variant="primary" href="phone" icon="phone" size="lg" class="text-lg px-10 py-5 shadow-lg" />
+          <Button variant="white" href="/products" icon="arrow" size="lg" class="text-lg px-10 py-5">View Products</Button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom brand bar -->
+    <div class="absolute bottom-0 left-0 right-0 z-10 bg-primary border-t border-white/10">
+      <div class="container py-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider">Authorised Stockists Of</span>
+          <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+            <img src="/images/logos/redland.svg" alt="Redland" class="h-7 md:h-8 w-auto object-contain" />
+            <img src="/images/logos/marley.svg" alt="Marley" class="h-7 md:h-8 w-auto object-contain" />
+            <img src="/images/logos/velux.png" alt="Velux" class="h-7 md:h-8 w-auto object-contain" />
+            <img src="/images/logos/cupa-pizarras.png" alt="Cupa Pizarras" class="h-7 md:h-8 w-auto object-contain" />
+            <img src="/images/logos/a-proctor-group.svg" alt="A. Proctor Group" class="h-7 md:h-8 w-auto object-contain" />
+            <img src="/images/logos/floplast.png" alt="FloPlast" class="h-7 md:h-8 w-auto object-contain" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -40,7 +123,7 @@ import { areas } from '../data/areas';
       <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Our Products</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.slice(0, 8).map(product => (
-          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} />
+          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
         ))}
       </div>
       <div class="text-center mt-10">

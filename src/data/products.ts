@@ -8,6 +8,30 @@ export interface Product {
   features: string[];
   metaTitle: string;
   metaDescription: string;
+  image?: string;
+}
+
+function productImage(slug: string): string {
+  const extMap: Record<string, string> = {
+    "concrete-tiles": "jpg",
+    "clay-tiles": "jpg",
+    "slates": "png",
+    "flat-roof-membranes": "jpg",
+    "pitched-roof-membranes": "jpg",
+    "roofing-battens": "jpg",
+    "nails-and-fixings": "jpg",
+    "fascias-and-guttering": "png",
+    "insulation": "jpg",
+    "ventilation-products": "jpg",
+    "lead-products": "jpg",
+    "roof-windows": "jpg",
+    "classicbond": "jpg",
+    "duopoly": "jpg",
+    "resitrix": "jpg",
+    "fatra": "jpg",
+  };
+  const ext = extMap[slug] || "jpg";
+  return `/images/products/${slug}.${ext}`;
 }
 
 export const products: Product[] = [
@@ -17,6 +41,7 @@ export const products: Product[] = [
     h1: "Concrete Tiles Bristol",
     shortDesc: "Durable, cost-effective concrete roof tiles from Redland and Marley, ideal for new builds and re-roofing projects across the South West.",
     longDesc: "Ashmead Roofing Supplies stocks one of the widest ranges of concrete roof tiles in Bristol and the surrounding areas. Whether you're working on a large housing development or a domestic re-roof, our concrete tiles deliver outstanding value, weather performance and long-term durability. We supply popular profiles from Redland and Marley — including the Redland 49, Marley Modern, Marley Double Roman and Redland Renown — all available for collection or fast local delivery. Our trade team can advise on tile coverage, batten spacing and compatible ridge and hip systems to keep your project on track.",
+    image: productImage("concrete-tiles"),
     brands: ["Redland", "Marley"],
     features: [
       "Interlocking profiles for fast laying and reduced labour costs",
@@ -35,6 +60,7 @@ export const products: Product[] = [
     h1: "Clay Tiles Bristol",
     shortDesc: "Premium clay plain and interlocking tiles that deliver character and longevity for heritage and contemporary roofing projects.",
     longDesc: "Clay roof tiles remain the premium choice for roofers who need lasting aesthetics alongside proven performance. Ashmead Roofing Supplies carries a carefully curated range of clay plain tiles and clay interlocking tiles from Redland and Marley, including the iconic Redland Rosemary and Marley Acme. From conservation-area restorations in Bath to new-build schemes in Bristol, clay tiles deliver a natural colour that mellows beautifully with age. Our Bristol depot holds stock for immediate collection, and our trade counter team can help with tile coverage calculations, underlay specifications and fixing recommendations.",
+    image: productImage("clay-tiles"),
     brands: ["Redland", "Marley"],
     features: [
       "Natural clay construction — colour never fades",
@@ -53,6 +79,7 @@ export const products: Product[] = [
     h1: "Slates Bristol",
     shortDesc: "Natural and synthetic slate roofing supplied from our Bristol depot, including Cupa Pizarras Spanish slate and fibre cement alternatives.",
     longDesc: "Ashmead Roofing Supplies is the go-to slate supplier for roofers across Bristol, Bath and Somerset. We stock natural Spanish slate from Cupa Pizarras — the world's leading slate producer — alongside fibre cement and synthetic slate alternatives that deliver the slate look at a competitive price point. Whether you're reroofing a period property in Clifton or specifying slate for a new-build in Wiltshire, our trade team will help you choose the right product, calculate headlap and coverage, and arrange delivery straight to site. Slates are available in a full range of sizes and we supply all matching accessories including ridge, hip and valley pieces.",
+    image: productImage("slates"),
     brands: ["Cupa Pizarras"],
     features: [
       "Natural Spanish slate from Cupa Pizarras — guaranteed quality",
@@ -71,6 +98,7 @@ export const products: Product[] = [
     h1: "Flat Roof Membranes Bristol",
     shortDesc: "EPDM, fibreglass and torch-on flat roofing systems from ClassicBond, Resitrix and leading manufacturers, all available from our Bristol trade counter.",
     longDesc: "Flat roofing is a core specialism at Ashmead Roofing Supplies, and our Bristol depot stocks everything you need to complete a first-class flat roof installation. We supply EPDM membranes from ClassicBond and Resitrix, fibreglass GRP systems, torch-on felt and liquid coating systems — all backed by the technical know-how of our trade counter team. Whether you're waterproofing a small extension, a garage roof or a commercial flat roof, we can advise on the right system, calculate material quantities and deliver direct to site. We also stock all ancillaries including trims, adhesives, sealants and insulation boards.",
+    image: productImage("flat-roof-membranes"),
     brands: ["ClassicBond", "Resitrix"],
     features: [
       "EPDM single-ply membranes with 50-year life expectancy",
@@ -89,6 +117,7 @@ export const products: Product[] = [
     h1: "Pitched Roof Membranes Bristol",
     shortDesc: "Breathable roofing underlay and breather membranes from A. Proctor Group, keeping pitched roofs ventilated and protected from the elements.",
     longDesc: "A well-specified breather membrane is essential to any pitched roof, and Ashmead Roofing Supplies stocks the full range from A. Proctor Group and other leading manufacturers. Whether you need a high-performance breathable underlay for a warm roof construction or a traditional HR felt for a cold roof, our Bristol depot has it on the shelf. Our trade team can advise on the correct membrane specification for your build-up, including condensation risk analysis and ventilation requirements. We stock both single-roll and multi-roll packs for trade pricing, and offer fast delivery across Bristol, Bath, Somerset, Gloucester and Wiltshire.",
+    image: productImage("pitched-roof-membranes"),
     brands: ["A. Proctor Group"],
     features: [
       "Breathable underlay from A. Proctor Group — market-leading performance",
@@ -107,6 +136,7 @@ export const products: Product[] = [
     h1: "Roofing Battens Bristol",
     shortDesc: "Graded and treated roofing battens in all standard sizes, stocked at our Bristol depot for immediate collection or delivery to site.",
     longDesc: "Roofing battens are the backbone of every pitched roof, and at Ashmead Roofing Supplies we only stock battens that meet BS 5534 requirements. Our graded, pressure-treated battens are available in all standard sizes — 25×38mm, 25×50mm and 38×50mm — and are suitable for use with all tile and slate profiles. We buy in bulk direct from the sawmill, which means we can offer trade customers consistently competitive pricing. Our Bristol depot holds large stocks for immediate collection, and we can deliver battens alongside tiles, membrane and fixings to keep your project moving.",
+    image: productImage("roofing-battens"),
     brands: [],
     features: [
       "BS 5534 compliant graded and stamped battens",
@@ -125,6 +155,7 @@ export const products: Product[] = [
     h1: "Nails and Fixings Bristol",
     shortDesc: "A comprehensive range of roofing nails, screws, clips and fixings from Kober and Kytun for every tile and slate application.",
     longDesc: "The right fixings are critical to roof performance and compliance, and Ashmead Roofing Supplies carries one of the widest selections of roofing nails and fixings in the South West. We stock nail and clip systems from Kober and Kytun — two of the UK's most trusted fixing manufacturers — covering concrete tiles, clay tiles, slates and all common batten sizes. Whether you need ring-shank nails, clout nails, slate nails, tile clips, batten nails or dry-fix ridge fixings, our Bristol trade counter has them on the shelf. Our team can advise on the correct fixing specification for your project, including wind zone calculations for exposed sites.",
+    image: productImage("nails-and-fixings"),
     brands: ["Kober", "Kytun"],
     features: [
       "Kober and Kytun fixing systems in stock",
@@ -143,6 +174,7 @@ export const products: Product[] = [
     h1: "Fascias and Guttering Bristol",
     shortDesc: "UPVC fascias, soffits and guttering from FloPlast, plus cast iron and aluminium options for heritage and commercial projects.",
     longDesc: "Ashmead Roofing Supplies stocks everything you need to finish a roof to the highest standard, including a comprehensive range of fascias, soffits and guttering from FloPlast. Our Bristol depot carries UPVC fascia boards in all widths, square and round gutter profiles, downpipes and all associated fittings. We also supply cast iron guttering for heritage and conservation work, plus aluminium systems for commercial and industrial projects. Our trade team can help you calculate run lengths, determine the correct gutter capacity for your roof area, and specify the right brackets and accessories for a neat, weathertight installation.",
+    image: productImage("fascias-and-guttering"),
     brands: ["FloPlast"],
     features: [
       "UPVC fascia boards in 100mm to 450mm widths",
@@ -161,6 +193,7 @@ export const products: Product[] = [
     h1: "Insulation Bristol",
     shortDesc: "Roof and loft insulation from Rockwool and other leading brands, available in boards, rolls and multi-layer blankets at trade prices.",
     longDesc: "Effective insulation is a legal requirement and a key part of any roofing project, and Ashmead Roofing Supplies has Bristol's best trade selection. We stock Rockwool stone wool insulation alongside PIR board and multi-layer blanket systems, giving roofers and builders the full range of options for warm roof, cold roof and loft insulation applications. Our Bristol depot holds bulk quantities for immediate collection, and we can deliver insulation alongside membranes, battens and tiles to minimise site logistics. Our team can advise on U-value targets, condensation risk and the latest Part L building regulations to ensure your specification is compliant.",
+    image: productImage("insulation"),
     brands: ["Rockwool"],
     features: [
       "Rockwool stone wool insulation in stock",
@@ -179,6 +212,7 @@ export const products: Product[] = [
     h1: "Ventilation Products Bristol",
     shortDesc: "Roof ventilation solutions from A. Proctor Group and other leading manufacturers, ensuring compliance with Building Regulations.",
     longDesc: "Proper roof ventilation is essential to prevent condensation, timber decay and tile failure — and Ashmead Roofing Supplies stocks the products and expertise to keep your roof breathing correctly. We supply ventilation solutions from A. Proctor Group and other leading manufacturers, including eaves ventilators, tile vents, ridge vents and dry-fix systems with built-in ventilation paths. Whether you're specifying ventilation for a new-build or adding retro-fit vents to an existing roof, our trade team will help you calculate the correct ventilation area and choose the right products for your roof type and pitch.",
+    image: productImage("ventilation-products"),
     brands: ["A. Proctor Group"],
     features: [
       "Eaves ventilators and fascia ventilation systems",
@@ -197,6 +231,7 @@ export const products: Product[] = [
     h1: "Lead Products Bristol",
     shortDesc: "Milled lead sheet from British Lead Mills plus Code 3 to Code 8 rolls, flashings and soakers for every roofing application.",
     longDesc: "Ashmead Roofing Supplies is a major stockist of milled lead sheet from British Lead Mills, supplying roofers across Bristol, Bath, Somerset, Gloucester and Wiltshire. We carry Code 3 through to Code 8 in full rolls and cut lengths, along with pre-formed flashings, soakers and lead accessories. Lead remains the longest-lasting and most reliable material for roof weathering details, and our trade counter team can advise on the correct code for your application, the latest Lead Sheet Association guidelines, and safe working practices. We also supply lead alternatives including Wakaflex and other flexible flashing products.",
+    image: productImage("lead-products"),
     brands: ["British Lead Mills"],
     features: [
       "Milled lead sheet from British Lead Mills",
@@ -215,6 +250,7 @@ export const products: Product[] = [
     h1: "Roof Windows Bristol",
     shortDesc: "Velux and Roto roof windows, flashings and accessories from our Bristol depot, with trade pricing and expert installation advice.",
     longDesc: "Ashmead Roofing Supplies stocks roof windows from Velux and Roto — the two most trusted names in the industry. Whether you need a centre-pivot Velux for a loft conversion, a top-hung Roto for easy access to a balcony, or conservation-area windows with custom flashings, our Bristol depot has the products and the expertise. We carry Velux GGU, GGL and GPU ranges alongside Roto Designo and Deluxe models, plus all associated flashings, installation kits and accessories. Our trade team can advise on the right window for your roof pitch, the correct flashing kit for your tile or slate, and Building Regulations requirements for emergency escape.",
+    image: productImage("roof-windows"),
     brands: ["Velux", "Roto"],
     features: [
       "Velux centre-pivot and top-hung roof windows in stock",
@@ -233,6 +269,7 @@ export const products: Product[] = [
     h1: "ClassicBond Bristol",
     shortDesc: "ClassicBond EPDM flat roofing systems — the UK's most popular single-ply membrane — available from our Bristol depot with full technical support.",
     longDesc: "ClassicBond EPDM is the UK's most widely specified single-ply flat roofing membrane, and Ashmead Roofing Supplies is your local stockist in Bristol. ClassicBond offers a proven 50-year life expectancy, simple one-piece installation and outstanding resistance to UV, ozone and temperature extremes. We hold ClassicBond 1.14mm and 1.52mm membranes in all standard sizes, plus the full range of adhesives, trims, formflash, waterblock and reinforcement accessories. Our trade team can walk you through the installation process, help calculate material requirements and arrange delivery direct to site.",
+    image: productImage("classicbond"),
     brands: [],
     features: [
       "50-year life expectancy — the market-leading EPDM system",
@@ -251,6 +288,7 @@ export const products: Product[] = [
     h1: "Duopoly Bristol",
     shortDesc: "Duopoly flat roofing systems combining the strength of felt with the durability of polymer — a versatile and cost-effective flat roof solution.",
     longDesc: "Duopoly flat roofing systems offer an excellent balance of performance and value, combining traditional bituminous felt technology with advanced polymer modification. At Ashmead Roofing Supplies, we stock the full Duopoly range at our Bristol depot, including torch-on and pour-and-roll cap sheets, underlays and associated ancillaries. Duopoly systems deliver reliable waterproofing for extensions, garages and commercial flat roofs, and our trade team can advise on the correct build-up, substrate preparation and detailing for your project. We also supply all the ancillaries you need including vapour control layers, insulation boards and edge trims.",
+    image: productImage("duopoly"),
     brands: [],
     features: [
       "Polymer-modified bituminous flat roofing system",
@@ -269,6 +307,7 @@ export const products: Product[] = [
     h1: "Resitrix Bristol",
     shortDesc: "Resitrix EPDM rubber membranes — heat-welded single-ply flat roofing for commercial and domestic applications demanding premium performance.",
     longDesc: "Resitrix is a premium EPDM rubber membrane system that uses heat-welded seams for maximum reliability, making it the go-to choice for flat roof projects where performance cannot be compromised. Ashmead Roofing Supplies stocks the full Resitrix range at our Bristol depot, including SK W Plus membranes, reinforced and unreinforced options, and all the welding accessories and edge details you need. Resitrix's heat-welded seams deliver lap strengths that exceed the membrane itself, making it ideal for large commercial flat roofs as well as domestic work. Our trade team can advise on installation, detailing and material quantities.",
+    image: productImage("resitrix"),
     brands: [],
     features: [
       "Heat-welded seams — stronger than the membrane itself",
@@ -287,6 +326,7 @@ export const products: Product[] = [
     h1: "Fatra Bristol",
     shortDesc: "Fatra PVC single-ply flat roofing membranes — a proven commercial flat roof system now available from Ashmead Roofing Supplies in Bristol.",
     longDesc: "Fatra PVC membrane is a single-ply flat roofing system with a 40-year track record on commercial and industrial buildings across Europe. Ashmead Roofing Supplies now stocks the Fatra range at our Bristol depot, giving local contractors access to a high-performance alternative to EPDM and felt systems. Fatra membranes are hot-air welded for maximum seam security, are root-resistant for green roof applications, and carry all the key European certifications. We supply the full system including membranes, vapour control layers, insulation boards and accessories, and our trade team can advise on specification, installation and warranty requirements.",
+    image: productImage("fatra"),
     brands: [],
     features: [
       "PVC single-ply membrane with 40-year European track record",
