@@ -4,6 +4,10 @@
 @import "@fontsource/dm-sans/500.css";
 @import "@fontsource/dm-sans/700.css";
 
+@source "../components/**/*.astro";
+@source "../pages/**/*.astro";
+@source "../layouts/**/*.astro";
+
 @theme {
   /* Colours */
   --color-primary: #009900;
