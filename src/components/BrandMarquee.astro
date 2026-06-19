@@ -26,17 +26,13 @@ const duration = `${speed}s`;
         href={brand.url}
         target="_blank"
         rel="noopener noreferrer"
-        class:list={['flex-shrink-0 inline-flex items-center h-10 md:h-12 px-4', isGreen ? '' : 'h-14 md:h-16']}
+        class:list={['flex-shrink-0 inline-flex items-center justify-center h-10 md:h-12 px-4 rounded bg-white group transition-colors duration-300 hover:bg-transparent', isGreen ? '' : 'h-14 md:h-16']}
         aria-label={brand.name}
       >
         {brand.logo ? (
-          <img
-            src={brand.logo}
-            alt={brand.name}
-            class:list={['h-full w-auto object-contain transition-all duration-300', isGreen ? 'logo-white hover:logo-color' : 'opacity-90 hover:opacity-100']}
-          />
+          <img src={brand.logo} alt={brand.name} class="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
         ) : (
-          <span class:list={['font-heading text-base md:text-lg font-bold uppercase tracking-wide', isGreen ? 'text-white' : 'text-charcoal']}>{brand.name}</span>
+          <span class:list={['font-heading text-base md:text-lg font-bold uppercase tracking-wide', isGreen ? 'text-charcoal group-hover:text-white' : 'text-charcoal']}>{brand.name}</span>
         )}
       </a>
     ))}
@@ -51,11 +47,7 @@ const duration = `${speed}s`;
     animation-play-state: paused;
   }
   .logo-white {
-    filter: brightness(0) invert(1);
-  }
-  .logo-white:hover,
-  a:hover .logo-white {
-    filter: none;
+    display: none;
   }
   @keyframes marquee {
     0% { transform: translateX(0); }
