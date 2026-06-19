@@ -9,10 +9,14 @@ import Button from '../components/Button.astro';
 import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
+import { brands, brandByName } from '../data/brands';
+
+const heroBrandNames = ["Redland", "Marley", "Velux", "Cupa Pizarras", "A. Proctor Group", "FloPlast"];
+const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean);
 ---
 
 <Layout title="Roofing Supplies Bristol | Ashmead Roofing Supplies" description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter. Tiles, slates, flat roofing, membranes, battens, fixings & more. Trade pricing, expert advice, fast delivery. Call 0117 986 0600.">
-  <section class="relative min-h-[85vh] flex items-center overflow-hidden">
+  <section class="relative min-h-[85vh] flex items-center">
     <!-- Background image -->
     <div class="absolute inset-0 z-0">
       <img
@@ -88,24 +92,39 @@ import { areas } from '../data/areas';
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Bottom brand bar -->
-    <div class="absolute bottom-0 left-0 right-0 z-10 bg-primary border-t border-white/10">
-      <div class="container py-4">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider">Authorised Stockists Of</span>
-          <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10">
-            <img src="/images/logos/redland.svg" alt="Redland" class="h-7 md:h-8 w-auto object-contain" />
-            <img src="/images/logos/marley.svg" alt="Marley" class="h-7 md:h-8 w-auto object-contain" />
-            <img src="/images/logos/velux.png" alt="Velux" class="h-7 md:h-8 w-auto object-contain" />
-            <img src="/images/logos/cupa-pizarras.png" alt="Cupa Pizarras" class="h-7 md:h-8 w-auto object-contain" />
-            <img src="/images/logos/a-proctor-group.svg" alt="A. Proctor Group" class="h-7 md:h-8 w-auto object-contain" />
-            <img src="/images/logos/floplast.png" alt="FloPlast" class="h-7 md:h-8 w-auto object-contain" />
-          </div>
-        </div>
+  <!-- Bottom brand bar -->
+  <div class="bg-primary border-t border-white/10">
+    <div class="container py-3 md:py-4">
+      <div class="flex items-center gap-4 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 scrollbar-hide">
+        <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider flex-shrink-0">Authorised Stockists Of</span>
+        {heroBrands.map(brand => (
+          brand.logo && (
+            <a
+              href={brand.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex flex-shrink-0 items-center h-7 md:h-8"
+              aria-label={brand.name}
+            >
+              <img src={brand.logo} alt={brand.name} class="h-full w-auto object-contain" />
+            </a>
+          )
+        ))}
       </div>
     </div>
-  </section>
+  </div>
+
+  <style>
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
 
   <section class="section-white section-padding">
     <div class="container">
