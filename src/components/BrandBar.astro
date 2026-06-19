@@ -1,5 +1,19 @@
 ---
 import { brands } from '../data/site';
+
+const logoMap: Record<string, string> = {
+  "Redland": "/images/logos/redland.svg",
+  "Marley": "/images/logos/marley.svg",
+  "Velux": "/images/logos/velux.svg",
+  "Kober": "/images/logos/kober.png",
+  "Kytun": "/images/logos/kytun.svg",
+  "A. Proctor Group": "/images/logos/a-proctor-group.svg",
+  "Rockwool": "/images/logos/rockwool.jpg",
+  "Roto": "/images/logos/roto.png",
+  "FloPlast": "/images/logos/floplast.png",
+  "British Lead Mills": "/images/logos/british-lead-mills.svg",
+  "Cupa Pizarras": "/images/logos/cupa-pizarras.jpg",
+};
 ---
 
 <section class="bg-section py-16 md:py-20">
@@ -7,8 +21,12 @@ import { brands } from '../data/site';
     <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal text-center mb-12">Brands We Supply</h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
       {brands.map(brand => (
-        <div class="bg-white rounded-lg p-4 text-center border border-border hover:border-primary transition-colors">
-          <span class="text-charcoal font-heading text-base font-bold uppercase tracking-wide">{brand}</span>
+        <div class="bg-white rounded-lg p-4 flex items-center justify-center border border-border hover:border-primary transition-colors h-24">
+          {logoMap[brand] ? (
+            <img src={logoMap[brand]} alt={brand} class="max-h-14 w-auto object-contain" />
+          ) : (
+            <span class="text-charcoal font-heading text-base font-bold uppercase tracking-wide text-center">{brand}</span>
+          )}
         </div>
       ))}
     </div>
