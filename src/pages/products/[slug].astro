@@ -43,9 +43,9 @@ const breadcrumbItems = [
   {product.brands && product.brands.length > 0 && (
     <div class="bg-primary border-t border-white/10">
       <div class="container py-3 md:py-4">
-        <div class="overflow-x-auto scrollbar-hide">
-          <div class="flex items-center gap-4" style="width: max-content;">
-            <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider flex-shrink-0">Recommended Brands</span>
+        <div class="scrollbar-hide" style="overflow-x: auto;">
+          <div style="display: flex; align-items: center; gap: 1rem; width: max-content;">
+            <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider" style="flex-shrink: 0;">Recommended Brands</span>
             {product.brands.map(brand => {
               const b = brandByName[brand];
               return b?.logo ? (
@@ -53,10 +53,10 @@ const breadcrumbItems = [
                   href={b.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="flex-shrink-0 h-7 md:h-8 inline-flex items-center"
+                  style="flex-shrink: 0; display: inline-flex; align-items: center; height: 1.75rem;"
                   aria-label={b.name}
                 >
-                  <img src={b.logo} alt={b.name} class="h-full w-auto object-contain" />
+                  <img src={b.logo} alt={b.name} style="height: 100%; width: auto; object-fit: contain;" />
                 </a>
               ) : null;
             })}

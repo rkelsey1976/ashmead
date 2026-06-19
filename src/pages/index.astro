@@ -97,19 +97,19 @@ const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean)
   <!-- Bottom brand bar -->
   <div class="bg-primary border-t border-white/10">
     <div class="container py-3 md:py-4">
-      <div class="overflow-x-auto scrollbar-hide">
-        <div class="flex items-center gap-4" style="width: max-content;">
-          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider flex-shrink-0">Authorised Stockists Of</span>
+      <div class="scrollbar-hide" style="overflow-x: auto;">
+        <div style="display: flex; align-items: center; gap: 1rem; width: max-content;">
+          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider" style="flex-shrink: 0;">Authorised Stockists Of</span>
           {heroBrands.map(brand => (
             brand.logo && (
               <a
                 href={brand.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex-shrink-0 h-7 md:h-8 inline-flex items-center"
+                style="flex-shrink: 0; display: inline-flex; align-items: center; height: 1.75rem;"
                 aria-label={brand.name}
               >
-                <img src={brand.logo} alt={brand.name} class="h-full w-auto object-contain" />
+                <img src={brand.logo} alt={brand.name} style="height: 100%; width: auto; object-fit: contain;" />
               </a>
             )
           ))}
