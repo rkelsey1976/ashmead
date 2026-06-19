@@ -5,6 +5,7 @@ import BrandBar from '../components/BrandBar.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { PHONE, PHONE_HREF, BUSINESS_NAME, heroImages } from '../data/site';
 import { brands } from '../data/brands';
 ---
@@ -84,4 +85,6 @@ import { brands } from '../data/brands';
   </section>
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={45} />
+
+  <Testimonials title="Trusted by Roofers Across the South West" />
 </Layout>

@@ -1,0 +1,99 @@
+---
+import { BUSINESS_NAME, EMAIL, PHONE_HREF, CANONICAL_URL, ADDRESS, POSTCODE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  schema?: object[];
+  noindex?: boolean;
+}
+
+const { title, description, ogImage = '/images/hero-home.jpg', canonical = Astro.url.pathname, schema = [] } = Astro.props;
+
+const fullTitle = title.includes(BUSINESS_NAME) ? title : `${title} | ${BUSINESS_NAME}`;
+const canonicalUrl = `${CANONICAL_URL}${canonical === '/' ? '' : canonical}`;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${CANONICAL_URL}${ogImage}`;
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "@id": `${CANONICAL_URL}/#business`,
+  name: BUSINESS_NAME,
+  telephone: PHONE_HREF.replace('tel:', ''),
+  email: EMAIL,
+  url: CANONICAL_URL,
+  image: `${CANONICAL_URL}/images/hero-home.jpg`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: ADDRESS,
+    addressLocality: "Bristol",
+    addressRegion: "South West England",
+    postalCode: POSTCODE,
+    addressCountry: "GB",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "51.4545",
+    longitude: "-2.5879",
+  },
+  openingHoursSpecification: [
+    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "07:30", closes: "17:00" },
+    { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "12:00" },
+  ],
+  priceRange: "$$",
+  areaServed: [
+    { "@type": "City", name: "Bristol" },
+    { "@type": "City", name: "Bath" },
+    { "@type": "AdministrativeArea", name: "Somerset" },
+    { "@type": "City", name: "Gloucester" },
+    { "@type": "AdministrativeArea", name: "Wiltshire" },
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: BUSINESS_NAME,
+  url: CANONICAL_URL,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${CANONICAL_URL}/products?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const allSchema = [websiteSchema, localBusinessSchema, ...schema];
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:site_name" content={BUSINESS_NAME} />
+<meta property="og:locale" content="en_GB" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<script type="application/ld+json" set:html={JSON.stringify(allSchema)} />

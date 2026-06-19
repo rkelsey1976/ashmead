@@ -1,17 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import CtaBanner from '../components/CtaBanner.astro';
-import FeatureCard from '../components/FeatureCard.astro';
+import Hero from '../components/Hero.astro';
 import ProductCard from '../components/ProductCard.astro';
 import AreaCard from '../components/AreaCard.astro';
+import FeatureCard from '../components/FeatureCard.astro';
 import BrandBar from '../components/BrandBar.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
+import CtaBanner from '../components/CtaBanner.astro';
 import Button from '../components/Button.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
+import SectionHeading from '../components/SectionHeading.astro';
+import Testimonials from '../components/Testimonials.astro';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, heroImages } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
 import { brands, brandByName } from '../data/brands';
-
 const heroBrandNames = ["Redland", "Marley", "Velux", "Cupa Pizarras", "A. Proctor Group", "FloPlast"];
 const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean);
 ---
@@ -133,6 +135,8 @@ const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean)
       </div>
     </div>
   </section>
+
+  <Testimonials />
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={45} />
 

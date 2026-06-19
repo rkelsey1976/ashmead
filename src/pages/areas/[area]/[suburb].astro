@@ -2,7 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/Button.astro';
 import CtaBanner from '../../../components/CtaBanner.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../../../data/site';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../../data/site';
 import { areas, getSuburb, getArea } from '../../../data/areas';
 
 export function getStaticPaths() {
@@ -27,9 +27,28 @@ const breadcrumbItems = [
   { label: area.name, href: `/areas/${area.slug}` },
   { label: suburb.name },
 ];
+
+const suburbSchema = {
+  "@context": "https://schema.org",
+  "@type": "ServiceArea",
+  name: `${BUSINESS_NAME} - ${suburb.name}`,
+  provider: { "@type": "LocalBusiness", name: BUSINESS_NAME },
+  areaServed: { "@type": "City", name: suburb.name },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${CANONICAL_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Areas We Cover", item: `${CANONICAL_URL}/areas/` },
+    { "@type": "ListItem", position: 3, name: area.name, item: `${CANONICAL_URL}/areas/${area.slug}/` },
+    { "@type": "ListItem", position: 4, name: suburb.name },
+  ],
+};
 ---
 
-<Layout title={suburb.metaTitle} description={suburb.metaDescription}>
+<Layout title={suburb.metaTitle} description={suburb.metaDescription} schema={[suburbSchema, breadcrumbSchema]} ogImage={heroImages[area.slug as keyof typeof heroImages]}>
   <section class="bg-section-highlight section-padding">
     <div class="container">
       <nav aria-label="Breadcrumb" class="text-body/60 text-sm font-heading uppercase tracking-widest mb-4">

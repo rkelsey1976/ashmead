@@ -4,7 +4,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import Button from '../../components/Button.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import Hero from '../../components/Hero.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../../data/site';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
 import { areas } from '../../data/areas';
 import { brands } from '../../data/brands';
 import BrandMarquee from '../../components/BrandMarquee.astro';
@@ -22,9 +22,27 @@ const breadcrumbItems = [
   { label: 'Areas We Cover', href: '/areas' },
   { label: area.name },
 ];
+
+const serviceAreaSchema = {
+  "@context": "https://schema.org",
+  "@type": "ServiceArea",
+  name: `${BUSINESS_NAME} - ${area.name}`,
+  provider: { "@type": "LocalBusiness", name: BUSINESS_NAME },
+  areaServed: { "@type": area.suburbs?.length ? "City" : "AdministrativeArea", name: area.name },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${CANONICAL_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Areas We Cover", item: `${CANONICAL_URL}/areas/` },
+    { "@type": "ListItem", position: 3, name: area.name },
+  ],
+};
 ---
 
-<Layout title={`${area.h1} | Ashmead Roofing Supplies`} description={area.metaDesc}>
+<Layout title={`${area.h1} | Ashmead Roofing Supplies`} description={area.metaDesc} schema={[serviceAreaSchema, breadcrumbSchema]} ogImage={area.image}>
   <Hero
     title={area.h1}
     subtitle={area.shortDesc}

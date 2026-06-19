@@ -3,6 +3,17 @@ export const PHONE_HREF = "tel:+441179860600";
 export const BUSINESS_NAME = "Ashmead Roofing Supplies Ltd";
 export const EMAIL = "sales@ashmeadroofing.co.uk";
 export const ADDRESS = "Ashmead Roofing Supplies Ltd, Bristol Depot, BS2 0SP";
+export const CANONICAL_URL = "https://roofingsuppliesbristol.co.uk";
+export const POSTCODE = "BS2 0SP";
+export const OPENING_HOURS = [
+  { day: "Monday", opens: "07:30", closes: "17:00" },
+  { day: "Tuesday", opens: "07:30", closes: "17:00" },
+  { day: "Wednesday", opens: "07:30", closes: "17:00" },
+  { day: "Thursday", opens: "07:30", closes: "17:00" },
+  { day: "Friday", opens: "07:30", closes: "17:00" },
+  { day: "Saturday", opens: "08:00", closes: "12:00" },
+  { day: "Sunday", opens: "", closes: "" },
+];
 
 export const navLinks = [
   { href: "/", label: "Home" },

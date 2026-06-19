@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
+import Testimonials from '../components/Testimonials.astro';
 import { PHONE, PHONE_HREF, BUSINESS_NAME, EMAIL, ADDRESS, heroImages } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
@@ -250,4 +251,6 @@ const openingHours = [
       </div>
     </div>
   </section>
+
+  <Testimonials title="What Our Customers Say" />
 </Layout>

@@ -2,52 +2,23 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyMobileFooter from '../components/StickyMobileFooter.astro';
+import SeoHead from '../components/SeoHead.astro';
 import '../styles/global.css';
-import { PHONE } from '../data/site';
 
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
   schema?: object[];
 }
 
-const { title, description, schema = [] } = Astro.props;
-
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Ashmead Roofing Supplies Ltd",
-  "telephone": "+441179860600",
-  "url": "https://www.ashmeadroofing.co.uk",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Bristol",
-    "addressRegion": "Somerset",
-    "addressCountry": "GB"
-  },
-  "areaServed": [
-    {"@type": "City", "name": "Bristol"},
-    {"@type": "City", "name": "Bath"},
-    {"@type": "County", "name": "Somerset"},
-    {"@type": "City", "name": "Gloucester"},
-    {"@type": "County", "name": "Wiltshire"}
-  ],
-  "category": "Roofing Supplies",
-  "priceRange": "$$"
-};
-
-const allSchema = [localBusinessSchema, ...schema];
+const { title, description, ogImage, schema } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content={description} />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>{title}</title>
-  <script type="application/ld+json" set:html={JSON.stringify(allSchema)} />
+  <SeoHead title={title} description={description} ogImage={ogImage} schema={schema} />
 </head>
 <body class="bg-white text-body font-body min-h-screen flex flex-col">
   <Header />

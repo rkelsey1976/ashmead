@@ -6,7 +6,7 @@ import CtaBanner from '../../components/CtaBanner.astro';
 import BrandBar from '../../components/BrandBar.astro';
 import BrandMarquee from '../../components/BrandMarquee.astro';
 import Hero from '../../components/Hero.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME, heroImages } from '../../data/site';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
 import { products } from '../../data/products';
 import { brandByName, brands } from '../../data/brands';
 
@@ -25,9 +25,33 @@ const breadcrumbItems = [
 ];
 
 const heroImage = heroImages[product.slug as keyof typeof heroImages] || heroImages.products;
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: product.h1,
+  description: product.shortDesc,
+  brand: product.brands?.length ? { "@type": "Brand", name: product.brands[0] } : undefined,
+  offers: {
+    "@type": "AggregateOffer",
+    availability: "https://schema.org/InStock",
+    priceCurrency: "GBP",
+    seller: { "@type": "LocalBusiness", name: BUSINESS_NAME },
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${CANONICAL_URL}/` },
+    { "@type": "ListItem", position: 2, name: "Products", item: `${CANONICAL_URL}/products/` },
+    { "@type": "ListItem", position: 3, name: product.name },
+  ],
+};
 ---
 
-<Layout title={`${product.h1} | Ashmead Roofing Supplies Bristol`} description={product.metaDesc}>
+<Layout title={`${product.h1} | Ashmead Roofing Supplies Bristol`} description={product.metaDesc} schema={[productSchema, breadcrumbSchema]} ogImage={heroImage}>
   <Hero
     title={product.h1}
     subtitle={product.shortDesc}
