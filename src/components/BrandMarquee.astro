@@ -1,0 +1,53 @@
+---
+export interface Props {
+  label?: string;
+  brands: { name: string; logo: string | null; url: string }[];
+  theme?: 'green' | 'white';
+  speed?: number;
+}
+
+const { label, brands, theme = 'green', speed = 60 } = Astro.props;
+
+const duplicated = [...brands, ...brands, ...brands, ...brands, ...brands, ...brands];
+const isGreen = theme === 'green';
+const duration = `${speed * 2}s`;
+---
+
+<div class:list={['py-3 md:py-4 overflow-hidden', isGreen ? 'bg-primary border-t border-white/10' : 'bg-section']}>
+  {label && (
+    <div class:list={['container mb-3 text-center', isGreen ? 'text-white' : 'text-charcoal']}">
+      <span class="text-xs md:text-sm font-medium uppercase tracking-wider whitespace-nowrap">{label}</span>
+    </div>
+  )}
+  <div class="marquee-track flex items-center gap-8 md:gap-12" style="width: max-content; --duration: {duration};">
+    {duplicated.map((brand, i) => (
+      <a
+        key={i}
+        href={brand.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class:list={['flex-shrink-0 inline-flex items-center h-10 md:h-12 px-4', isGreen ? '' : 'h-14 md:h-16']}
+        aria-label={brand.name}
+      >
+        {brand.logo ? (
+          <img src={brand.logo} alt={brand.name} class="h-full w-auto object-contain" />
+        ) : (
+          <span class:list={['font-heading text-base md:text-lg font-bold uppercase tracking-wide', isGreen ? 'text-white' : 'text-charcoal']}>{brand.name}</span>
+        )}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .marquee-track {
+    animation: marquee var(--duration, 60s) linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

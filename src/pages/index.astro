@@ -5,6 +5,7 @@ import FeatureCard from '../components/FeatureCard.astro';
 import ProductCard from '../components/ProductCard.astro';
 import AreaCard from '../components/AreaCard.astro';
 import BrandBar from '../components/BrandBar.astro';
+import BrandMarquee from '../components/BrandMarquee.astro';
 import Button from '../components/Button.astro';
 import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
 import { products } from '../data/products';
@@ -95,38 +96,7 @@ const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean)
   </section>
 
   <!-- Bottom brand bar -->
-  <div class="bg-primary border-t border-white/10">
-    <div class="container py-3 md:py-4">
-      <div class="overflow-x-auto scrollbar-hide">
-        <div class="flex items-center gap-8 md:gap-12" style="width: max-content; min-width: calc(100% + 4rem);">
-          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider whitespace-nowrap">Authorised Stockists Of</span>
-          {heroBrands.map(brand => (
-            brand.logo && (
-              <a
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex-shrink-0 inline-flex items-center h-10 md:h-12 px-4"
-                aria-label={brand.name}
-              >
-                <img src={brand.logo} alt={brand.name} class="h-full w-auto object-contain" />
-              </a>
-            )
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  </style>
+  <BrandMarquee label="Authorised Stockists Of" brands={heroBrands} theme="green" />
 
   <section class="section-white section-padding">
     <div class="container">
@@ -164,7 +134,7 @@ const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean)
     </div>
   </section>
 
-  <BrandBar />
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={70} />
 
   <CtaBanner />
 </Layout>

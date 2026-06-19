@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import CtaBanner from '../../components/CtaBanner.astro';
 import ProductCard from '../../components/ProductCard.astro';
+import BrandMarquee from '../../components/BrandMarquee.astro';
 import { products } from '../../data/products';
 import { brands } from '../../data/brands';
 ---
@@ -14,38 +15,7 @@ import { brands } from '../../data/brands';
     </div>
   </section>
 
-  <div class="bg-primary border-t border-white/10">
-    <div class="container py-3 md:py-4">
-      <div class="overflow-x-auto scrollbar-hide">
-        <div class="flex items-center gap-8 md:gap-12" style="width: max-content; min-width: calc(100% + 4rem);">
-          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider whitespace-nowrap">Brands We Supply</span>
-          {brands.map(brand => (
-            brand.logo && (
-              <a
-                href={brand.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex-shrink-0 inline-flex items-center h-10 md:h-12 px-4"
-                aria-label={brand.name}
-              >
-                <img src={brand.logo} alt={brand.name} class="h-full w-auto object-contain" />
-              </a>
-            )
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  </style>
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 
   <section class="section-white section-padding">
     <div class="container">
