@@ -43,22 +43,24 @@ const breadcrumbItems = [
   {product.brands && product.brands.length > 0 && (
     <div class="bg-primary border-t border-white/10">
       <div class="container py-3 md:py-4">
-        <div class="flex items-center gap-4 overflow-x-auto whitespace-nowrap pb-2 md:pb-0 scrollbar-hide">
-          <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider flex-shrink-0">Recommended Brands</span>
-          {product.brands.map(brand => {
-            const b = brandByName[brand];
-            return b?.logo ? (
-              <a
-                href={b.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex flex-shrink-0 items-center h-7 md:h-8"
-                aria-label={b.name}
-              >
-                <img src={b.logo} alt={b.name} class="h-full w-auto object-contain" />
-              </a>
-            ) : null;
-          })}
+        <div class="overflow-x-auto scrollbar-hide">
+          <div class="flex items-center gap-4 w-max">
+            <span class="text-xs md:text-sm text-white font-medium uppercase tracking-wider flex-shrink-0">Recommended Brands</span>
+            {product.brands.map(brand => {
+              const b = brandByName[brand];
+              return b?.logo ? (
+                <a
+                  href={b.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-shrink-0 h-7 md:h-8 inline-flex items-center"
+                  aria-label={b.name}
+                >
+                  <img src={b.logo} alt={b.name} class="h-full w-auto object-contain" />
+                </a>
+              ) : null;
+            })}
+          </div>
         </div>
       </div>
     </div>
