@@ -57,6 +57,22 @@ const breadcrumbItems = [
           </ul>
         </div>
       )}
+      {area.suburbs && area.suburbs.length > 0 && (
+        <div class="mt-12">
+          <h2 class="text-2xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Areas We Serve in {area.name}</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {area.suburbs.map(suburb => (
+              <a href={`/areas/${area.slug}/${suburb.slug}`} class="flex items-center justify-between p-4 bg-section-highlight rounded hover:bg-primary hover:text-white group transition-colors">
+                <span class="font-heading font-bold uppercase tracking-wide text-charcoal group-hover:text-white">{suburb.name}</span>
+                <svg class="w-5 h-5 text-primary group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
     </div>
   </section>
 
