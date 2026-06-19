@@ -17,7 +17,7 @@ import { products } from '../../data/products';
     <div class="container">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map(product => (
-          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} />
+          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
         ))}
       </div>
     </div>
