@@ -6,15 +6,16 @@ import { products } from '../../data/products';
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
-  <section class="bg-section-highlight section-padding">
+  <section class="bg-section-highlight py-12 md:py-16">
     <div class="container">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-6">Roofing Products</h1>
-      <p class="text-lg text-body max-w-2xl mb-8">Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings.</p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-wide text-charcoal mb-4">Roofing Products</h1>
+      <p class="text-lg text-body max-w-4xl mb-0">Browse our complete range of professional roofing supplies, from tiles and slates to flat roof systems and fixings.</p>
     </div>
   </section>
 
   <section class="section-white section-padding">
     <div class="container">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Our Range</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map(product => (
           <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
