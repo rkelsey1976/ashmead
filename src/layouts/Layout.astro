@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import StickyMobileFooter from '../components/StickyMobileFooter.astro';
 import '../styles/global.css';
 import { PHONE } from '../data/site';
 
@@ -54,6 +55,7 @@ const allSchema = [localBusinessSchema, ...schema];
     <slot />
   </main>
   <Footer />
+  <StickyMobileFooter />
 
   <!-- Mobile menu script -->
   <script>
