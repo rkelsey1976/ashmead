@@ -48,7 +48,7 @@ const footerColumns = [
             </svg>
           </button>
           <h3 class="hidden md:block text-white font-heading text-lg font-bold uppercase tracking-wide mb-4">{col.title}</h3>
-          <ul class="footer-accordion-body hidden md:space-y-2 px-1 pb-4">
+          <ul class="footer-accordion-body hidden md:block md:space-y-2 px-1 pb-4">
             {col.links.map(link => (
               <li class="py-2 md:py-0 border-b border-gray-700/50 md:border-0">
                 <a href={link.href} class:list={['hover:text-primary transition-colors text-sm', link.highlight ? 'text-primary hover:text-primary-hover font-medium' : 'text-gray-300']}>{link.label}</a>
