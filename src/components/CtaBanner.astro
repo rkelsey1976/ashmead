@@ -13,16 +13,16 @@ const { title = "Ready to Order?", subtitle } = Astro.props;
   <!-- Background image with dark overlay -->
   <div class="absolute inset-0 z-0">
     <img src="/images/hero-home.jpg" alt="" class="w-full h-full object-cover" loading="lazy" />
-    <div class="absolute inset-0 bg-charcoal/80"></div>
-    <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"></div>
+    <div class="absolute inset-0 bg-charcoal/85"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/30 to-transparent"></div>
   </div>
   
   <div class="relative z-10 container">
     <div class="max-w-4xl">
       <div class="gsap-reveal">
         <div class="flex items-center gap-3 mb-5">
-          <span class="h-px w-8 bg-accent"></span>
-          <span class="text-accent text-sm font-semibold uppercase tracking-[0.2em]">Trade Enquiries</span>
+          <span class="h-px w-6 bg-accent opacity-60"></span>
+          <span class="text-accent text-xs font-bold uppercase tracking-[0.22em]">Trade Enquiries</span>
         </div>
         
         <h2 class="text-white font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide mb-6">{title}</h2>
