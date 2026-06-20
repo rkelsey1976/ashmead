@@ -37,7 +37,7 @@ import { areas } from '../data/areas';
       </div>
 
       <div class="lg:col-span-2">
-        <h3 class="text-white/40 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-5">Products</h3>
+        <h3 class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-5">Products</h3>
         <ul class="space-y-2.5">
           {products.slice(0, 8).map(p => (
             <li><a href={`/products/${p.slug}`} class="text-white/60 hover:text-white transition-colors text-sm">{p.name}</a></li>
@@ -51,7 +51,7 @@ import { areas } from '../data/areas';
       </div>
 
       <div class="lg:col-span-3">
-        <h3 class="text-white/40 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-5">Areas We Cover</h3>
+        <h3 class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-5">Areas We Cover</h3>
         <ul class="space-y-2.5">
           {areas.slice(0, 8).map(a => (
             <li><a href={`/areas/${a.slug}`} class="text-white/60 hover:text-white transition-colors text-sm">{a.name}</a></li>
@@ -65,7 +65,7 @@ import { areas } from '../data/areas';
       </div>
 
       <div class="lg:col-span-3">
-        <h3 class="text-white/40 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-5">Depot</h3>
+        <h3 class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-5">Depot</h3>
         <address class="not-italic space-y-3 mb-6">
           <p class="text-white/60 text-sm leading-relaxed">{ADDRESS}<br /><span class="text-white">{POSTCODE}</span></p>
           <a href={`mailto:${EMAIL}`} class="inline-flex items-center gap-2 text-white/60 hover:text-[#4ADE80] transition-colors text-sm">
@@ -73,7 +73,7 @@ import { areas } from '../data/areas';
             {EMAIL}
           </a>
         </address>
-        <h4 class="text-white/40 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-3">Opening Hours</h4>
+        <h4 class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-3">Opening Hours</h4>
         <ul class="space-y-1.5">
           {OPENING_HOURS.map(day => (
             <li class="flex justify-between gap-4 text-sm">
@@ -117,7 +117,7 @@ import { areas } from '../data/areas';
       <!-- Accordion: Products -->
       <div class="border-b border-white/10">
         <button class="footer-acc-btn w-full flex items-center justify-between py-4" aria-expanded="false" data-target="acc-products">
-          <span class="text-white/40 font-heading text-xs font-bold uppercase tracking-[0.2em]">Products</span>
+          <span class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em]">Products</span>
           <svg class="w-4 h-4 text-white/30 footer-acc-icon transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
         </button>
         <div id="acc-products" class="overflow-hidden" style="max-height:0;transition:max-height 0.3s ease">
@@ -133,7 +133,7 @@ import { areas } from '../data/areas';
       <!-- Accordion: Areas -->
       <div class="border-b border-white/10">
         <button class="footer-acc-btn w-full flex items-center justify-between py-4" aria-expanded="false" data-target="acc-areas">
-          <span class="text-white/40 font-heading text-xs font-bold uppercase tracking-[0.2em]">Areas We Cover</span>
+          <span class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em]">Areas We Cover</span>
           <svg class="w-4 h-4 text-white/30 footer-acc-icon transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
         </button>
         <div id="acc-areas" class="overflow-hidden" style="max-height:0;transition:max-height 0.3s ease">
@@ -149,7 +149,7 @@ import { areas } from '../data/areas';
       <!-- Accordion: Depot & Hours -->
       <div class="border-b border-white/10">
         <button class="footer-acc-btn w-full flex items-center justify-between py-4" aria-expanded="false" data-target="acc-depot">
-          <span class="text-white/40 font-heading text-xs font-bold uppercase tracking-[0.2em]">Depot & Hours</span>
+          <span class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em]">Depot & Hours</span>
           <svg class="w-4 h-4 text-white/30 footer-acc-icon transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
         </button>
         <div id="acc-depot" class="overflow-hidden" style="max-height:0;transition:max-height 0.3s ease">
@@ -179,19 +179,19 @@ import { areas } from '../data/areas';
       <div class="flex flex-wrap items-center justify-center gap-6 md:gap-14">
         <div class="flex items-center gap-2 text-white/40">
           <svg class="w-4 h-4 text-[#4ADE80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span class="text-xs font-medium uppercase tracking-wider">Authorised Stockist</span>
+          <span class="text-xs font-medium uppercase tracking-wider text-white/60">Authorised Stockist</span>
         </div>
         <div class="flex items-center gap-2 text-white/40">
           <svg class="w-4 h-4 text-[#4ADE80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-          <span class="text-xs font-medium uppercase tracking-wider">Next-Day Delivery</span>
+          <span class="text-xs font-medium uppercase tracking-wider text-white/60">Next-Day Delivery</span>
         </div>
         <div class="flex items-center gap-2 text-white/40">
           <svg class="w-4 h-4 text-[#4ADE80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span class="text-xs font-medium uppercase tracking-wider">Trade Pricing</span>
+          <span class="text-xs font-medium uppercase tracking-wider text-white/60">Trade Pricing</span>
         </div>
         <div class="flex items-center gap-2 text-white/40">
           <svg class="w-4 h-4 text-[#4ADE80]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-          <span class="text-xs font-medium uppercase tracking-wider">Est. 1984</span>
+          <span class="text-xs font-medium uppercase tracking-wider text-white/60">Est. 1984</span>
         </div>
       </div>
     </div>
@@ -199,12 +199,12 @@ import { areas } from '../data/areas';
     <!-- Bottom bar -->
     <div class="border-t border-white/10 pt-6">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-xs text-white/30">&copy; {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.</p>
-        <div class="flex items-center gap-6 text-xs text-white/30">
-          <a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="/faq" class="hover:text-white transition-colors">FAQ</a>
-          <a href="/contact" class="hover:text-white transition-colors">Contact</a>
-          <span>Site by <a href="https://vortexdesignstudio.co.uk" class="hover:text-[#4ADE80] transition-colors">Vortex Design Studio</a></span>
+        <p class="text-xs text-white/50">&copy; {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.</p>
+        <div class="flex items-center gap-6 text-xs text-white/50">
+          <a href="/privacy-policy" class="text-white/50 hover:text-white transition-colors">Privacy Policy</a>
+          <a href="/faq" class="text-white/50 hover:text-white transition-colors">FAQ</a>
+          <a href="/contact" class="text-white/50 hover:text-white transition-colors">Contact</a>
+          <span class="text-white/50">Site by <a href="https://vortexdesignstudio.co.uk" class="text-white/50 hover:text-[#4ADE80] transition-colors">Vortex Design Studio</a></span>
         </div>
       </div>
     </div>
