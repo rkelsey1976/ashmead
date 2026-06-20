@@ -8,9 +8,6 @@ import AnimatedSection from '../../components/AnimatedSection.astro';
 import { PHONE, PHONE_HREF, heroImages } from '../../data/site';
 import { products } from '../../data/products';
 import { brands } from '../../data/brands';
-
-const firstHalf = products.slice(0, Math.ceil(products.length / 2));
-const secondHalf = products.slice(Math.ceil(products.length / 2));
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
@@ -81,19 +78,7 @@ const secondHalf = products.slice(Math.ceil(products.length / 2));
       </div>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {firstHalf.map((product, i) => (
-          <AnimatedSection delay={i * 0.05}>
-            <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
-          </AnimatedSection>
-        ))}
-      </div>
-      
-      <div class="mt-10">
-        <BrandMarquee brands={brands} theme="white" speed={50} />
-      </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
-        {secondHalf.map((product, i) => (
+        {products.map((product, i) => (
           <AnimatedSection delay={i * 0.05}>
             <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
           </AnimatedSection>
@@ -101,6 +86,8 @@ const secondHalf = products.slice(Math.ceil(products.length / 2));
       </div>
     </div>
   </section>
+
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={45} />
 
   <CtaBanner />
 </Layout>
