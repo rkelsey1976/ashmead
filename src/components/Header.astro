@@ -57,7 +57,7 @@ import { PHONE, PHONE_HREF, navLinks } from '../data/site';
         <img src="/logo-original.png" alt="Ashmead Roofing Supplies" class="h-12 w-auto brightness-0 invert" />
       </a>
       
-      <button id="mobile-menu-close" type="button" class="text-white/80 hover:text-white p-3 -mr-3 transition-colors touch-manipulation" aria-label="Close menu">
+      <button id="mobile-menu-close" type="button" onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('mobile-menu').classList.remove('flex'); document.body.style.overflow=''; document.getElementById('mobile-menu-btn').setAttribute('aria-expanded','false');" class="text-white/80 hover:text-white p-4 -mr-4 transition-colors touch-manipulation relative z-[70]" aria-label="Close menu">
         <svg class="w-8 h-8 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
