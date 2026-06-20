@@ -30,13 +30,17 @@ const {
   <!-- Background image with cinematic treatment -->
   <div class="absolute inset-0 z-0 hero-bg">
     <img
-      src={image}
-      alt={imageAlt}
-      class="w-full h-full object-cover"
-      loading="eager"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/40"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-charcoal/40"></div>
+        src={image}
+        alt={imageAlt}
+        class="w-full h-full object-cover object-center scale-105"
+        loading="eager"
+      />
+      <!-- Stronger vignette for text legibility on any image -->
+      <div class="absolute inset-0 bg-charcoal/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/85 to-charcoal/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-charcoal/50"></div>
+      <!-- Bottom edge fade for trust bar overlap -->
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-charcoal to-transparent"></div>
   </div>
   
   <div class="container relative z-10 py-20 md:py-28">
