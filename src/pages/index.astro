@@ -100,10 +100,10 @@ const projects = [
         </div>
 
         <!-- Stats -->
-        <div class="hero-stats grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-8 border-t border-white/20">
+        <div class="hero-stats grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 pt-8 border-t border-white/20">
           {stats.map(stat => (
-            <div class="text-left">
-              <div class="text-3xl md:text-4xl font-heading font-bold text-accent mb-1">{stat.value}</div>
+            <div class="text-left md:text-center">
+              <div class="text-4xl md:text-5xl font-heading font-bold text-accent mb-2">{stat.value}</div>
               <div class="text-white/70 text-sm uppercase tracking-wider">{stat.label}</div>
             </div>
           ))}
