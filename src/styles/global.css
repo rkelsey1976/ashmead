@@ -13,29 +13,34 @@
 @source "../pages/**/*.astro";
 @source "../layouts/**/*.astro";
 
-@theme {
-  /* Premium palette */
-  --color-primary: #0B7A3E;
-  --color-primary-hover: #095E30;
-  --color-primary-light: #E6F3EC;
+:root {
+  /* Premium Ashmead palette — dialled in for high-end trades feel */
+  --color-primary: #0A5C36;
+  --color-primary-hover: #074528;
+  --color-primary-light: #EAF4EE;
+  --color-primary-dark: #052E1B;
   --color-accent: #4ADE80;
   --color-accent-hover: #22C55E;
-  --color-charcoal: #1A1A1A;
-  --color-charcoal-light: #2D2D2D;
-  --color-body: #555555;
-  --color-body-light: #737373;
-  --color-section: #F7F7F7;
-  --color-section-warm: #F9F8F5;
+  --color-accent-soft: #86EFAC;
+  --color-charcoal: #0F172A;
+  --color-charcoal-light: #1E293B;
+  --color-charcoal-soft: #334155;
+  --color-body: #52647A;
+  --color-body-light: #94A3B8;
+  --color-section: #F8FAF8;
+  --color-section-warm: #FDFCFA;
   --color-card: #FFFFFF;
-  --color-border: #E8E8E8;
-  --color-heading: #1A1A1A;
+  --color-border: #E2E8E0;
+  --color-border-soft: rgba(15, 23, 42, 0.08);
+  --color-heading: #0F172A;
+  --color-heading-secondary: #1E293B;
 
   /* Font families */
   --font-heading: "Barlow Condensed", "Oswald", sans-serif;
   --font-body: "Outfit", "DM Sans", sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
 
-  /* Custom spacing scale — prefixed to avoid clashing with Tailwind's core spacing */
+  /* Custom spacing scale */
   --spacing-ash-xs: 0.25rem;
   --spacing-ash-sm: 0.5rem;
   --spacing-ash-md: 1rem;
@@ -52,13 +57,61 @@
   --radius-full: 9999px;
 
   /* Shadow scale */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
-  --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.08);
-  --shadow-lg: 0 12px 32px -8px rgb(0 0 0 / 0.14);
-  --shadow-xl: 0 24px 60px -12px rgb(0 0 0 / 0.2);
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-md: 0 4px 14px -2px rgb(15 23 42 / 0.08);
+  --shadow-lg: 0 14px 36px -8px rgb(15 23 42 / 0.12);
+  --shadow-xl: 0 28px 70px -14px rgb(15 23 42 / 0.18);
 
   /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme {
+  /* Theme alias tokens */
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-charcoal: var(--color-charcoal);
+  --color-charcoal-light: var(--color-charcoal-light);
+  --color-charcoal-soft: var(--color-charcoal-soft);
+  --color-body: var(--color-body);
+  --color-body-light: var(--color-body-light);
+  --color-section: var(--color-section);
+  --color-section-warm: var(--color-section-warm);
+  --color-card: var(--color-card);
+  --color-border: var(--color-border);
+  --color-border-soft: var(--color-border-soft);
+  --color-heading: var(--color-heading);
+  --color-heading-secondary: var(--color-heading-secondary);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-serif: var(--font-serif);
+
+  --spacing-ash-xs: var(--spacing-ash-xs);
+  --spacing-ash-sm: var(--spacing-ash-sm);
+  --spacing-ash-md: var(--spacing-ash-md);
+  --spacing-ash-lg: var(--spacing-ash-lg);
+  --spacing-ash-xl: var(--spacing-ash-xl);
+  --spacing-ash-2xl: var(--spacing-ash-2xl);
+  --spacing-ash-3xl: var(--spacing-ash-3xl);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-full: var(--radius-full);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  --ease-out-expo: var(--ease-out-expo);
 }
 
 html {
