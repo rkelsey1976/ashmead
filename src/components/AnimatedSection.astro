@@ -1,0 +1,34 @@
+---
+interface Props {
+  class?: string;
+  delay?: number;
+  children: any;
+}
+
+const { class: className = '', delay = 0 } = Astro.props;
+const delayMs = Math.round(delay * 1000);
+const style = `transition-delay: ${delayMs}ms;`;
+---
+
+<div class={`gsap-reveal ${className}`} style={style}>
+  <slot />
+</div>
+
+<script>
+  if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.gsap-reveal').forEach((el) => {
+      el.classList.add('animate');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.gsap-reveal').forEach(el => observer.observe(el));
+  }
+</script>

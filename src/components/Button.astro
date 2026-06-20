@@ -2,7 +2,7 @@
 import { PHONE, PHONE_HREF } from '../data/site';
 
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline' | 'white';
+  variant?: 'primary' | 'secondary' | 'outline' | 'white' | 'ghost';
   href?: string;
   icon?: 'phone' | 'arrow' | 'none';
   size?: 'sm' | 'md' | 'lg';
@@ -13,27 +13,28 @@ const { variant = 'primary', href = '', icon = 'none', size = 'md', class: extra
 
 const sizeClasses: Record<string, string> = {
   sm: 'px-5 py-2.5 text-sm',
-  md: 'px-8 py-4 text-base',
-  lg: 'px-8 py-4 text-lg'
+  md: 'px-7 py-3.5 text-base',
+  lg: 'px-9 py-4 text-lg'
 };
 
 const variantClasses: Record<string, string> = {
-  primary: 'bg-primary hover:bg-primary-hover text-white',
-  secondary: 'bg-charcoal hover:bg-gray-800 text-white',
-  outline: 'bg-white hover:bg-gray-50 text-charcoal border border-border hover:border-primary',
-  white: 'bg-white hover:bg-gray-100 text-primary'
+  primary: 'bg-primary hover:bg-primary-hover text-white shadow-md hover:shadow-lg',
+  secondary: 'bg-charcoal hover:bg-charcoal-light text-white',
+  outline: 'bg-transparent hover:bg-white text-white border-2 border-white hover:text-charcoal',
+  white: 'bg-white hover:bg-section text-charcoal shadow-md hover:shadow-lg',
+  ghost: 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/30'
 };
 
 const resolvedHref = href === 'phone' ? PHONE_HREF : href;
 const defaultLabel = href === 'phone' ? PHONE : '';
 
-const flexClass = icon !== 'none' ? 'inline-flex items-center justify-center gap-2' : 'inline-flex items-center justify-center';
+const flexClass = icon !== 'none' ? 'inline-flex items-center justify-center gap-2.5' : 'inline-flex items-center justify-center';
 
 const allClasses = [
   flexClass,
   sizeClasses[size],
   variantClasses[variant],
-  'font-bold rounded transition-colors text-center',
+  'font-semibold rounded-md transition-all duration-300 text-center',
   extraClass
 ].filter(Boolean).join(' ');
 ---
@@ -45,7 +46,7 @@ const allClasses = [
     </svg>
   )}
   {icon === 'arrow' && (
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
     </svg>
   )}

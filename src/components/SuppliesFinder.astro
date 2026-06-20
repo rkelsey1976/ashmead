@@ -1,0 +1,159 @@
+---
+import { products } from '../data/products';
+import { areas } from '../data/areas';
+
+interface ProductOption {
+  value: string;
+  label: string;
+}
+
+const productOptions: ProductOption[] = products.map(p => ({ value: p.slug, label: p.name }));
+const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.name }));
+---
+
+<section class="relative bg-charcoal py-20 md:py-28 overflow-hidden">
+  <!-- Background pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+  </div>
+  
+  <div class="container relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="gsap-reveal">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="h-px w-8 bg-accent"></span>
+          <span class="text-accent text-sm font-semibold uppercase tracking-[0.2em]">Roofing Supplies Finder</span>
+        </div>
+        
+        <h2 class="text-white font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide mb-6 leading-[0.95]">
+          Find the Right Materials.
+          <span class="block text-accent">Fast.</span>
+        </h2>
+        
+        <p class="text-white/70 text-lg mb-8 max-w-lg">
+          Tell us what you're working on and where. We'll point you to the right products, brands and delivery options from our Bristol depot.
+        </p>
+        
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3 text-white/80">
+            <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Matched to your project type — pitched roof, flat roof, extension, repair or new build</span>
+          </li>
+          <li class="flex items-start gap-3 text-white/80">
+            <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Stock checked at our Bristol trade counter, with next-day delivery options</span>
+          </li>
+          <li class="flex items-start gap-3 text-white/80">
+            <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Expert recommendations from trade staff who actually know roofing</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="gsap-reveal">
+        <form id="supplies-finder" class="bg-white rounded-2xl p-8 md:p-10 shadow-xl">
+          <div class="space-y-6">
+            <div>
+              <label for="finder-project" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-3">What type of project?</label>
+              <select id="finder-project" name="project" class="w-full bg-section border border-border rounded-lg px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                <option value="">Select a project type...</option>
+                <option value="new-build">New build roof</option>
+                <option value="re-roof">Re-roof / replacement</option>
+                <option value="extension">Extension / loft conversion</option>
+                <option value="flat-roof">Flat roof installation</option>
+                <option value="repair">Repair / maintenance</option>
+                <option value="heritage">Heritage / conservation</option>
+              </select>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label for="finder-product" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-3">What do you need?</label>
+                <select id="finder-product" name="product" class="w-full bg-section border border-border rounded-lg px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                  <option value="">Select a product...</option>
+                  {productOptions.map(p => (
+                    <option value={p.value}>{p.label}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <div>
+                <label for="finder-area" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-3">Delivery area?</label>
+                <select id="finder-area" name="area" class="w-full bg-section border border-border rounded-lg px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                  <option value="">Select your area...</option>
+                  {areaOptions.map(a => (
+                    <option value={a.value}>{a.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            
+            <div id="finder-result" class="hidden bg-primary-light border border-primary/20 rounded-lg p-5">
+              <h4 class="text-charcoal font-heading font-bold uppercase tracking-wide mb-2">Recommended Next Step</h4>
+              <p id="finder-result-text" class="text-body"></p>
+              <a id="finder-result-link" href="/contact" class="inline-flex items-center gap-2 text-primary font-semibold mt-3 hover:text-primary-hover transition-colors">
+                Get a quote
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </div>
+            
+            <button type="submit" class="w-full bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-lg text-lg">
+              Find the Right Supplies
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const finderForm = document.getElementById('supplies-finder') as HTMLFormElement | null;
+  const resultBox = document.getElementById('finder-result') as HTMLElement | null;
+  const resultText = document.getElementById('finder-result-text') as HTMLElement | null;
+  const resultLink = document.getElementById('finder-result-link') as HTMLAnchorElement | null;
+
+  if (finderForm && resultBox && resultText && resultLink) {
+    finderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(finderForm);
+      const project = formData.get('project') as string;
+      const product = formData.get('product') as string;
+      const area = formData.get('area') as string;
+
+      const projectNames: Record<string, string> = {
+        'new-build': 'a new build',
+        're-roof': 'a re-roof',
+        'extension': 'an extension or loft conversion',
+        'flat-roof': 'a flat roof',
+        'repair': 'a repair',
+        'heritage': 'a heritage project'
+      };
+
+      const projectText = project ? projectNames[project] || project : 'your project';
+      const areaText = area ? ` in ${area}` : '';
+      const productText = product ? ` ${product.replace(/-/g, ' ')}` : ' roofing supplies';
+
+      resultText.textContent = `For ${projectText}${areaText}, we recommend${productText}. Call our trade team or request a quote and we'll confirm stock, pricing and delivery.`;
+
+      if (product) {
+        resultLink.href = `/products/${product}`;
+        resultLink.textContent = `View ${product.replace(/-/g, ' ')} range`;
+      } else {
+        resultLink.href = '/contact';
+        resultLink.textContent = 'Get a quote';
+      }
+
+      resultBox.classList.remove('hidden');
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+</script>

@@ -1,144 +1,296 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
 import ProductCard from '../components/ProductCard.astro';
 import AreaCard from '../components/AreaCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
-import BrandBar from '../components/BrandBar.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Button from '../components/Button.astro';
-import SectionHeading from '../components/SectionHeading.astro';
+import SectionLabel from '../components/SectionLabel.astro';
 import Testimonials from '../components/Testimonials.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME, heroImages } from '../data/site';
+import SuppliesFinder from '../components/SuppliesFinder.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
 import { brands, brandByName } from '../data/brands';
+
 const heroBrandNames = ["Redland", "Marley", "Velux", "Cupa Pizarras", "A. Proctor Group", "FloPlast"];
 const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean);
+
+const stats = [
+  { value: '40+', label: 'Years Experience' },
+  { value: '5', label: 'Counties Supplied' },
+  { value: '18+', label: 'Product Ranges' },
+  { value: '1000s', label: 'Trade Customers' },
+];
+
+const projects = [
+  {
+    image: '/images/hero-bristol.jpg',
+    title: 'Heritage Re-Roof',
+    category: 'Re-Roof',
+    location: 'Bath',
+    description: 'Full clay tile re-roof on a Georgian townhouse using Redland and Marley products.',
+    metric: 'Completed in 6 weeks'
+  },
+  {
+    image: '/images/hero-somerset.jpg',
+    title: 'New-Build Development',
+    category: 'New Build',
+    location: 'Somerset',
+    description: 'Large-scale roofing supply for a 24-home development with next-day delivery scheduling.',
+    metric: '24 homes roofed'
+  },
+  {
+    image: '/images/hero-bath.jpg',
+    title: 'Flat-Roof Refurbishment',
+    category: 'Flat Roof',
+    location: 'Bristol',
+    description: 'ClassicBond EPDM system installed on commercial units with full membrane and trims supplied.',
+    metric: 'Zero leaks since install'
+  }
+];
 ---
 
 <Layout title="Roofing Supplies Bristol | Ashmead Roofing Supplies" description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter. Tiles, slates, flat roofing, membranes, battens, fixings & more. Trade pricing, expert advice, fast delivery. Call 0117 986 0600.">
-  <section class="relative min-h-[85vh] flex items-center">
-    <!-- Background image -->
-    <div class="absolute inset-0 z-0">
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Background image with parallax wrapper -->
+    <div class="absolute inset-0 z-0 hero-bg">
       <img
         src="/images/hero-home.jpg"
         alt="Roofing supplies stacked at Ashmead Roofing Supplies Bristol depot"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover scale-110"
         loading="eager"
       />
-      <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/50"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-charcoal/50"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/40 to-charcoal/40"></div>
     </div>
-    <div class="container relative z-10 py-20 md:py-28">
-      <div class="max-w-5xl">
+    
+    <div class="container relative z-10 py-24 md:py-32">
+      <div class="max-w-4xl">
         <!-- Eyebrow -->
-        <div class="inline-flex items-center gap-2 bg-primary text-white px-4 py-2 rounded text-sm font-bold uppercase tracking-wider mb-6 shadow-md">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="hero-eyebrow inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-md text-sm font-semibold uppercase tracking-wider mb-6 border border-white/20">
+          <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
           South West's Roofing Trade Counter
         </div>
 
         <!-- Headline -->
-        <h1 class="text-5xl md:text-6xl lg:text-7xl xl:text-[6.5rem] font-heading font-bold uppercase leading-[0.92] tracking-tight text-white mb-6"
-          style="text-shadow: 0 2px 20px rgba(0,0,0,0.5);"
+        <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold uppercase leading-[0.92] tracking-wide text-white mb-8"
         >
-          <span class="text-primary">Roofing Supplies</span>
-          <span class="block text-white drop-shadow-lg">Built for Trade</span>
+          Roofing Supplies
+          <span class="block text-accent">Built for Trade</span>
         </h1>
 
         <!-- Subhead -->
-        <p class="text-lg md:text-xl lg:text-2xl text-white max-w-4xl mb-8 leading-relaxed"
-          style="text-shadow: 0 1px 10px rgba(0,0,0,0.4);"
+        <p class="hero-sub text-lg md:text-xl lg:text-2xl text-white/80 max-w-3xl mb-10 leading-relaxed"
         >
-          Tiles, slates, flat roofing, membranes, fixings and battens — stocked ready for immediate collection or next-day delivery across Bristol, Bath, Somerset, Gloucester and Wiltshire.
+          Tiles, slates, flat roofing, membranes, fixings and battens — stocked for immediate collection or next-day delivery across Bristol, Bath, Somerset, Gloucester and Wiltshire.
         </p>
 
-        <!-- Trust strip -->
-        <div class="flex flex-wrap items-center gap-4 md:gap-8 mb-10 text-white text-sm md:text-base"
-          style="text-shadow: 0 1px 8px rgba(0,0,0,0.4);"
-        >
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span class="font-medium">Bristol Depot</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            <span class="font-medium">Trade Pricing</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-6-7a1 1 0 11-2 0 1 1 0 012 0zM5 5a2 2 0 114 0 2 2 0 01-4 0zm12 0a2 2 0 114 0 2 2 0 01-4 0z" />
-            </svg>
-            <span class="font-medium">Fast Delivery</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="font-medium">40+ Years Experience</span>
-          </div>
+        <!-- CTAs -->
+        <div class="hero-ctas flex flex-col sm:flex-row gap-4 mb-16">
+          <Button variant="primary" href="phone" icon="phone" size="lg" class="text-lg px-10 py-5">{PHONE}</Button>
+          <Button variant="outline" href="/products" icon="arrow" size="lg" class="text-lg px-10 py-5">Explore Products</Button>
         </div>
 
-        <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row gap-4">
-          <Button variant="primary" href="phone" icon="phone" size="lg" class="text-lg px-10 py-5 shadow-lg" />
-          <Button variant="white" href="/products" icon="arrow" size="lg" class="text-lg px-10 py-5">View Products</Button>
+        <!-- Stats -->
+        <div class="hero-stats grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-8 border-t border-white/20">
+          {stats.map(stat => (
+            <div class="text-left">
+              <div class="text-3xl md:text-4xl font-heading font-bold text-accent mb-1">{stat.value}</div>
+              <div class="text-white/70 text-sm uppercase tracking-wider">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Bottom brand bar -->
+  <!-- Brands marquee -->
   <BrandMarquee label="Authorised Stockists Of" brands={heroBrands} theme="green" />
 
+  <!-- Why choose -->
   <section class="section-white section-padding">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Why Choose Ashmead?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <FeatureCard title="Trade Expertise" description="Our team has years of on-the-tools experience. We advise on products, calculate quantities and help specify the right system first time." icon="trade" />
-        <FeatureCard title="Massive Stock" description="One of the widest ranges of roofing materials in the South West, ready for immediate collection or next-day delivery." icon="stock" />
-        <FeatureCard title="Fast Delivery" description="Our fleet covers Bristol, Bath, Somerset, Gloucester and Wiltshire. Need it faster? Collect from our Bristol depot." icon="delivery" />
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end mb-16">
+        <AnimatedSection>
+          <SectionLabel text="Why Ashmead" />
+          <h2 class="text-charcoal font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-[0.95]">
+            The Trade Counter
+            <span class="block text-primary">Roofers Trust</span>
+          </h2>
+        </AnimatedSection>
+        
+        <AnimatedSection>
+          <p class="text-body text-lg leading-relaxed">
+            We don't just shift boxes. Our team has years of on-the-tools experience and will advise on the right system, calculate quantities and make sure you leave the depot with exactly what you need — every time.
+          </p>
+        </AnimatedSection>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <AnimatedSection delay={0.1}>
+          <FeatureCard title="Trade Expertise" description="Years of hands-on roofing knowledge. We advise, calculate and specify the right system first time." icon="trade" />
+        </AnimatedSection>
+        <AnimatedSection delay={0.2}>
+          <FeatureCard title="Massive Stock" description="One of the widest ranges in the South West, ready for collection or next-day delivery." icon="stock" />
+        </AnimatedSection>
+        <AnimatedSection delay={0.3}>
+          <FeatureCard title="Fast Delivery" description="Our fleet covers Bristol, Bath, Somerset, Gloucester and Wiltshire six days a week." icon="delivery" />
+        </AnimatedSection>
+        <AnimatedSection delay={0.4}>
+          <FeatureCard title="Expert Support" description="From trade accounts to technical specs, we're here to keep your project on track." icon="support" />
+        </AnimatedSection>
       </div>
     </div>
   </section>
 
+  <!-- Products -->
   <section class="section-grey section-padding">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Our Products</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {products.slice(0, 8).map(product => (
-          <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
-        ))}
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <AnimatedSection>
+          <SectionLabel text="Our Range" />
+          <h2 class="text-charcoal font-heading text-4xl md:text-5xl font-bold uppercase tracking-wide">
+            Trade-Roofing Products
+          </h2>
+        </AnimatedSection>
+        
+        <AnimatedSection>
+          <a href="/products" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-hover transition-colors">
+            View all products
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </AnimatedSection>
       </div>
-      <div class="text-center mt-10">
-        <a href="/products" class="inline-block bg-primary hover:bg-primary-hover text-white font-bold px-8 py-4 rounded transition-colors text-lg">View All Products</a>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {products.slice(0, 8).map((product, i) => (
+          <AnimatedSection delay={i * 0.05}>
+            <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
+          </AnimatedSection>
+        ))}
       </div>
     </div>
   </section>
 
+  <!-- Areas -->
   <section class="section-white section-padding">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl font-bold font-heading uppercase tracking-wide text-charcoal mb-10 text-center">Areas We Cover</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {areas.map(area => (
-          <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} image={area.image} />
+      <AnimatedSection class="text-center max-w-3xl mx-auto mb-14">
+        <SectionLabel text="Areas We Cover" />
+        <h2 class="text-charcoal font-heading text-4xl md:text-5xl font-bold uppercase tracking-wide mb-4">
+          Delivery Across the South West
+        </h2>
+        
+        <p class="text-body text-lg">
+          From our Bristol depot we supply roofing materials to roofers, builders and developers across five counties and 68+ towns.
+        </p>
+      </AnimatedSection>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {areas.map((area, i) => (
+          <AnimatedSection delay={i * 0.1}>
+            <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} image={area.image} />
+          </AnimatedSection>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- Supplies Finder -->
+  <SuppliesFinder />
+
+  <!-- Case Studies -->
+  <section class="section-grey section-padding">
+    <div class="container">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end mb-14">
+        <AnimatedSection>
+          <SectionLabel text="Case Studies" />
+          <h2 class="text-charcoal font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-[0.95]">
+            Real Projects,
+            <span class="block text-primary">Real Results</span>
+          </h2>
+        </AnimatedSection>
+        
+        <AnimatedSection class="lg:text-right">
+          <p class="text-body text-lg">
+            A snapshot of the roofing supply projects we've supported across the South West — from heritage re-roofs to large new-build developments.
+          </p>
+        </AnimatedSection>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project, i) => (
+          <AnimatedSection delay={i * 0.1}>
+            <ProjectCard {...project} />
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
   <Testimonials />
 
-  <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={45} />
+  <!-- Brands -->
+  <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={50} />
 
+  <!-- CTA -->
   <CtaBanner />
+
+  <!-- Hero entrance animation -->
+  <script>
+    import { gsap } from 'gsap';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion) return;
+
+      const tl = gsap.timeline();
+
+      tl.fromTo('.hero-bg img', 
+        { scale: 1.15, opacity: 0 },
+        { scale: 1.1, opacity: 1, duration: 1.8, ease: 'power2.out' }
+      );
+
+      tl.fromTo('.hero-eyebrow',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
+        '-=1.2'
+      );
+
+      tl.fromTo('.hero-title span',
+        { y: 60, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: 'power3.out' },
+        '-=0.8'
+      );
+
+      tl.fromTo('.hero-sub',
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+        '-=0.6'
+      );
+
+      tl.fromTo('.hero-ctas > *',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
+        '-=0.5'
+      );
+
+      tl.fromTo('.hero-stats > div',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: 'power3.out' },
+        '-=0.3'
+      );
+    });
+  </script>
 </Layout>

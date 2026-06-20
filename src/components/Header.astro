@@ -2,62 +2,66 @@
 import { PHONE, PHONE_HREF, navLinks } from '../data/site';
 ---
 
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-border shadow-sm">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="flex items-center justify-between h-16 md:h-20">
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-border/60 transition-all duration-300">
+  <div class="container">
+    <div class="flex items-center justify-between h-18 md:h-22">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2">
         <img src="/logo-original.png" alt="Ashmead Roofing Supplies" class="h-10 md:h-12 w-auto" />
       </a>
 
-      <!-- Phone (visible on all sizes) -->
-      <a href={PHONE_HREF} class="flex items-center gap-2 text-primary hover:text-primary-hover transition-colors md:mr-4 font-bold text-sm md:text-base">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.502 5.502l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-        </svg>
-        <span class="hidden sm:inline">{PHONE}</span>
-      </a>
-
       <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-6">
+      <nav class="hidden lg:flex items-center gap-8">
         {navLinks.map(link => (
-          <a href={link.href} class="text-charcoal hover:text-primary transition-colors text-sm font-medium uppercase tracking-wide font-heading">{link.label}</a>
+          <a href={link.href} class="text-charcoal hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wide font-heading">{link.label}</a>
         ))}
-        <a href={PHONE_HREF} class="bg-primary hover:bg-primary-hover text-white font-bold px-5 py-2 rounded text-sm uppercase tracking-wide font-heading transition-colors">Call Now</a>
       </nav>
 
-      <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden text-charcoal p-2" aria-label="Open menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+      <!-- CTA + phone -->
+      <div class="flex items-center gap-4">
+        <a href={PHONE_HREF} class="hidden md:flex items-center gap-2 text-charcoal hover:text-primary transition-colors font-semibold text-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.502 5.502l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          {PHONE}
+        </a>
+        
+        <a href="/contact" class="hidden md:inline-flex bg-primary hover:bg-primary-hover text-white font-semibold px-5 py-2.5 rounded-md transition-all duration-300 hover:shadow-md text-sm uppercase tracking-wide font-heading">
+          Get a Quote
+        </a>
+        
+        <button id="mobile-menu-btn" class="lg:hidden text-charcoal p-2" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-white">
-    <div class="flex flex-col h-full px-6 py-6">
+  <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-charcoal">
+    <div class="flex flex-col h-full container py-6">
       <div class="flex items-center justify-between mb-12">
         <a href="/" class="flex items-center gap-2">
           <img src="/logo-original.png" alt="Ashmead Roofing Supplies" class="h-12 w-auto" />
         </a>
-        <button id="mobile-menu-close" class="text-charcoal p-2 hover:text-primary transition-colors" aria-label="Close menu">
+        <button id="mobile-menu-close" class="text-white p-2 hover:text-accent transition-colors" aria-label="Close menu">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
-      <nav class="flex-1 flex flex-col items-center justify-center gap-6">
+      <nav class="flex-1 flex flex-col justify-center gap-6">
         {navLinks.map(link => (
-          <a href={link.href} class="mobile-nav-link text-charcoal hover:text-primary transition-colors text-2xl font-bold uppercase tracking-wide font-heading">{link.label}</a>
+          <a href={link.href} class="mobile-nav-link text-white hover:text-accent transition-colors text-3xl font-bold uppercase tracking-wide font-heading">{link.label}</a>
         ))}
       </nav>
 
-      <div class="text-center pb-8 border-t border-border pt-6">
-        <p class="text-body text-sm uppercase tracking-wide mb-2">Call us today</p>
-        <a href={PHONE_HREF} class="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-bold text-2xl font-heading transition-colors">
+      <div class="border-t border-white/20 pt-8">
+        <p class="text-white/60 text-sm uppercase tracking-wide mb-2">Call us today</p>
+        <a href={PHONE_HREF} class="inline-flex items-center gap-2 text-accent hover:text-white font-bold text-2xl font-heading transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.502 5.502l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
           </svg>
@@ -67,3 +71,6 @@ import { PHONE, PHONE_HREF, navLinks } from '../data/site';
     </div>
   </div>
 </header>
+
+<!-- Spacer for fixed header -->
+<div class="h-18 md:h-22"></div>
