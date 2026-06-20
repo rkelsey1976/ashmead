@@ -12,34 +12,71 @@ interface Props {
 const { image, title, category, location, description, metric, href = '#' } = Astro.props;
 ---
 
-<a href={href} class="group relative block rounded-2xl overflow-hidden h-[420px] shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
-  <img src={image} alt={title} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-  
-  <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/50 to-transparent"></div>
-  
-  <div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-  
-  <div class="absolute top-5 left-5 flex gap-2">
+<a href={href} class="project-card group relative block rounded-2xl overflow-hidden h-[420px] shadow-lg" style="cursor:pointer;">
+  <!-- Image -->
+  <img
+    src={image}
+    alt={title}
+    class="project-card__img absolute inset-0 w-full h-full object-cover"
+    loading="lazy"
+  />
+
+  <!-- Permanent dark gradient so category/location badges always read -->
+  <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/30 to-transparent pointer-events-none"></div>
+
+  <!-- Category + location badges -->
+  <div class="absolute top-5 left-5 flex gap-2 z-10">
     <span class="bg-white/95 text-charcoal text-xs font-semibold px-3 py-1 rounded-md">{category}</span>
     <span class="bg-primary text-white text-xs font-semibold px-3 py-1 rounded-md">{location}</span>
   </div>
-  
-  <div class="absolute bottom-0 left-0 right-0 p-6">
-    <div class="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-      <div class="flex items-center gap-2 mb-3">
-        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <span class="text-accent font-semibold text-sm">{metric}</span>
-      </div>
-      <h3 class="text-white font-heading text-2xl font-bold uppercase tracking-wide mb-2">{title}</h3>
-      <p class="text-white/80 text-sm line-clamp-2 mb-4">{description}</p>
-      <span class="inline-flex items-center gap-2 text-white text-sm font-semibold">
-        View case study
-        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </span>
-    </div>
+
+  <!-- Green overlay — slides up from bottom on hover -->
+  <div class="project-card__overlay absolute inset-x-0 bottom-0 h-full bg-primary z-10 pointer-events-none" style="transform:translateY(100%);"></div>
+
+  <!-- Resting content (always visible at bottom) -->
+  <div class="project-card__rest absolute bottom-0 left-0 right-0 p-6 z-20">
+    <h3 class="text-white font-heading text-2xl font-bold uppercase tracking-wide">{title}</h3>
+  </div>
+
+  <!-- Hover content (revealed over the green overlay) -->
+  <div class="project-card__hover absolute inset-0 flex flex-col justify-end p-6 z-30 pointer-events-none" style="opacity:0;">
+    <span class="inline-flex items-center gap-2 text-accent font-bold text-sm uppercase tracking-wider mb-3">
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      {metric}
+    </span>
+    <h3 class="text-white font-heading text-2xl font-bold uppercase tracking-wide mb-3">{title}</h3>
+    <p class="text-white/85 text-sm leading-relaxed mb-5">{description}</p>
+    <span class="inline-flex items-center gap-2 text-white text-sm font-semibold">
+      View case study
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </span>
   </div>
 </a>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.querySelectorAll<HTMLElement>('.project-card').forEach(card => {
+    const img     = card.querySelector<HTMLElement>('.project-card__img');
+    const overlay = card.querySelector<HTMLElement>('.project-card__overlay');
+    const rest    = card.querySelector<HTMLElement>('.project-card__rest');
+    const hover   = card.querySelector<HTMLElement>('.project-card__hover');
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+
+    tl.to(overlay, { translateY: '0%', duration: 0.45 }, 0)
+      .to(img,     { scale: 1.08,      duration: 0.6  }, 0)
+      .to(rest,    { opacity: 0,        duration: 0.2  }, 0)
+      .to(hover,   { opacity: 1,        duration: 0.3  }, 0.2);
+
+    card.addEventListener('mouseenter', () => tl.play());
+    card.addEventListener('mouseleave', () => tl.reverse());
+  });
+</script>

@@ -58,8 +58,8 @@ const {
       )}
       
       <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl font-heading font-bold uppercase leading-[0.9] tracking-tight text-white mb-6">
-        <span class="block">{title}</span>
-        {accent && <span class="block text-accent">{accent}</span>}
+        <span class="block overflow-hidden"><span class="block hero-line">{title}</span></span>
+        {accent && <span class="block overflow-hidden text-accent"><span class="block hero-line">{accent}</span></span>}
       </h1>
       
       {description && (
@@ -83,3 +83,45 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const section = document.querySelector('.hero-section');
+    if (!section) return;
+
+    const tl = gsap.timeline();
+
+    tl.fromTo(section.querySelector('.hero-bg img'),
+      { scale: 1.12, opacity: 0 },
+      { scale: 1.05, opacity: 1, duration: 1.6, ease: 'power2.out' }
+    );
+
+    tl.fromTo(section.querySelector('.hero-eyebrow'),
+      { y: 16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+      '-=1.0'
+    );
+
+    tl.fromTo(section.querySelectorAll('.hero-line'),
+      { y: '105%' },
+      { y: '0%', duration: 0.9, stagger: 0.12, ease: 'power3.out' },
+      '-=0.7'
+    );
+
+    tl.fromTo(section.querySelector('.hero-sub'),
+      { y: 24, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
+      '-=0.5'
+    );
+
+    tl.fromTo(section.querySelectorAll('.hero-ctas > *'),
+      { y: 16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.55, stagger: 0.1, ease: 'power3.out' },
+      '-=0.4'
+    );
+  });
+</script>

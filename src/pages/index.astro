@@ -84,8 +84,8 @@ const projects = [
 
         <!-- Headline -->
         <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold uppercase leading-[0.9] tracking-tight text-white mb-8">
-          <span class="block">Roofing Supplies</span>
-          <span class="block text-accent">Built for Trade</span>
+          <span class="block overflow-hidden"><span class="block hero-line">Roofing Supplies</span></span>
+          <span class="block overflow-hidden text-accent"><span class="block hero-line">Built for Trade</span></span>
         </h1>
 
         <!-- Subhead -->
@@ -101,12 +101,16 @@ const projects = [
 
         <!-- Stats -->
         <div class="hero-stats grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 pt-8 border-t border-white/20">
-          {stats.map(stat => (
-            <div class="text-left md:text-center">
-              <div class="text-4xl md:text-5xl font-heading font-bold text-accent mb-2">{stat.value}</div>
-              <div class="text-white/70 text-sm uppercase tracking-wider">{stat.label}</div>
-            </div>
-          ))}
+          {stats.map(stat => {
+            const num = stat.value.replace(/[^0-9]/g, '');
+            const suffix = stat.value.replace(/[0-9]/g, '');
+            return (
+              <div class="text-left md:text-center">
+                <div class="text-4xl md:text-5xl font-heading font-bold text-accent mb-2" data-count-to={num} data-count-suffix={suffix} data-count-hero>{stat.value}</div>
+                <div class="text-white/70 text-sm uppercase tracking-wider">{stat.label}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -247,9 +251,9 @@ const projects = [
         '-=1.2'
       );
 
-      tl.fromTo('.hero-title span',
-        { y: 60, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: 'power3.out' },
+      tl.fromTo('.hero-line',
+        { y: '105%' },
+        { y: '0%', duration: 0.9, stagger: 0.12, ease: 'power3.out' },
         '-=0.8'
       );
 
@@ -270,6 +274,22 @@ const projects = [
         { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: 'power3.out' },
         '-=0.3'
       );
+
+      setTimeout(() => {
+        document.querySelectorAll<HTMLElement>('[data-count-hero]').forEach(el => {
+          const target = parseInt(el.dataset.countTo ?? '0', 10);
+          const suffix = el.dataset.countSuffix ?? '';
+          const dur = 1400;
+          const start = performance.now();
+          const ease = (t: number) => 1 - Math.pow(1 - t, 4);
+          const tick = (now: number) => {
+            const elapsed = Math.min(now - start, dur);
+            el.textContent = Math.round(ease(elapsed / dur) * target) + suffix;
+            if (elapsed < dur) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }, 1500);
     });
   </script>
 </Layout>
