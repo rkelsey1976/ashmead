@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
-import AreaCard from '../components/AreaCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
 import CtaBanner from '../components/CtaBanner.astro';
@@ -10,6 +9,7 @@ import SectionLabel from '../components/SectionLabel.astro';
 import Testimonials from '../components/Testimonials.astro';
 import SuppliesFinder from '../components/SuppliesFinder.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import AreasSection from '../components/AreasSection.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
 import { products } from '../data/products';
@@ -183,28 +183,7 @@ const projects = [
   </section>
 
   <!-- Areas -->
-  <section class="section-white section-padding">
-    <div class="container">
-      <AnimatedSection class="text-center max-w-3xl mx-auto mb-14">
-        <SectionLabel text="Areas We Cover" />
-        <h2 class="text-charcoal font-heading text-4xl md:text-5xl font-bold uppercase tracking-wide mb-4">
-          Delivery Across the South West
-        </h2>
-        
-        <p class="text-body text-lg">
-          From our Bristol depot we supply roofing materials to roofers, builders and developers across five counties and 68+ towns.
-        </p>
-      </AnimatedSection>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {areas.map((area, i) => (
-          <AnimatedSection delay={i * 0.1}>
-            <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} image={area.image} />
-          </AnimatedSection>
-        ))}
-      </div>
-    </div>
-  </section>
+  <AreasSection />
 
   <!-- Supplies Finder -->
   <SuppliesFinder />
