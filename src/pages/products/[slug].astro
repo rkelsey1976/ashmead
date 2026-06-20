@@ -23,7 +23,7 @@ const breadcrumbItems = [
   { label: product.name },
 ];
 
-const heroImage = heroImages[product.slug as keyof typeof heroImages] || heroImages.products;
+const heroImage = product.image || heroImages[product.slug as keyof typeof heroImages] || heroImages.products;
 
 const productSchema = {
   "@context": "https://schema.org",
