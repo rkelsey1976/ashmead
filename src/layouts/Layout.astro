@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyMobileFooter from '../components/StickyMobileFooter.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 import SeoHead from '../components/SeoHead.astro';
 import '../styles/global.css';
 
@@ -27,6 +28,7 @@ const { title, description, ogImage, schema } = Astro.props;
   </main>
   <Footer />
   <StickyMobileFooter />
+  <CookieBanner />
 
   <script>
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

@@ -27,6 +27,12 @@ export function getStaticPaths() {
 }
 
 const { area, suburb } = Astro.props;
+
+// Pick up to 4 other suburbs from the same area for the "nearby" section
+const nearbySuburbs = (area.suburbs ?? [])
+  .filter((s: any) => s.slug !== suburb.slug)
+  .slice(0, 4);
+
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
   { label: 'Areas We Cover', href: '/areas' },
@@ -55,7 +61,7 @@ const breadcrumbSchema = {
 ---
 
 <Layout title={suburb.metaTitle} description={suburb.metaDescription} schema={[suburbSchema, breadcrumbSchema]} ogImage={heroImages[area.slug as keyof typeof heroImages]}>
-  
+
   <Hero
     eyebrow="Local Delivery"
     title={suburb.h1.replace(` Roofing Supplies`, '')}
@@ -73,73 +79,110 @@ const breadcrumbSchema = {
   <section class="section-white section-padding">
     <div class="container">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-        
+
         <!-- Main copy -->
         <div class="lg:col-span-8">
           <AnimatedSection>
             <Breadcrumb items={breadcrumbItems} />
-            
+
             <div class="mt-6">
               <SectionLabel text={`${suburb.name} Delivery`} />
             </div>
-            
-            <h2 class="text-charcoal font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-6">
+
+            <h2 class="text-charcoal font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-4">
               Roofing Supply in {suburb.name}
             </h2>
-            
+
+            <!-- Local intro callout — unique per suburb -->
+            <div class="bg-primary/5 border-l-4 border-primary rounded-r-xl px-5 py-4 mb-6">
+              <p class="text-body font-medium leading-relaxed">{suburb.shortDesc}</p>
+            </div>
+
             <div class="prose prose-lg text-body leading-relaxed space-y-4" set:html={suburb.longDesc} />
           </AnimatedSection>
-          
+
+          <!-- Why choose Ashmead — dynamic bullets -->
           <AnimatedSection delay={0.1} class="mt-12">
             <div class="bg-section rounded-2xl p-6 md:p-8">
-              <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-6">Why Roofers in {suburb.name} Choose Ashmead</h3>
-              
+              <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-6">
+                Why Roofers in {suburb.name} Choose Ashmead
+              </h3>
+
               <ul class="space-y-4">
                 <li class="flex items-start gap-3 text-body">
                   <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Huge stock at our Bristol depot, just minutes from {suburb.name}.</span>
+                  <span>Our Bristol depot is just <strong>{area.driveTime}</strong> from {suburb.name} — collect same day or order for next-day delivery.</span>
                 </li>
                 <li class="flex items-start gap-3 text-body">
                   <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Next-day delivery to {suburb.name} and across {area.name}.</span>
+                  <span>One of the widest stocks in the South West — tiles, slates, flat roofing, membranes, battens, lead, guttering and roof windows, all under one roof.</span>
                 </li>
                 <li class="flex items-start gap-3 text-body">
                   <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Trade pricing and expert product advice.</span>
+                  <span>Genuine trade pricing — no games, no minimum orders. Open a trade account and order by phone.</span>
                 </li>
                 <li class="flex items-start gap-3 text-body">
                   <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Roofing materials for heritage, modern and new-build properties.</span>
+                  <span>Expert staff who know {area.name}'s building stock — the right product first time, every time.</span>
                 </li>
               </ul>
             </div>
           </AnimatedSection>
+
+          <!-- Nearby areas in same region -->
+          {nearbySuburbs.length > 0 && (
+            <AnimatedSection delay={0.2} class="mt-12">
+              <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-5">
+                Also Delivering Across {area.name}
+              </h3>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {nearbySuburbs.map((s: any) => (
+                  <a
+                    href={`/areas/${area.slug}/${s.slug}`}
+                    class="group flex items-center justify-between gap-2 bg-section hover:bg-primary/10 border border-border hover:border-primary/30 rounded-xl px-4 py-3 transition-all"
+                  >
+                    <span class="text-sm font-semibold text-charcoal group-hover:text-primary transition-colors">{s.name}</span>
+                    <svg class="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+              <a href={`/areas/${area.slug}`} class="inline-flex items-center gap-1.5 text-primary hover:text-primary-hover font-semibold text-sm mt-4 transition-colors">
+                View all {area.name} areas
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </AnimatedSection>
+          )}
         </div>
-        
+
         <!-- Sidebar CTA -->
         <div class="lg:col-span-4">
           <AnimatedSection class="bg-charcoal rounded-2xl p-6 md:p-8 sticky top-28">
             <h3 class="text-white font-heading text-xl font-bold uppercase tracking-wide mb-4">Order for {suburb.name}</h3>
-            
-            <p class="text-white/70 mb-6">Call our trade team now for expert advice, competitive pricing and fast delivery to {suburb.name}.</p>
-            
+
+            <p class="text-white/70 mb-2 text-sm">Depot: <strong class="text-white">{area.driveTime}</strong> from {suburb.name}</p>
+            <p class="text-white/70 mb-6 text-sm">Call our trade team for expert advice, competitive pricing and fast delivery.</p>
+
             <div class="flex flex-col gap-3">
               <Button variant="primary" href={PHONE_HREF} icon="phone">{PHONE}</Button>
               <Button variant="white" href="/contact">Get a Quote</Button>
             </div>
-            
+
             <hr class="border-white/20 my-6" />
-            
+
             <p class="text-white/60 text-sm">
-              Based in {area.name}? <a href={`/areas/${area.slug}`} class="text-accent hover:underline">View all {area.name} areas.</a>
+              Covering all of <a href={`/areas/${area.slug}`} class="text-accent hover:underline">{area.name}</a> — next-day delivery to every postcode.
             </p>
           </AnimatedSection>
         </div>

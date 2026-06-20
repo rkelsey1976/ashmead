@@ -217,7 +217,9 @@ const hostedBenefits = [
             
             <p class="text-body mb-6">Leave your details and we'll add you to our training mailing list. You'll get first notice of upcoming depot events, manufacturer demo days and exclusive trade offers.</p>
 
-            <form action="/contact" method="get" class="space-y-4">
+            <form name="training-register" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
+              <input type="hidden" name="form-name" value="training-register" />
+              <p class="hidden"><label>Don't fill this in: <input name="bot-field" /></label></p>
               <div>
                 <label for="name" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-2">Name</label>
                 <input type="text" id="name" name="name" required class="w-full border border-border rounded-lg px-4 py-3 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" />

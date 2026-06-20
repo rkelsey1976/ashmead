@@ -1,0 +1,66 @@
+<!-- Cookie consent banner — hidden by default, shown via JS if no preference stored -->
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-[100] hidden"
+  role="dialog"
+  aria-label="Cookie consent"
+  aria-live="polite"
+>
+  <div class="bg-[#0B1F3A] border-t border-white/10 shadow-2xl">
+    <div class="container py-4 md:py-5">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+        <p class="text-white/80 text-sm leading-relaxed flex-1">
+          We use cookies to improve your experience and analyse site traffic. Read our
+          <a href="/privacy-policy" class="text-[#4ADE80] hover:underline font-medium">Privacy Policy</a>
+          for details.
+        </p>
+        <div class="flex items-center gap-3 shrink-0">
+          <button
+            id="cookie-decline"
+            type="button"
+            class="text-white/60 hover:text-white text-sm font-semibold transition-colors px-4 py-2 rounded-full border border-white/20 hover:border-white/40"
+          >
+            Decline
+          </button>
+          <button
+            id="cookie-accept"
+            type="button"
+            class="bg-[#0A5C36] hover:bg-[#0b6b40] text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors"
+          >
+            Accept All
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var COOKIE_KEY = 'ar_cookie_consent';
+    var banner = document.getElementById('cookie-banner');
+
+    function hide() {
+      banner.classList.add('hidden');
+    }
+
+    function setConsent(value) {
+      try { localStorage.setItem(COOKIE_KEY, value); } catch (e) {}
+      hide();
+    }
+
+    // Show banner only if no preference saved
+    var stored;
+    try { stored = localStorage.getItem(COOKIE_KEY); } catch (e) {}
+    if (!stored) {
+      banner.classList.remove('hidden');
+    }
+
+    document.getElementById('cookie-accept').addEventListener('click', function () {
+      setConsent('accepted');
+    });
+    document.getElementById('cookie-decline').addEventListener('click', function () {
+      setConsent('declined');
+    });
+  })();
+</script>
