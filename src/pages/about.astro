@@ -53,14 +53,14 @@ const values = [
 <Layout title={`About ${BUSINESS_NAME} | Bristol's Trade Counter`} description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter supplying professional roofers across the South West. Expert advice, massive stock, fast delivery.">
   
   <Hero
-    eyebrow="Bristol's Roofing Trade Counter"
-    title="More About"
-    accent="Ashmead"
-    description="Bristol's trusted roofing trade counter — supplying professional roofers with quality materials, expert advice and fast delivery across the South West."
+    eyebrow="Roofing Suppliers Since 1985"
+    title="Built by Roofers,"
+    accent="For Roofers"
+    description="Independent trade counter supplying quality materials, honest advice and next-day delivery to roofing contractors across the South West."
     image={heroImages.about}
-    imageAlt="Ashmead Roofing Supplies Bristol depot"
-    ctaPrimary={{ label: `Call ${PHONE}`, href: 'phone', icon: 'phone' }}
-    ctaSecondary={{ label: 'Contact Us', href: '/contact', icon: 'arrow' }}
+    ctaPrimary={{ label: 'Call the Team', href: PHONE_HREF, icon: 'phone' }}
+    ctaSecondary={{ label: 'View Our Products', href: '/products', icon: 'arrow' }}
+    minHeight="min-h-[60vh] md:min-h-[70vh]"
   />
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />

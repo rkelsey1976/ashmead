@@ -5,7 +5,7 @@ import AreaCard from '../../components/AreaCard.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Hero from '../../components/Hero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
-import { PHONE, heroImages } from '../../data/site';
+import { PHONE, PHONE_HREF, heroImages } from '../../data/site';
 import { areas } from '../../data/areas';
 import { brands } from '../../data/brands';
 import BrandMarquee from '../../components/BrandMarquee.astro';
@@ -14,14 +14,14 @@ import BrandMarquee from '../../components/BrandMarquee.astro';
 <Layout title="Areas We Cover | Roofing Supplies Bristol, Bath, Somerset & Beyond | Ashmead" description="Ashmead Roofing Supplies delivers across Bristol, Bath, Somerset, Gloucester and Wiltshire. Trade prices, fast delivery. Call 0117 986 0600.">
   
   <Hero
-    eyebrow="South West Delivery"
-    title="Areas We"
-    accent="Cover"
-    description="We supply professional roofers and builders across Bristol, Bath, Somerset, Gloucester and Wiltshire with trade pricing and fast, reliable delivery."
+    eyebrow="South West Coverage"
+    title="Local Service,"
+    accent="Regional Reach"
+    description="Trade roofing supplies delivered across Bristol, Bath, Somerset, Gloucester and Wiltshire. Same-day collection, next-day drop."
     image={heroImages.areas}
-    imageAlt="Ashmead Roofing Supplies delivery area across the South West"
-    ctaPrimary={{ label: `Call ${PHONE}`, href: 'phone', icon: 'phone' }}
-    ctaSecondary={{ label: 'Get a Quote', href: '/contact', icon: 'arrow' }}
+    ctaPrimary={{ label: 'Call for Delivery', href: PHONE_HREF, icon: 'phone' }}
+    ctaSecondary={{ label: 'Find Your Area', href: '#counties', icon: 'arrow' }}
+    minHeight="min-h-[55vh] md:min-h-[65vh]"
   />
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />

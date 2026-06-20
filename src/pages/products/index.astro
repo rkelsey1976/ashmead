@@ -6,7 +6,7 @@ import BrandMarquee from '../../components/BrandMarquee.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Hero from '../../components/Hero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
-import { PHONE, heroImages } from '../../data/site';
+import { PHONE, PHONE_HREF, heroImages } from '../../data/site';
 import { products } from '../../data/products';
 import { brands } from '../../data/brands';
 ---
@@ -14,14 +14,14 @@ import { brands } from '../../data/brands';
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
   
   <Hero
-    eyebrow="Full Trade Range"
-    title="Roofing"
-    accent="Products"
-    description="Browse our complete range of professional roofing supplies. From tiles and slates to flat roof systems, membranes, battens and fixings — all stocked at our Bristol trade counter."
+    eyebrow="Complete Roofing Systems"
+    title="Everything"
+    accent="On the Roof"
+    description="Tiles, slates, membranes, battens, fixings and ventilation — all from brands roofers trust, stocked at our Bristol trade counter."
     image={heroImages.products}
-    imageAlt="Roofing products stacked at Ashmead Roofing Supplies depot"
-    ctaPrimary={{ label: `Call ${PHONE}`, href: 'phone', icon: 'phone' }}
-    ctaSecondary={{ label: 'Get a Quote', href: '/contact', icon: 'arrow' }}
+    ctaPrimary={{ label: 'Call for Pricing', href: PHONE_HREF, icon: 'phone' }}
+    ctaSecondary={{ label: 'Browse the Range', href: '#product-categories', icon: 'arrow' }}
+    minHeight="min-h-[55vh] md:min-h-[65vh]"
   />
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
