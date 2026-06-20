@@ -141,6 +141,35 @@ h1.text-white, h2.text-white, h3.text-white, h4.text-white, h5.text-white, h6.te
   color: #FFFFFF;
 }
 
+/* Hero text polish */
+.hero-title {
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 30px rgba(15, 23, 42, 0.25);
+}
+
+.hero-title .font-serif {
+  letter-spacing: -0.03em;
+  font-style: italic;
+  text-transform: none;
+}
+
+/* Cinematic hero image */
+.hero-bg img {
+  animation: heroKenBurns 20s ease-out forwards;
+}
+
+@keyframes heroKenBurns {
+  0% { transform: scale(1.18) translateX(-2%); }
+  100% { transform: scale(1.08) translateX(0%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg img {
+    animation: none;
+    transform: scale(1.1);
+  }
+}
+
 /* Section backgrounds */
 .section-white { background-color: #FFFFFF; }
 .section-grey { background-color: var(--color-section); }
@@ -150,13 +179,13 @@ h1.text-white, h2.text-white, h3.text-white, h4.text-white, h5.text-white, h6.te
 
 /* Section padding */
 .section-padding {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
 }
 @media (min-width: 768px) {
   .section-padding {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }
 
