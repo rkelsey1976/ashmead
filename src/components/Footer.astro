@@ -1,86 +1,149 @@
 ---
-import { PHONE, PHONE_HREF, BUSINESS_NAME, navLinks } from '../data/site';
+import { PHONE, PHONE_HREF, BUSINESS_NAME, EMAIL, ADDRESS, POSTCODE, navLinks, OPENING_HOURS } from '../data/site';
 import { products } from '../data/products';
 import { areas } from '../data/areas';
-
-const footerColumns = [
-  {
-    title: 'Quick Links',
-    links: navLinks.map(link => ({ label: link.label, href: link.href })),
-  },
-  {
-    title: 'Products',
-    links: [
-      ...products.slice(0, 8).map(p => ({ label: p.name, href: `/products/${p.slug}` })),
-      { label: 'View all products →', href: '/products', highlight: true },
-    ],
-  },
-  {
-    title: 'Areas We Cover',
-    links: areas.map(a => ({ label: a.name, href: `/areas/${a.slug}` })),
-  },
-];
 ---
 
-<footer class="bg-charcoal text-white">
-  <div class="max-w-7xl mx-auto px-4 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- Company -->
-      <div class="md:col-span-2 lg:col-span-1">
-        <div class="mb-4">
-          <img src="/logo-original.png" alt="Ashmead Roofing Supplies" class="h-10 w-auto" />
+<footer class="bg-charcoal text-white border-t-4 border-accent">
+  <div class="container pt-16 pb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+      
+      <!-- Brand column -->
+      <div class="lg:col-span-4">
+        <div class="mb-6">
+          <img src="/logo-original.png" alt="Ashmead Roofing Supplies" class="h-12 w-auto brightness-0 invert" />
         </div>
-        <p class="text-gray-300 text-sm mb-4">{BUSINESS_NAME} is Bristol's trusted roofing trade counter, supplying professional roofers and builders across the South West.</p>
-        <a href={PHONE_HREF} class="inline-flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-bold text-lg">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.502 5.502l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
+        
+        <p class="text-body-light text-sm leading-relaxed mb-6 max-w-sm">
+          {BUSINESS_NAME} is Bristol's trusted roofing trade counter, supplying professional roofers, builders and developers across the South West.
+        </p>
+        
+        <a href={PHONE_HREF} class="group inline-flex items-center gap-3 text-white hover:text-accent transition-colors font-bold text-xl mb-6">
+          <span class="w-10 h-10 rounded-full bg-accent/20 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-charcoal transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.502 5.502l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </span>
           {PHONE}
         </a>
+        
+        <a href="/contact" class="block w-fit px-6 py-3 bg-primary hover:bg-primary-hover text-white font-semibold rounded-md transition-colors shadow-md">
+          Get a Quote
+        </a>
       </div>
-
-      {footerColumns.map(col => (
-        <div class="footer-accordion md:block">
-          <button type="button" class="footer-accordion-heading md:hidden w-full flex items-center justify-between text-left py-3 border-b border-gray-600">
-            <span class="text-white font-heading text-lg font-bold uppercase tracking-wide">{col.title}</span>
-            <svg class="footer-accordion-icon w-5 h-5 text-primary transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      
+      <!-- Products column -->
+      <div class="lg:col-span-3">
+        <h3 class="text-white font-heading text-lg font-bold uppercase tracking-wide mb-5">Products</h3>
+        <ul class="space-y-2.5">
+          {products.slice(0, 7).map(p => (
+            <li>
+              <a href={`/products/${p.slug}`} class="group inline-flex items-center gap-2 text-body-light hover:text-white transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent/60 group-hover:bg-accent transition-colors"></span>
+                {p.name}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/products" class="inline-flex items-center gap-2 text-accent hover:text-accent-hover font-semibold text-sm">
+              View all products
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Areas column -->
+      <div class="lg:col-span-3">
+        <h3 class="text-white font-heading text-lg font-bold uppercase tracking-wide mb-5">Areas We Cover</h3>
+        <ul class="space-y-2.5">
+          {areas.map(a => (
+            <li>
+              <a href={`/areas/${a.slug}`} class="group inline-flex items-center gap-2 text-body-light hover:text-white transition-colors text-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent/60 group-hover:bg-accent transition-colors"></span>
+                {a.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <!-- Contact / Hours column -->
+      <div class="lg:col-span-2">
+        <h3 class="text-white font-heading text-lg font-bold uppercase tracking-wide mb-5">Depot</h3>
+        
+        <div class="space-y-4 mb-6">
+          <p class="text-body-light text-sm leading-relaxed">
+            {ADDRESS.replace(', Bristol Depot', ', Bristol Depot')} <br />
+            <span class="text-white">{POSTCODE}</span>
+          </p>
+          
+          <a href={`mailto:${EMAIL}`} class="inline-flex items-center gap-2 text-body-light hover:text-accent transition-colors text-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-          </button>
-          <h3 class="hidden md:block text-white font-heading text-lg font-bold uppercase tracking-wide mb-4">{col.title}</h3>
-          <ul class="footer-accordion-body hidden md:block md:space-y-2 px-1 pb-4">
-            {col.links.map(link => (
-              <li class="py-2 md:py-0 border-b border-gray-700/50 md:border-0">
-                <a href={link.href} class:list={['hover:text-primary transition-colors text-sm', link.highlight ? 'text-primary hover:text-primary-hover font-medium' : 'text-gray-300']}>{link.label}</a>
-              </li>
-            ))}
-          </ul>
+            {EMAIL}
+          </a>
         </div>
-      ))}
+        
+        <h4 class="text-white/70 text-xs font-bold uppercase tracking-[0.2em] mb-3">Opening Hours</h4>
+        <ul class="space-y-1.5 text-sm text-body-light">
+          {OPENING_HOURS.map(day => (
+            <li class="flex justify-between gap-4">
+              <span class="text-white/80">{day.day}</span>
+              <span>{day.opens && day.closes ? `${day.opens}–${day.closes}` : 'Closed'}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
-
-    <div class="border-t border-gray-600 mt-8 pt-8 text-center text-sm text-gray-400">
-      <p>&copy; {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.</p>
+    
+    <!-- Trust badges -->
+    <div class="border-t border-white/10 mt-12 pt-8 mb-8">
+      <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 text-white/50">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="text-sm font-medium">Authorised Stockist</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span class="text-sm font-medium">Next-Day Delivery</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="text-sm font-medium">Trade Pricing</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <span class="text-sm font-medium">Local Depot</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom bar -->
+    <div class="border-t border-white/10 pt-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-white/40 text-center md:text-left">
+          &copy; {new Date().getFullYear()} {BUSINESS_NAME}. All rights reserved.
+        </p>
+        
+        <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-white/40">
+          <a href="/" class="hover:text-white transition-colors">Home</a>
+          <a href="/products" class="hover:text-white transition-colors">Products</a>
+          <a href="/areas" class="hover:text-white transition-colors">Areas</a>
+          <a href="/contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+      </div>
     </div>
   </div>
-
-  <script>
-    document.querySelectorAll('.footer-accordion').forEach(acc => {
-      const heading = acc.querySelector('.footer-accordion-heading');
-      const body = acc.querySelector('.footer-accordion-body');
-      const icon = acc.querySelector('.footer-accordion-icon');
-      if (heading && body && icon) {
-        heading.addEventListener('click', () => {
-          const isOpen = !body.classList.contains('hidden');
-          if (isOpen) {
-            body.classList.add('hidden');
-            icon.classList.remove('rotate-45');
-          } else {
-            body.classList.remove('hidden');
-            icon.classList.add('rotate-45');
-          }
-        });
-      }
-    });
-  </script>
 </footer>
