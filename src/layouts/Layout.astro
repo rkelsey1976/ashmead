@@ -27,32 +27,5 @@ const { title, description, ogImage, schema } = Astro.props;
   </main>
   <Footer />
   <StickyMobileFooter />
-
-  <!-- Mobile menu script -->
-  <script>
-    const btn = document.getElementById('mobile-menu-btn');
-    const close = document.getElementById('mobile-menu-close');
-    const menu = document.getElementById('mobile-menu');
-    if (btn && menu) {
-      btn.addEventListener('click', () => {
-        menu.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      });
-    }
-    if (close && menu) {
-      close.addEventListener('click', () => {
-        menu.classList.add('hidden');
-        document.body.style.overflow = '';
-      });
-    }
-    if (menu) {
-      menu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          menu.classList.add('hidden');
-          document.body.style.overflow = '';
-        });
-      });
-    }
-  </script>
 </body>
 </html>
