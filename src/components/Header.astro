@@ -17,7 +17,7 @@ const { PHONE, PHONE_HREF } = await getSiteSettings();
         <img src="/logo-mark-inverted.svg" alt="" aria-hidden="true" width="46" height="36" class="h-8 md:h-9 w-auto flex-shrink-0 transition-all duration-300 hidden" data-logo-dark />
         <div class="flex flex-col items-end font-heading font-bold uppercase tracking-tight" style="line-height:1;gap:1px">
           <span class="text-[13px] md:text-[14px] transition-colors duration-500" data-logo-name style="color:#1A1A1A">Ashmead Roofing</span>
-          <span class="text-[13px] md:text-[14px]" style="color:#0A5C36" data-logo-sub>Supplies Ltd</span>
+          <span class="text-[13px] md:text-[14px]" style="color:#1A1A1A" data-logo-sub>Supplies Ltd</span>
         </div>
       </a>
 
@@ -291,7 +291,7 @@ const { PHONE, PHONE_HREF } = await getSiteSettings();
       logoLight && (logoLight.style.display = '');
       logoDark && (logoDark.style.display = 'none');
       logoName && (logoName.style.color = '#1A1A1A');
-      logoSub && (logoSub.style.color = '#0A5C36');
+      logoSub && (logoSub.style.color = '#1A1A1A');
       navActives.forEach(el => el.style.color = '#0A5C36');
       navInactives.forEach(el => { el.style.color = 'rgba(26,26,26,0.6)'; el.onmouseenter = () => el.style.color = '#1A1A1A'; el.onmouseleave = () => el.style.color = 'rgba(26,26,26,0.6)'; });
       navUnderlines.forEach(el => el.style.background = '#0A5C36');
@@ -305,7 +305,7 @@ const { PHONE, PHONE_HREF } = await getSiteSettings();
       logoLight && (logoLight.style.display = 'none');
       logoDark && (logoDark.style.display = 'block');
       logoName && (logoName.style.color = 'white');
-      logoSub && (logoSub.style.color = '#4ADE80');
+      logoSub && (logoSub.style.color = 'white');
       navActives.forEach(el => el.style.color = '#4ADE80');
       navInactives.forEach(el => { el.style.color = 'rgba(255,255,255,0.7)'; el.onmouseenter = () => el.style.color = 'white'; el.onmouseleave = () => el.style.color = 'rgba(255,255,255,0.7)'; });
       navUnderlines.forEach(el => el.style.background = '#4ADE80');
