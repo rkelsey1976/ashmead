@@ -7,17 +7,17 @@ const { PHONE, PHONE_HREF } = await getSiteSettings();
 ---
 
 <div class="fixed top-0 inset-x-0 z-40" id="site-header">
-  <header class="relative transition-all duration-500 border-b border-transparent" data-header-pill style="background:white;box-shadow:0 1px 12px rgba(0,0,0,0.08);">
+  <header class="relative transition-all duration-500 border-b border-transparent" data-header-pill style="background:transparent;box-shadow:none;">
     <div id="scroll-progress" style="position:absolute;bottom:0;left:0;width:0%;height:2px;background:#4ADE80;z-index:10;will-change:width;"></div>
     <div class="flex items-center justify-between px-5 py-3 md:px-8 max-w-7xl mx-auto" data-header-inner>
 
       <!-- Logo: dark for hero, inverted for scrolled -->
       <a href="/" class="flex items-center gap-3 group shrink-0" aria-label="Ashmead Roofing Supplies — Home">
-        <img src="/logo-mark.svg" alt="" aria-hidden="true" width="46" height="36" class="h-8 md:h-9 w-auto flex-shrink-0 transition-all duration-300" data-logo-light />
-        <img src="/logo-mark-inverted.svg" alt="" aria-hidden="true" width="46" height="36" class="h-8 md:h-9 w-auto flex-shrink-0 transition-all duration-300 hidden" data-logo-dark />
+        <img src="/logo-mark.svg" alt="" aria-hidden="true" width="46" height="36" class="h-8 md:h-9 w-auto flex-shrink-0 transition-all duration-300 hidden" data-logo-light />
+        <img src="/logo-mark-inverted.svg" alt="" aria-hidden="true" width="46" height="36" class="h-8 md:h-9 w-auto flex-shrink-0 transition-all duration-300" data-logo-dark />
         <div class="flex flex-col items-end font-heading font-bold uppercase tracking-tight" style="line-height:1;gap:1px">
-          <span class="text-[13px] md:text-[14px] transition-colors duration-500" data-logo-name style="color:#1A1A1A">Ashmead Roofing</span>
-          <span class="text-[13px] md:text-[14px]" style="color:#1A1A1A" data-logo-sub>Supplies Ltd</span>
+          <span class="text-[13px] md:text-[14px] transition-colors duration-500" data-logo-name style="color:white">Ashmead Roofing</span>
+          <span class="text-[13px] md:text-[14px]" style="color:white" data-logo-sub>Supplies Ltd</span>
         </div>
       </a>
 
@@ -286,17 +286,17 @@ const { PHONE, PHONE_HREF } = await getSiteSettings();
     const menuBtn = document.querySelector('[data-menu-btn]');
 
     function applyHeroState() {
-      pill.style.background = 'white';
-      pill.style.boxShadow = '0 4px 24px rgba(0,0,0,0.12)';
-      logoLight && (logoLight.style.display = '');
-      logoDark && (logoDark.style.display = 'none');
-      logoName && (logoName.style.color = '#1A1A1A');
-      logoSub && (logoSub.style.color = '#1A1A1A');
-      navActives.forEach(el => el.style.color = '#1A1A1A');
-      navInactives.forEach(el => { el.style.color = 'rgba(26,26,26,0.55)'; el.onmouseenter = () => el.style.color = '#1A1A1A'; el.onmouseleave = () => el.style.color = 'rgba(26,26,26,0.55)'; });
-      navUnderlines.forEach(el => el.style.background = '#0A5C36');
-      phoneLink && (phoneLink.style.color = '#1A1A1A');
-      menuBtn && (menuBtn.style.color = '#1A1A1A');
+      pill.style.background = 'transparent';
+      pill.style.boxShadow = 'none';
+      logoLight && (logoLight.style.display = 'none');
+      logoDark && (logoDark.style.display = 'block');
+      logoName && (logoName.style.color = 'white');
+      logoSub && (logoSub.style.color = 'white');
+      navActives.forEach(el => el.style.color = 'white');
+      navInactives.forEach(el => { el.style.color = 'rgba(255,255,255,0.6)'; el.onmouseenter = () => el.style.color = 'white'; el.onmouseleave = () => el.style.color = 'rgba(255,255,255,0.6)'; });
+      navUnderlines.forEach(el => el.style.background = '#4ADE80');
+      phoneLink && (phoneLink.style.color = 'rgba(255,255,255,0.7)');
+      menuBtn && (menuBtn.style.color = 'white');
     }
 
     function applyNavyState() {
