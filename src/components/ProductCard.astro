@@ -6,57 +6,99 @@ interface Props {
   brands?: string[];
   image?: string;
   index?: number;
+  variant?: 'horizontal' | 'vertical';
 }
 
-const { name, shortDesc, href, brands = [], image, index = 0 } = Astro.props;
+const { name, shortDesc, href, brands = [], image, index = 0, variant = 'horizontal' } = Astro.props;
 const num = String(index + 1).padStart(2, '0');
 ---
 
-<a href={href} class="group relative flex bg-white border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-xl overflow-hidden h-full">
+{variant === 'vertical' ? (
 
-  <!-- Left: image -->
-  <div class="relative w-2/5 flex-shrink-0 overflow-hidden bg-section">
-    {image ? (
-      <img
-        src={image}
-        alt={name}
-        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        loading="lazy"
-      />
-    ) : (
-      <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5"></div>
-    )}
-    <!-- Green left-edge accent on hover -->
-    <div class="absolute inset-y-0 left-0 w-[3px] bg-accent scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom"></div>
-  </div>
+  <!-- Vertical card: image top, content below — for product listing pages -->
+  <a href={href} class="group flex flex-col bg-white border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-xl overflow-hidden h-full">
 
-  <!-- Right: content -->
-  <div class="relative flex flex-col justify-between p-6 flex-1 min-w-0">
-
-    <!-- Index number top-right -->
-    <span class="absolute top-4 right-5 font-heading font-bold text-border text-sm tabular-nums">{num}</span>
-
-    <div>
-      <h3 class="font-heading font-bold uppercase text-charcoal leading-tight tracking-tight mb-3 group-hover:text-primary transition-colors duration-300 pr-8"
-          style="font-size: clamp(1rem, 1.8vw, 1.3rem)">{name}</h3>
-
+    <!-- Image -->
+    <div class="relative h-48 overflow-hidden bg-section flex-shrink-0">
+      {image
+        ? <img src={image} alt={name} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+        : <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5"></div>
+      }
+      <!-- Hover overlay with arrow -->
+      <div class="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end justify-end p-4">
+        <span class="w-9 h-9 bg-accent flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </span>
+      </div>
+      <!-- Brand pills -->
       {brands.length > 0 && (
-        <div class="flex flex-wrap gap-1.5 mb-3">
+        <div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
           {brands.slice(0, 2).map(brand => (
-            <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-body border border-border px-2 py-0.5">{brand}</span>
+            <span class="bg-white/95 text-charcoal text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 shadow-sm">{brand}</span>
           ))}
         </div>
       )}
-
-      <p class="text-body text-sm leading-relaxed line-clamp-3">{shortDesc}</p>
     </div>
 
-    <span class="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mt-4 group-hover:gap-2.5 transition-all duration-300">
-      View range
-      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
-    </span>
+    <!-- Content -->
+    <div class="flex flex-col flex-1 p-5">
+      <h3 class="font-heading font-bold uppercase text-charcoal leading-tight tracking-tight mb-2 group-hover:text-primary transition-colors duration-300"
+          style="font-size: clamp(1rem, 1.6vw, 1.15rem)">{name}</h3>
+      <p class="text-body text-sm leading-relaxed line-clamp-2 flex-1 mb-4">{shortDesc}</p>
+      <span class="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider group-hover:gap-2.5 transition-all duration-300">
+        View range
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </span>
+    </div>
 
-  </div>
-</a>
+  </a>
+
+) : (
+
+  <!-- Horizontal card: image left, content right — for homepage -->
+  <a href={href} class="group relative flex bg-white border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-xl overflow-hidden h-full">
+
+    <!-- Left: image -->
+    <div class="relative w-2/5 flex-shrink-0 overflow-hidden bg-section">
+      {image ? (
+        <img src={image} alt={name} class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+      ) : (
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5"></div>
+      )}
+      <div class="absolute inset-y-0 left-0 w-[3px] bg-accent scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-bottom"></div>
+    </div>
+
+    <!-- Right: content -->
+    <div class="relative flex flex-col justify-between p-6 flex-1 min-w-0">
+      <span class="absolute top-4 right-5 font-heading font-bold text-border text-sm tabular-nums">{num}</span>
+
+      <div>
+        <h3 class="font-heading font-bold uppercase text-charcoal leading-tight tracking-tight mb-3 group-hover:text-primary transition-colors duration-300 pr-8"
+            style="font-size: clamp(1rem, 1.8vw, 1.3rem)">{name}</h3>
+
+        {brands.length > 0 && (
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            {brands.slice(0, 2).map(brand => (
+              <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-body border border-border px-2 py-0.5">{brand}</span>
+            ))}
+          </div>
+        )}
+
+        <p class="text-body text-sm leading-relaxed line-clamp-2 flex-1">{shortDesc}</p>
+      </div>
+
+      <span class="inline-flex items-center gap-1.5 text-primary text-xs font-semibold uppercase tracking-wider mt-4 group-hover:gap-2.5 transition-all duration-300">
+        View range
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </span>
+    </div>
+
+  </a>
+
+)}

@@ -14,12 +14,35 @@ import { getSiteSettings, productImagePath } from '../../lib/siteSettings';
 const { PHONE_HREF } = await getSiteSettings();
 
 const slugs = await reader.collections.products.list();
-const products = (await Promise.all(
+const allProducts = (await Promise.all(
   slugs.map(async slug => {
     const data = await reader.collections.products.read(slug);
     return data ? { slug, ...data, image: productImagePath(slug) } : null;
   })
 )).filter(Boolean) as { slug: string; name: string; shortDesc: string; brands: string[]; image: string }[];
+
+const CATEGORIES = [
+  {
+    id: 'pitched',
+    label: 'Pitched Roofing',
+    description: 'Tiles, slates, underlays and everything that goes on top.',
+    slugs: ['concrete-tiles', 'clay-tiles', 'slates', 'pitched-roof-membranes', 'roofing-battens', 'nails-and-fixings'],
+  },
+  {
+    id: 'flat',
+    label: 'Flat Roofing',
+    description: 'Single-ply membranes, EPDM systems and flat roof accessories.',
+    slugs: ['flat-roof-membranes', 'classicbond', 'duopoly', 'resitrix', 'fatra'],
+  },
+  {
+    id: 'building',
+    label: 'Building Products',
+    description: 'Guttering, insulation, ventilation, roof windows and lead work.',
+    slugs: ['fascias-and-guttering', 'insulation', 'ventilation-products', 'roof-windows', 'lead-products'],
+  },
+];
+
+const productsBySlug = Object.fromEntries(allProducts.map(p => [p.slug, p]));
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
@@ -31,42 +54,71 @@ const products = (await Promise.all(
     description="Tiles, slates, membranes, battens, fixings and ventilation — all from brands roofers trust, stocked at our Bristol trade counter."
     image={heroImages.products}
     ctaPrimary={{ label: 'Call for Pricing', href: PHONE_HREF, icon: 'phone' }}
-    ctaSecondary={{ label: 'Browse the Range', href: '#product-categories', icon: 'arrow' }}
+    ctaSecondary={{ label: 'Browse the Range', href: '#pitched', icon: 'arrow' }}
     minHeight="min-h-[55vh] md:min-h-[65vh]"
   />
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 
-  <!-- Product grid -->
-  <section class="section-white section-padding">
+  <!-- Category quick-nav -->
+  <div class="sticky top-[61px] z-30 bg-white border-b border-border shadow-sm">
     <div class="container">
-      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end mb-14">
-        <AnimatedSection>
-          <SectionLabel text="Our Range" />
-          <h2 class="text-charcoal font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-[0.95]">
-            Trade-Roofing
-            <span class="block text-primary">Products</span>
-          </h2>
-        </AnimatedSection>
-
-        <AnimatedSection class="lg:text-right">
-          <p class="text-body text-lg leading-relaxed">
-            Every product we stock is chosen for proven performance on South West roofs. Need help specifying? Call the trade team.
-          </p>
-        </AnimatedSection>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {products.map((product, i) => (
-          <AnimatedSection delay={i * 0.05}>
-            <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
-          </AnimatedSection>
+      <nav class="flex gap-1 py-3 overflow-x-auto scrollbar-none" aria-label="Product categories">
+        {CATEGORIES.map(cat => (
+          <a
+            href={`#${cat.id}`}
+            class="flex-shrink-0 px-5 py-2 text-sm font-semibold font-body text-body border border-border hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200 whitespace-nowrap"
+          >
+            {cat.label}
+          </a>
         ))}
-      </div>
+      </nav>
     </div>
-  </section>
+  </div>
+
+  <!-- Category sections -->
+  {CATEGORIES.map((cat, catIndex) => {
+    const catProducts = cat.slugs.map(s => productsBySlug[s]).filter(Boolean);
+    return (
+      <section
+        id={cat.id}
+        class={catIndex % 2 === 0 ? 'section-white section-padding' : 'section-grey section-padding'}
+      >
+        <div class="container">
+          <!-- Category header -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <AnimatedSection>
+              <SectionLabel text={`0${catIndex + 1}`} />
+              <h2 class="text-charcoal font-heading text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wide leading-tight">
+                {cat.label}
+              </h2>
+              <p class="text-body mt-2">{cat.description}</p>
+            </AnimatedSection>
+          </div>
+
+          <!-- Product grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {catProducts.map((product, i) => (
+              <AnimatedSection delay={i * 0.07} class="h-full">
+                <ProductCard
+                  name={product.name}
+                  shortDesc={product.shortDesc}
+                  href={`/products/${product.slug}`}
+                  brands={product.brands}
+                  image={product.image}
+                  variant="vertical"
+                  index={i}
+                />
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={45} />
 
   <CtaBanner />
+
 </Layout>

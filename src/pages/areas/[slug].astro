@@ -6,11 +6,10 @@ import BrandMarquee from '../../components/BrandMarquee.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Hero from '../../components/Hero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
-import Button from '../../components/Button.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
+import { BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
 import { areas } from '../../data/areas';
-import { products } from '../../data/products';
 import { brands } from '../../data/brands';
+import { getSiteSettings } from '../../lib/siteSettings';
 
 export function getStaticPaths() {
   return areas.map(area => ({
@@ -20,6 +19,8 @@ export function getStaticPaths() {
 }
 
 const { area } = Astro.props;
+const { PHONE, PHONE_HREF } = await getSiteSettings();
+
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
   { label: 'Areas We Cover', href: '/areas' },
@@ -45,12 +46,10 @@ const breadcrumbSchema = {
     { "@type": "ListItem", position: 3, name: area.name },
   ],
 };
-
-const suburbNames = area.suburbs ? area.suburbs.map(s => s.name) : [];
 ---
 
 <Layout title={`${area.h1} | Ashmead Roofing Supplies`} description={area.metaDescription} schema={[areaSchema, breadcrumbSchema]} ogImage={heroImage}>
-  
+
   <Hero
     eyebrow="Local Trade Delivery"
     title={`${area.name}`}
@@ -68,7 +67,7 @@ const suburbNames = area.suburbs ? area.suburbs.map(s => s.name) : [];
   <section class="section-white section-padding">
     <div class="container">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-        
+
         <!-- Main copy -->
         <div class="lg:col-span-8">
           <AnimatedSection>
@@ -76,84 +75,99 @@ const suburbNames = area.suburbs ? area.suburbs.map(s => s.name) : [];
             <div class="mt-6">
               <SectionLabel text={`${area.name} Coverage`} />
             </div>
-            
+
             <h2 class="text-charcoal font-heading text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-wide mb-6">
               Roofing Supply in {area.name}
             </h2>
-            
+
             <div class="prose prose-lg text-body leading-relaxed space-y-4" set:html={area.longDesc} />
           </AnimatedSection>
-          
-          {area.products && area.products.length > 0 && (
-            <AnimatedSection delay={0.1} class="mt-12">
-              <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-6">Roofing Supplies Available in {area.name}</h3>
-              
-              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {area.products.map(product => (
-                  <li class="flex items-center gap-3 text-body p-4 bg-section rounded-xl">
-                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <a href={`/products/${product.slug}`} class="hover:text-primary transition-colors font-medium">{product.name}</a>
-                  </li>
-                ))}
-              </ul>
-            </AnimatedSection>
-          )}
 
-          {suburbNames.length > 0 && (
-            <AnimatedSection delay={0.15} class="mt-12">
-              <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-4">Areas We Serve in {area.name}</h3>
-              
-              <div class="flex flex-wrap gap-2">
-                {area.suburbs!.map(suburb => (
-                  <a href={`/areas/${area.slug}/${suburb.slug}`} class="bg-white text-charcoal text-sm font-semibold uppercase tracking-wide px-4 py-2 rounded-full border border-border hover:border-primary hover:text-primary transition-colors">
-                    {suburb.name}
-                  </a>
-                ))}
+          {area.suburbs && area.suburbs.length > 0 && (
+            <AnimatedSection delay={0.1} class="mt-14">
+              <div class="border-t border-border pt-10">
+                <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2">
+                  Areas We Serve in {area.name}
+                </h3>
+                <p class="text-body text-sm mb-8">{area.suburbs.length} towns and suburbs covered — click to see local information.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+                  {area.suburbs.map(suburb => (
+                    <a
+                      href={`/areas/${area.slug}/${suburb.slug}`}
+                      class="group flex items-center justify-between bg-white px-4 py-3.5 hover:bg-section transition-colors duration-200"
+                    >
+                      <span class="text-charcoal text-sm font-semibold group-hover:text-primary transition-colors duration-200">{suburb.name}</span>
+                      <svg class="w-3.5 h-3.5 text-border group-hover:text-accent transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
               </div>
             </AnimatedSection>
           )}
         </div>
-        
+
         <!-- Sidebar -->
         <div class="lg:col-span-4">
-          <AnimatedSection class="bg-charcoal rounded-2xl p-6 md:p-8 sticky top-28">
-            <h3 class="text-white font-heading text-xl font-bold uppercase tracking-wide mb-6">Why Roofers Choose Ashmead</h3>
-            
-            <ul class="space-y-4 mb-8">
-              <li class="flex items-start gap-3 text-white/90">
-                <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Huge trade stock at our Bristol depot, ready for collection or delivery.</span>
-              </li>
-              <li class="flex items-start gap-3 text-white/90">
-                <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Next-day delivery to {area.name} and across the South West.</span>
-              </li>
-              <li class="flex items-start gap-3 text-white/90">
-                <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Trade pricing and expert advice on coverage, fixings and specification.</span>
-              </li>
-              <li class="flex items-start gap-3 text-white/90">
-                <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Materials for heritage, modern and new-build properties.</span>
-              </li>
-            </ul>
-            
-            <div class="flex flex-col gap-3">
-              <Button variant="primary" href={PHONE_HREF} icon="phone">Call {PHONE}</Button>
-              <Button variant="white" href="/contact">Get a Quote</Button>
+          <AnimatedSection class="sticky top-28 space-y-4">
+
+            <!-- CTA card -->
+            <div class="bg-charcoal p-7">
+              <p class="text-white/40 text-[10px] font-semibold uppercase tracking-[0.22em] font-body mb-1">Call us direct</p>
+              <a href={PHONE_HREF} class="block font-heading font-bold text-accent hover:text-white transition-colors duration-300 leading-none mb-6"
+                 style="font-size: clamp(1.5rem, 3vw, 2rem)">{PHONE}</a>
+
+              <ul class="space-y-3 mb-7 border-t border-white/10 pt-6">
+                {[
+                  `Huge trade stock — ready for ${area.name}`,
+                  'Same-day collection from Keynsham depot',
+                  'Next-day delivery across the South West',
+                  'Trade pricing & expert specification advice',
+                ].map(point => (
+                  <li class="flex items-start gap-2.5 text-white/75 text-sm font-body leading-snug">
+                    <svg class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+
+              <div class="flex flex-col gap-2.5">
+                <a href={PHONE_HREF}
+                   class="flex items-center justify-center gap-2 bg-accent text-charcoal font-heading font-bold uppercase tracking-wide text-sm px-5 py-3 hover:bg-white transition-colors duration-300">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.502 5.502l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  Call Now
+                </a>
+                <a href="/contact"
+                   class="flex items-center justify-center gap-2 border border-white/20 text-white font-heading font-bold uppercase tracking-wide text-sm px-5 py-3 hover:border-white hover:bg-white/5 transition-all duration-300">
+                  Get a Quote
+                </a>
+              </div>
             </div>
+
+            <!-- Drive time card -->
+            {area.driveTime && (
+              <div class="bg-section border border-border p-5 flex items-center gap-4">
+                <div class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-charcoal font-heading font-bold text-sm uppercase tracking-wide">{area.driveTime} from depot</p>
+                  <p class="text-body text-xs mt-0.5">Keynsham, Bristol BS31 1TU</p>
+                </div>
+              </div>
+            )}
+
           </AnimatedSection>
         </div>
+
       </div>
     </div>
   </section>

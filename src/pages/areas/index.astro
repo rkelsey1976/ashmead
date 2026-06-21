@@ -5,14 +5,26 @@ import AreaCard from '../../components/AreaCard.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Hero from '../../components/Hero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
-import { PHONE, PHONE_HREF, heroImages } from '../../data/site';
+import { heroImages } from '../../data/site';
 import { areas } from '../../data/areas';
 import { brands } from '../../data/brands';
 import BrandMarquee from '../../components/BrandMarquee.astro';
+import { getSiteSettings } from '../../lib/siteSettings';
+
+const { PHONE_HREF } = await getSiteSettings();
+
+const totalTowns = areas.reduce((sum, a) => sum + (a.suburbs?.length ?? 0), 0);
+
+const coverageStats = [
+  { value: `${areas.length}`, label: 'Counties Covered' },
+  { value: `${totalTowns}+`, label: 'Towns Served' },
+  { value: 'Next Day', label: 'Delivery Available' },
+  { value: '6 Days', label: 'A Week' },
+];
 ---
 
 <Layout title="Areas We Cover | Roofing Supplies Bristol, Bath, Somerset & Beyond | Ashmead" description="Ashmead Roofing Supplies delivers across Bristol, Bath, Somerset, Gloucester and Wiltshire. Trade prices, fast delivery. Call 0117 986 0600.">
-  
+
   <Hero
     eyebrow="South West Coverage"
     title="Local Service,"
@@ -20,42 +32,74 @@ import BrandMarquee from '../../components/BrandMarquee.astro';
     description="Trade roofing supplies delivered across Bristol, Bath, Somerset, Gloucester and Wiltshire. Same-day collection, next-day drop."
     image={heroImages.areas}
     ctaPrimary={{ label: 'Call for Delivery', href: PHONE_HREF, icon: 'phone' }}
-    ctaSecondary={{ label: 'Find Your Area', href: '#counties', icon: 'arrow' }}
+    ctaSecondary={{ label: 'Find Your Area', href: '#areas', icon: 'arrow' }}
     minHeight="min-h-[55vh] md:min-h-[65vh]"
   />
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="green" />
 
-  <!-- Areas grid -->
-  <section class="section-white section-padding">
+  <!-- Coverage stats band -->
+  <div class="bg-charcoal border-b border-white/5">
     <div class="container">
-      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end mb-14">
+      <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
+        {coverageStats.map(stat => (
+          <div class="px-6 py-8 text-center">
+            <p class="font-heading font-bold text-accent leading-none mb-2" style="font-size: clamp(1.8rem, 3.5vw, 2.8rem)">{stat.value}</p>
+            <p class="text-white/40 text-xs uppercase tracking-[0.18em] font-body">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Areas grid -->
+  <section id="areas" class="section-white section-padding">
+    <div class="container">
+
+      <div class="mb-14">
         <AnimatedSection>
-          <SectionLabel text="Our Delivery Region" />
+          <SectionLabel text="Delivery Region" />
           <h2 class="text-charcoal font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-[0.95]">
-            Roofing
-            <span class="block text-primary">Delivered Regionally</span>
+            Where We<br>
+            <span class="text-primary">Deliver</span>
           </h2>
         </AnimatedSection>
-        
-        <AnimatedSection class="lg:text-right">
-          <p class="text-body text-lg leading-relaxed">
-            Bristol depot dispatch to 5 counties and 68+ towns. Same-day collection, next-day delivery and trade pricing throughout the South West.
-          </p>
-        </AnimatedSection>
       </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="counties">
         {areas.map((area, i) => (
-          <AnimatedSection delay={i * 0.05}>
-            <AreaCard name={area.name} shortDesc={area.shortDesc} href={`/areas/${area.slug}`} image={area.image} />
+          <AnimatedSection delay={i * 0.08} class={i === 0 ? 'sm:col-span-2 lg:col-span-1' : ''}>
+            <AreaCard
+              name={area.name}
+              shortDesc={area.shortDesc}
+              href={`/areas/${area.slug}`}
+              image={area.image}
+              driveTime={area.driveTime}
+              townCount={area.suburbs?.length}
+            />
           </AnimatedSection>
         ))}
       </div>
+
+      <!-- Delivery note -->
+      <AnimatedSection>
+        <div class="mt-12 p-6 bg-section border border-border flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5 sm:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-body text-sm leading-relaxed">
+            <strong class="text-charcoal font-semibold">Not sure if we cover your area?</strong> Call us on
+            <a href={PHONE_HREF} class="text-primary font-semibold hover:underline">0117 986 0600</a> — if we can get it to you, we will.
+            Same-day collection always available from our Keynsham depot.
+          </p>
+        </div>
+      </AnimatedSection>
+
     </div>
   </section>
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={45} />
 
   <CtaBanner />
+
 </Layout>
