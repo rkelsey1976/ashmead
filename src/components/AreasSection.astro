@@ -87,45 +87,46 @@ const { PHONE, PHONE_HREF } = await getSiteSettings();
     
     <!-- Delivery promise bar -->
     <AnimatedSection>
-      <div class="bg-charcoal p-8 md:p-10">
-        <div class="grid md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-white/10">
-          <div class="flex flex-col md:flex-row items-center md:items-start gap-4 pt-8 md:pt-0 first:pt-0">
-            <div class="w-12 h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="bg-charcoal p-6 md:p-10">
+        <div class="grid grid-cols-3 gap-4 md:gap-0 md:divide-x divide-white/10">
+
+          <div class="flex flex-col items-center text-center gap-3 md:gap-4 md:pr-8">
+            <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div>
-              <h4 class="text-white font-heading font-bold uppercase tracking-wide">Same-Day Collection</h4>
-              <p class="text-white/70 text-sm">Pick up from our Keynsham trade counter today.</p>
+              <h4 class="text-white font-heading font-bold uppercase tracking-wide text-xs md:text-sm leading-tight">Same-Day Collection</h4>
+              <p class="text-white/60 text-xs mt-1 hidden md:block">Pick up from our Keynsham trade counter today.</p>
             </div>
           </div>
-          
-          <div class="flex flex-col md:flex-row items-center md:items-start gap-4 pt-8 md:pt-0 md:pl-8">
-            <div class="w-12 h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+          <div class="flex flex-col items-center text-center gap-3 md:gap-4 md:px-8">
+            <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
               </svg>
             </div>
             <div>
-              <h4 class="text-white font-heading font-bold uppercase tracking-wide">Next-Day Delivery</h4>
-              <p class="text-white/70 text-sm">Fleet coverage across the South West six days a week.</p>
+              <h4 class="text-white font-heading font-bold uppercase tracking-wide text-xs md:text-sm leading-tight">Next-Day Delivery</h4>
+              <p class="text-white/60 text-xs mt-1 hidden md:block">Fleet coverage across the South West six days a week.</p>
             </div>
           </div>
-          
-          <div class="flex flex-col md:flex-row items-center md:items-start gap-4 pt-8 md:pt-0 md:pl-8">
-            <div class="w-12 h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+          <div class="flex flex-col items-center text-center gap-3 md:gap-4 md:pl-8">
+            <div class="w-10 h-10 md:w-12 md:h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
             <div>
-              <h4 class="text-white font-heading font-bold uppercase tracking-wide">Trade Account Pricing</h4>
-              <p class="text-white/70 text-sm">Volume discounts and flexible terms for regular buyers.</p>
+              <h4 class="text-white font-heading font-bold uppercase tracking-wide text-xs md:text-sm leading-tight">Trade Account Pricing</h4>
+              <p class="text-white/60 text-xs mt-1 hidden md:block">Volume discounts and flexible terms for regular buyers.</p>
             </div>
           </div>
-          
+
         </div>
       </div>
     </AnimatedSection>
