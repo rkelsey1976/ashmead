@@ -4,17 +4,19 @@ import ProductCard from '../components/ProductCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import BrandMarquee from '../components/BrandMarquee.astro';
 import CtaBanner from '../components/CtaBanner.astro';
-import Button from '../components/Button.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import Testimonials from '../components/Testimonials.astro';
 import SuppliesFinder from '../components/SuppliesFinder.astro';
-import ProjectCard from '../components/ProjectCard.astro';
 import AreasSection from '../components/AreasSection.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME } from '../data/site';
-import { products } from '../data/products';
+import Button from '../components/Button.astro';
+import { BUSINESS_NAME } from '../data/site';
 import { areas } from '../data/areas';
 import { brands, brandByName } from '../data/brands';
+import { reader } from '../lib/reader';
+import { getSiteSettings, productImagePath } from '../lib/siteSettings';
+
+const { PHONE, PHONE_HREF } = await getSiteSettings();
 
 const heroBrandNames = ["Redland", "Marley", "Velux", "Cupa Pizarras", "A. Proctor Group", "FloPlast"];
 const heroBrands = heroBrandNames.map(name => brandByName[name]).filter(Boolean);
@@ -26,39 +28,20 @@ const stats = [
   { value: '1000s', label: 'Trade Customers' },
 ];
 
-const projects = [
-  {
-    image: '/images/hero-bristol.jpg',
-    title: 'Heritage Re-Roof',
-    category: 'Re-Roof',
-    location: 'Bath',
-    description: 'Full clay tile re-roof on a Georgian townhouse using Redland and Marley products.',
-    metric: 'Completed in 6 weeks'
-  },
-  {
-    image: '/images/hero-somerset.jpg',
-    title: 'New-Build Development',
-    category: 'New Build',
-    location: 'Somerset',
-    description: 'Large-scale roofing supply for a 24-home development with next-day delivery scheduling.',
-    metric: '24 homes roofed'
-  },
-  {
-    image: '/images/hero-bath.jpg',
-    title: 'Flat-Roof Refurbishment',
-    category: 'Flat Roof',
-    location: 'Bristol',
-    description: 'ClassicBond EPDM system installed on commercial units with full membrane and trims supplied.',
-    metric: 'Zero leaks since install'
-  }
-];
+
+const slugs = await reader.collections.products.list();
+const products = (await Promise.all(
+  slugs.map(async slug => {
+    const data = await reader.collections.products.read(slug);
+    return data ? { slug, ...data, image: productImagePath(slug) } : null;
+  })
+)).filter(Boolean).slice(0, 8) as { slug: string; name: string; shortDesc: string; brands: string[]; image: string }[];
 ---
 
 <Layout title="Roofing Supplies Bristol | Ashmead Roofing Supplies" description="Ashmead Roofing Supplies Ltd — Bristol's trusted roofing trade counter. Tiles, slates, flat roofing, membranes, battens, fixings & more. Trade pricing, expert advice, fast delivery. Call 0117 986 0600.">
 
   <!-- Hero -->
   <section class="relative min-h-screen flex items-center overflow-hidden">
-    <!-- Background image with parallax wrapper -->
     <div class="absolute inset-0 z-0 hero-bg">
       <img
         src="/images/hero-home.jpg"
@@ -69,7 +52,7 @@ const projects = [
       <div class="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/90 to-charcoal/40"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/40 to-charcoal/40"></div>
     </div>
-    
+
     <div class="container relative z-10 py-24 md:py-32">
       <div class="max-w-4xl">
         <!-- Eyebrow -->
@@ -130,14 +113,14 @@ const projects = [
             <span class="block text-primary">Roofers Trust</span>
           </h2>
         </AnimatedSection>
-        
+
         <AnimatedSection>
           <p class="text-body text-lg leading-relaxed">
             We don't just shift boxes. Our team has years of on-the-tools experience and will advise on the right system, calculate quantities and make sure you leave the depot with exactly what you need — every time.
           </p>
         </AnimatedSection>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <AnimatedSection delay={0.1}>
           <FeatureCard title="Trade Expertise" description="Years of hands-on roofing knowledge. We advise, calculate and specify the right system first time." icon="trade" />
@@ -165,7 +148,7 @@ const projects = [
             Trade-Roofing Products
           </h2>
         </AnimatedSection>
-        
+
         <AnimatedSection>
           <a href="/products" class="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-hover transition-colors">
             View all products
@@ -175,11 +158,11 @@ const projects = [
           </a>
         </AnimatedSection>
       </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {products.slice(0, 8).map((product, i) => (
-          <AnimatedSection delay={i * 0.05}>
-            <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {products.map((product, i) => (
+          <AnimatedSection delay={i * 0.05} class="h-full">
+            <ProductCard name={product.name} shortDesc={product.shortDesc} href={`/products/${product.slug}`} brands={product.brands} image={product.image} index={i} />
           </AnimatedSection>
         ))}
       </div>
@@ -191,35 +174,6 @@ const projects = [
 
   <!-- Supplies Finder -->
   <SuppliesFinder />
-
-  <!-- Case Studies -->
-  <section class="section-grey section-padding">
-    <div class="container">
-      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end mb-14">
-        <AnimatedSection>
-          <SectionLabel text="Case Studies" />
-          <h2 class="text-charcoal font-heading text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-wide leading-[0.95]">
-            Real Projects,
-            <span class="block text-primary">Real Results</span>
-          </h2>
-        </AnimatedSection>
-        
-        <AnimatedSection class="lg:text-right">
-          <p class="text-body text-lg">
-            A snapshot of the roofing supply projects we've supported across the South West — from heritage re-roofs to large new-build developments.
-          </p>
-        </AnimatedSection>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project, i) => (
-          <AnimatedSection delay={i * 0.1}>
-            <ProjectCard {...project} />
-          </AnimatedSection>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <!-- Testimonials -->
   <Testimonials />
@@ -238,50 +192,48 @@ const projects = [
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
 
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.fromTo('.hero-bg img', 
-        { scale: 1.15, opacity: 0 },
-        { scale: 1.1, opacity: 1, duration: 1.8, ease: 'power2.out' }
+      tl.fromTo('.hero-bg img',
+        { scale: 1.15 },
+        { scale: 1.1, duration: 2, ease: 'power2.out' },
+        0
       );
-
       tl.fromTo('.hero-eyebrow',
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out' },
-        '-=1.2'
+        { y: 0, opacity: 1, duration: 0.7 },
+        0.3
       );
-
       tl.fromTo('.hero-line',
-        { y: '105%' },
-        { y: '0%', duration: 0.9, stagger: 0.12, ease: 'power3.out' },
-        '-=0.8'
+        { y: '110%' },
+        { y: '0%', duration: 0.85, stagger: 0.12 },
+        0.55
       );
-
       tl.fromTo('.hero-sub',
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-        '-=0.6'
-      );
-
-      tl.fromTo('.hero-ctas > *',
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: 'power3.out' },
-        '-=0.5'
+        { y: 0, opacity: 1, duration: 0.7 },
+        '-=0.4'
       );
-
+      tl.fromTo('.hero-ctas > *',
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
+        '-=0.45'
+      );
       tl.fromTo('.hero-stats > div',
         { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: 'power3.out' },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.08 },
         '-=0.3'
       );
 
+      // Count-up numbers
       setTimeout(() => {
         document.querySelectorAll<HTMLElement>('[data-count-hero]').forEach(el => {
           const target = parseInt(el.dataset.countTo ?? '0', 10);
           const suffix = el.dataset.countSuffix ?? '';
-          const dur = 1400;
+          if (!target) return;
+          const dur = 1200;
           const start = performance.now();
-          const ease = (t: number) => 1 - Math.pow(1 - t, 4);
+          const ease = (t: number) => 1 - Math.pow(1 - t, 3);
           const tick = (now: number) => {
             const elapsed = Math.min(now - start, dur);
             el.textContent = Math.round(ease(elapsed / dur) * target) + suffix;
@@ -289,7 +241,8 @@ const projects = [
           };
           requestAnimationFrame(tick);
         });
-      }, 1500);
+      }, 1200);
     });
   </script>
+
 </Layout>

@@ -7,7 +7,7 @@ interface Props {
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from '../../keystatic.config';
 
-const { title = "What Our Customers Say", limit = 6 } = Astro.props;
+const { limit = 9 } = Astro.props;
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const slugs = await reader.collections.testimonials.list();
@@ -17,53 +17,135 @@ const allTestimonials = (
 const items = allTestimonials.slice(0, limit);
 ---
 
-<section class="section-white section-padding">
+<section class="section-white overflow-hidden section-padding">
   <div class="container">
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-end mb-14">
-      <div class="gsap-reveal">
-        <div class="flex items-center gap-3 mb-5">
-          <span class="h-px w-6 bg-primary opacity-40"></span>
-          <span class="text-primary text-xs font-bold uppercase tracking-[0.22em]">Testimonials</span>
-        </div>
-        <h2 class="text-charcoal font-heading text-4xl md:text-5xl font-bold uppercase tracking-wide">{title}</h2>
+
+    <!-- Label -->
+    <div class="flex items-center gap-3 mb-16">
+      <span class="w-6 h-px bg-accent opacity-50"></span>
+      <span class="text-primary/60 text-xs font-semibold uppercase tracking-[0.25em] font-body">What Customers Say</span>
+    </div>
+
+    <!-- Slider -->
+    <div class="relative" id="testimonial-slider">
+
+      <!-- Giant decorative quote mark -->
+      <div class="absolute -top-8 -left-4 font-heading font-bold text-charcoal/[0.04] select-none pointer-events-none leading-none" style="font-size: clamp(12rem, 22vw, 20rem)" aria-hidden="true">"</div>
+
+      <!-- Slides -->
+      <div class="relative min-h-[280px] lg:min-h-[240px]">
+        {items.map((t, i) => (
+          <div
+            class="testimonial-slide absolute inset-0 transition-all duration-700"
+            class:list={[i === 0 ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-6 pointer-events-none']}
+            data-index={i}
+          >
+            <blockquote
+              class="text-charcoal font-body leading-relaxed mb-10"
+              style="font-size: clamp(1.15rem, 2.5vw, 1.65rem); max-width: 52rem"
+            >
+              &ldquo;{t?.quote}&rdquo;
+            </blockquote>
+
+            <!-- Stars -->
+            <div class="flex gap-1 mb-6">
+              {[...Array(5)].map((_, s) => (
+                <svg class={`w-4 h-4 ${s < (t?.rating ?? 5) ? 'text-accent' : 'text-border'}`} fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+
+            <!-- Attribution -->
+            <div class="flex items-center gap-4">
+              <span class="w-8 h-px bg-accent/60"></span>
+              <div>
+                <p class="text-charcoal font-heading font-bold uppercase tracking-[0.15em] text-sm">{t?.name}</p>
+                <p class="text-body text-xs uppercase tracking-[0.12em] font-body mt-0.5">{t?.role}{t?.location ? ` · ${t.location}` : ''}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
 
-      <div class="gsap-reveal lg:text-right">
-        <p class="text-body text-lg">Genuine feedback from roofers, builders and contractors who rely on our Bristol trade counter every day.</p>
+      <!-- Navigation -->
+      <div class="flex items-center gap-6 mt-16 pt-8 border-t border-border">
+
+        <!-- Dots -->
+        <div class="flex gap-2 flex-1" id="testimonial-dots">
+          {items.map((_, i) => (
+            <button
+              class="testimonial-dot h-[3px] transition-all duration-300 rounded-none"
+              class:list={[i === 0 ? 'bg-accent w-8' : 'bg-border w-4 hover:bg-body/40']}
+              data-index={i}
+              aria-label={`Review ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <!-- Prev / Next -->
+        <div class="flex gap-3">
+          <button
+            id="testimonial-prev"
+            class="w-10 h-10 rounded-full border border-border text-body hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center"
+            aria-label="Previous review"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            id="testimonial-next"
+            class="w-10 h-10 rounded-full border border-border text-body hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center"
+            aria-label="Next review"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
       </div>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {items.map((t, i) => (
-        <div class="gsap-reveal relative bg-white rounded-2xl p-8 border border-border/80 hover:border-primary/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-500" style={`transition-delay: ${i * 0.1}s`}>
-          <!-- Decorative quote -->
-          <svg class="absolute top-6 right-6 w-10 h-10 text-primary/10" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-          </svg>
-
-          <div class="flex gap-1 mb-5">
-            {[...Array(5)].map((_, i) => (
-              <svg class={`w-5 h-5 ${i < (t?.rating ?? 5) ? 'text-accent' : 'text-border'}`} fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
-          </div>
-
-          <blockquote class="text-charcoal text-lg leading-relaxed mb-6">
-            "{t?.quote}"
-          </blockquote>
-
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-heading font-bold text-lg">
-              {t?.name?.charAt(0)}
-            </div>
-            <div>
-              <p class="text-charcoal font-heading font-bold uppercase tracking-wide">{t?.name}</p>
-              <p class="text-body text-sm">{t?.role}, {t?.location}</p>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
   </div>
 </section>
+
+<script>
+  const slider = document.getElementById('testimonial-slider');
+  if (slider) {
+    const slides = slider.querySelectorAll<HTMLElement>('.testimonial-slide');
+    const dots = slider.querySelectorAll<HTMLButtonElement>('.testimonial-dot');
+    let current = 0;
+    let autoTimer: ReturnType<typeof setInterval>;
+
+    function goTo(index: number) {
+      slides[current].classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      slides[current].classList.add('opacity-0', 'translate-y-6', 'pointer-events-none');
+      dots[current].classList.remove('bg-accent', 'w-8');
+      dots[current].classList.add('bg-border', 'w-4');
+
+      current = (index + slides.length) % slides.length;
+
+      slides[current].classList.remove('opacity-0', 'translate-y-6', 'pointer-events-none');
+      slides[current].classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+      dots[current].classList.remove('bg-border', 'w-4');
+      dots[current].classList.add('bg-accent', 'w-8');
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(() => goTo(current + 1), 6000);
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    document.getElementById('testimonial-next')?.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+    document.getElementById('testimonial-prev')?.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+    dots.forEach(dot => dot.addEventListener('click', () => { goTo(Number(dot.dataset.index)); resetAuto(); }));
+
+    startAuto();
+  }
+</script>
