@@ -1,0 +1,26 @@
+phone: "0117 986 0600"
+email: sales@ashmeadroofing.co.uk
+address: "Unit 1, Ashmead Industrial Estate, Ashmead Road, Keynsham, Bristol"
+postcode: BS31 1TU
+openingHours:
+  - day: Monday
+    opens: "07:00"
+    closes: "16:30"
+  - day: Tuesday
+    opens: "07:00"
+    closes: "16:30"
+  - day: Wednesday
+    opens: "07:00"
+    closes: "16:30"
+  - day: Thursday
+    opens: "07:00"
+    closes: "16:30"
+  - day: Friday
+    opens: "07:00"
+    closes: "16:30"
+  - day: Saturday
+    opens: ""
+    closes: ""
+  - day: Sunday
+    opens: ""
+    closes: ""

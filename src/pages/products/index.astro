@@ -6,13 +6,24 @@ import BrandMarquee from '../../components/BrandMarquee.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Hero from '../../components/Hero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
-import { PHONE, PHONE_HREF, heroImages } from '../../data/site';
-import { products } from '../../data/products';
+import { heroImages } from '../../data/site';
 import { brands } from '../../data/brands';
+import { reader } from '../../lib/reader';
+import { getSiteSettings, productImagePath } from '../../lib/siteSettings';
+
+const { PHONE_HREF } = await getSiteSettings();
+
+const slugs = await reader.collections.products.list();
+const products = (await Promise.all(
+  slugs.map(async slug => {
+    const data = await reader.collections.products.read(slug);
+    return data ? { slug, ...data, image: productImagePath(slug) } : null;
+  })
+)).filter(Boolean) as { slug: string; name: string; shortDesc: string; brands: string[]; image: string }[];
 ---
 
 <Layout title="Roofing Products Bristol | Tiles, Slates, Membranes & More | Ashmead" description="Browse our full range of roofing supplies. Concrete tiles, clay tiles, slates, flat roofing, membranes, battens, fixings, guttering & more. Call 0117 986 0600.">
-  
+
   <Hero
     eyebrow="Complete Roofing Systems"
     title="Everything"
@@ -37,14 +48,14 @@ import { brands } from '../../data/brands';
             <span class="block text-primary">Products</span>
           </h2>
         </AnimatedSection>
-        
+
         <AnimatedSection class="lg:text-right">
           <p class="text-body text-lg leading-relaxed">
             Every product we stock is chosen for proven performance on South West roofs. Need help specifying? Call the trade team.
           </p>
         </AnimatedSection>
       </div>
-      
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product, i) => (
           <AnimatedSection delay={i * 0.05}>

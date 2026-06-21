@@ -7,25 +7,29 @@ import SectionLabel from '../../components/SectionLabel.astro';
 import Hero from '../../components/Hero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
 import Button from '../../components/Button.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
-import { products } from '../../data/products';
+import { BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
 import { brandByName, brands } from '../../data/brands';
+import { reader } from '../../lib/reader';
+import { getSiteSettings, productImagePath } from '../../lib/siteSettings';
 
-export function getStaticPaths() {
-  return products.map(product => ({
-    params: { slug: product.slug },
-    props: { product },
-  }));
+export async function getStaticPaths() {
+  const slugs = await reader.collections.products.list();
+  return slugs.map(slug => ({ params: { slug } }));
 }
 
-const { product } = Astro.props;
+const { slug } = Astro.params;
+const product = await reader.collections.products.read(slug as string);
+if (!product) return Astro.redirect('/404');
+
+const { PHONE, PHONE_HREF } = await getSiteSettings();
+
+const heroImage = productImagePath(slug as string) || heroImages.products;
+
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
   { label: 'Products', href: '/products' },
   { label: product.name },
 ];
-
-const heroImage = product.image || heroImages[product.slug as keyof typeof heroImages] || heroImages.products;
 
 const productSchema = {
   "@context": "https://schema.org",
@@ -52,8 +56,8 @@ const breadcrumbSchema = {
 };
 ---
 
-<Layout title={`${product.h1} | Ashmead Roofing Supplies Bristol`} description={product.metaDesc} schema={[productSchema, breadcrumbSchema]} ogImage={heroImage}>
-  
+<Layout title={`${product.h1} | Ashmead Roofing Supplies Bristol`} description={product.metaDescription} schema={[productSchema, breadcrumbSchema]} ogImage={heroImage}>
+
   <Hero
     eyebrow={product.brands?.[0] ? `From ${product.brands[0]}` : 'Trade-Grade Product'}
     title={product.h1.replace(' Bristol', '')}
@@ -73,39 +77,33 @@ const breadcrumbSchema = {
   <section class="section-white section-padding">
     <div class="container">
       <Breadcrumb items={breadcrumbItems} />
-      
+
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start mt-8">
-        
+
         <!-- Product image -->
         <AnimatedSection class="lg:col-span-5">
           <div class="rounded-2xl overflow-hidden border border-border shadow-lg bg-white sticky top-28">
-            {product.image ? (
-              <img src={product.image} alt={product.name} class="w-full h-auto object-cover" />
-            ) : (
-              <div class="aspect-square bg-section flex items-center justify-center">
-                <span class="font-heading text-3xl font-bold uppercase tracking-wide text-body-light">{product.name}</span>
-              </div>
-            )}
+            <img src={heroImage} alt={product.name} class="w-full h-auto object-cover" />
           </div>
         </AnimatedSection>
-        
-        <!-- Product copy + features + applications -->
+
+        <!-- Product copy + features -->
         <div class="lg:col-span-7">
           <AnimatedSection>
             <SectionLabel text="Product Overview" />
-            
+
             <h2 class="text-charcoal font-heading text-3xl md:text-4xl font-bold uppercase tracking-wide mb-6">
               {product.h1} from Ashmead
             </h2>
-            
+
             <div class="prose prose-lg text-body leading-relaxed space-y-4 mb-10" set:html={product.longDesc} />
           </AnimatedSection>
-          
+
           {product.features && product.features.length > 0 && (
             <AnimatedSection delay={0.1}>
               <div class="bg-section rounded-2xl p-6 md:p-8 mb-10">
                 <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-6">Key Features</h3>
-                
+
                 <ul class="grid sm:grid-cols-2 gap-4">
                   {product.features.map(feature => (
                     <li class="flex items-start gap-3">
@@ -119,24 +117,7 @@ const breadcrumbSchema = {
               </div>
             </AnimatedSection>
           )}
-          
-          {product.applications && product.applications.length > 0 && (
-            <AnimatedSection delay={0.2}>
-              <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-6">Applications</h3>
-              
-              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {product.applications.map(app => (
-                  <li class="flex items-center gap-3 text-body p-4 bg-white border border-border rounded-xl">
-                    <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {app}
-                  </li>
-                ))}
-              </ul>
-            </AnimatedSection>
-          )}
-          
+
           <!-- Quick quote card -->
           <AnimatedSection delay={0.3}>
             <div class="mt-10 bg-charcoal rounded-2xl p-6 md:p-8">
@@ -145,7 +126,7 @@ const breadcrumbSchema = {
                   <h4 class="text-white font-heading text-xl font-bold uppercase tracking-wide mb-2">Need a price for {product.name.toLowerCase()}?</h4>
                   <p class="text-white/70">Call our trade team or send your bill of quantities for a fast, competitive quote.</p>
                 </div>
-                
+
                 <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                   <Button variant="primary" href={PHONE_HREF} icon="phone">Call {PHONE}</Button>
                   <Button variant="white" href="/contact">Get a Quote</Button>

@@ -1,6 +1,14 @@
 ---
-import { products } from '../data/products';
 import { areas } from '../data/areas';
+import { reader } from '../lib/reader';
+
+const slugs = await reader.collections.products.list();
+const products = (await Promise.all(
+  slugs.map(async slug => {
+    const data = await reader.collections.products.read(slug);
+    return data ? { slug, name: data.name, shortDesc: data.shortDesc } : null;
+  })
+)).filter(Boolean) as { slug: string; name: string; shortDesc: string }[];
 ---
 
 <!-- Products Grid -->

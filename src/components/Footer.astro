@@ -1,7 +1,18 @@
 ---
-import { PHONE, PHONE_HREF, BUSINESS_NAME, EMAIL, ADDRESS, POSTCODE, OPENING_HOURS } from '../data/site';
-import { products } from '../data/products';
+import { BUSINESS_NAME } from '../data/site';
 import { areas } from '../data/areas';
+import { reader } from '../lib/reader';
+import { getSiteSettings } from '../lib/siteSettings';
+
+const { PHONE, PHONE_HREF, EMAIL, ADDRESS, POSTCODE, OPENING_HOURS } = await getSiteSettings();
+
+const slugs = await reader.collections.products.list();
+const footerProducts = (await Promise.all(
+  slugs.map(async slug => {
+    const data = await reader.collections.products.read(slug);
+    return data ? { slug, name: data.name } : null;
+  })
+)).filter(Boolean).slice(0, 8) as { slug: string; name: string }[];
 ---
 
 <footer class="bg-[#0B1F3A] text-white">
@@ -39,7 +50,7 @@ import { areas } from '../data/areas';
       <div class="lg:col-span-2">
         <h3 class="text-white/60 font-heading text-xs font-bold uppercase tracking-[0.2em] mb-5">Products</h3>
         <ul class="space-y-2.5">
-          {products.slice(0, 8).map(p => (
+          {footerProducts.map(p => (
             <li><a href={`/products/${p.slug}`} class="text-white/60 hover:text-white transition-colors text-sm">{p.name}</a></li>
           ))}
           <li class="pt-1">
@@ -122,7 +133,7 @@ import { areas } from '../data/areas';
         </button>
         <div id="acc-products" class="overflow-hidden" style="max-height:0;transition:max-height 0.3s ease">
           <ul class="space-y-3 pb-4">
-            {products.slice(0, 8).map(p => (
+            {footerProducts.map(p => (
               <li><a href={`/products/${p.slug}`} class="text-white/60 hover:text-white transition-colors text-sm">{p.name}</a></li>
             ))}
             <li class="pt-1"><a href="/products" class="text-[#4ADE80] text-sm font-semibold">All products →</a></li>

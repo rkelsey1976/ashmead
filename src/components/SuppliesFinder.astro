@@ -1,13 +1,19 @@
 ---
-import { products } from '../data/products';
 import { areas } from '../data/areas';
+import { reader } from '../lib/reader';
 
 interface ProductOption {
   value: string;
   label: string;
 }
 
-const productOptions: ProductOption[] = products.map(p => ({ value: p.slug, label: p.name }));
+const slugs = await reader.collections.products.list();
+const productOptions: ProductOption[] = (await Promise.all(
+  slugs.map(async slug => {
+    const data = await reader.collections.products.read(slug);
+    return data ? { value: slug, label: data.name } : null;
+  })
+)).filter(Boolean) as ProductOption[];
 const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.name }));
 ---
 

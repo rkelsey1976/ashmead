@@ -1,5 +1,6 @@
 ---
-import { PHONE, PHONE_HREF } from '../data/site';
+import { getSiteSettings } from '../lib/siteSettings';
+const { PHONE, PHONE_HREF } = await getSiteSettings();
 ---
 
 <!-- Sticky mobile CTA footer -->
@@ -14,9 +15,9 @@ import { PHONE, PHONE_HREF } from '../data/site';
       </svg>
       {PHONE}
     </a>
-    
+
     <div class="w-px h-10 bg-border"></div>
-    
+
     <a
       href="/contact"
       class="flex-1 flex items-center justify-center gap-2 py-3.5 bg-primary hover:bg-primary-hover text-white font-semibold text-sm uppercase tracking-wide transition-colors"
@@ -27,7 +28,7 @@ import { PHONE, PHONE_HREF } from '../data/site';
       </svg>
     </a>
   </div>
-  
+
   <!-- iOS safe-area padding -->
   <div class="h-[env(safe-area-inset-bottom)]"></div>
 </div>
