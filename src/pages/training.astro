@@ -6,7 +6,10 @@ import SectionLabel from '../components/SectionLabel.astro';
 import Hero from '../components/Hero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import { brands } from '../data/brands';
-import { PHONE, PHONE_HREF, heroImages } from '../data/site';
+import { heroImages } from '../data/site';
+import { getSiteSettings } from '../lib/siteSettings';
+
+const { PHONE, PHONE_HREF } = await getSiteSettings();
 
 const title = "Roofing Training, CPDs & Trade Events | Ashmead Roofing Supplies";
 const description = "Upcoming roofing training courses, manufacturer CPDs and trade events for roofers and builders across Bristol, Bath, Somerset, Gloucestershire and Wiltshire.";
@@ -191,7 +194,7 @@ const hostedBenefits = [
           <ul class="space-y-4 mb-8">
             {hostedBenefits.map(benefit => (
               <li class="flex items-start gap-3 text-white">
-                <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <div class="w-6 h-6 bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
@@ -212,7 +215,7 @@ const hostedBenefits = [
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
-          <div class="bg-white rounded-2xl p-6 md:p-8 shadow-xl">
+          <div class="bg-white p-6 md:p-8 shadow-xl border border-white/10">
             <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2">Register for Ashmead Training</h3>
             
             <p class="text-body mb-6">Leave your details and we'll add you to our training mailing list. You'll get first notice of upcoming depot events, manufacturer demo days and exclusive trade offers.</p>
@@ -268,9 +271,9 @@ const hostedBenefits = [
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {events.map((event, i) => (
           <AnimatedSection delay={i * 0.05}>
-            <article class="bg-white rounded-2xl p-6 md:p-7 border border-border flex flex-col h-full hover:border-primary transition-colors group">
+            <article class="bg-white p-6 md:p-7 border border-border flex flex-col h-full hover:border-primary transition-colors group">
               <div class="flex items-center justify-between gap-3 mb-4">
-                <span class="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wide bg-section text-primary rounded-full">{event.type}</span>
+                <span class="inline-block px-3 py-1 text-xs font-semibold uppercase tracking-wide bg-section text-primary">{event.type}</span>
                 
                 <span class="text-xs font-semibold text-body uppercase tracking-wide">{event.provider}</span>
               </div>

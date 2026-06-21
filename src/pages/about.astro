@@ -6,7 +6,10 @@ import SectionLabel from '../components/SectionLabel.astro';
 import Hero from '../components/Hero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import Testimonials from '../components/Testimonials.astro';
-import { PHONE, PHONE_HREF, BUSINESS_NAME, ADDRESS, heroImages } from '../data/site';
+import { BUSINESS_NAME, ADDRESS, heroImages } from '../data/site';
+import { getSiteSettings } from '../lib/siteSettings';
+
+const { PHONE, PHONE_HREF } = await getSiteSettings();
 import { brands } from '../data/brands';
 
 const stats = [
@@ -84,19 +87,15 @@ const values = [
         </AnimatedSection>
         
         <AnimatedSection delay={0.1}>
-          <div class="bg-section rounded-2xl p-6 md:p-8 lg:sticky lg:top-28">
-            <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-6">Why Trade Roofers Choose Us</h3>
-            
-            <ul class="space-y-5">
-              {values.map(value => (
-                <li class="flex items-start gap-4">
-                  <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={value.icon} />
-                    </svg>
-                  </div>
+          <div class="bg-section border border-border p-6 md:p-8 lg:sticky lg:top-28">
+            <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-6 pb-5 border-b border-border">Why Trade Roofers Choose Us</h3>
+
+            <ul class="divide-y divide-border">
+              {values.map((value, i) => (
+                <li class="flex items-start gap-4 py-4 first:pt-0 last:pb-0">
+                  <span class="text-[11px] font-bold text-accent font-heading tabular-nums mt-0.5 flex-shrink-0 w-5">{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <h4 class="text-charcoal font-semibold mb-1">{value.title}</h4>
+                    <h4 class="text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-1">{value.title}</h4>
                     <p class="text-body text-sm leading-relaxed">{value.desc}</p>
                   </div>
                 </li>
