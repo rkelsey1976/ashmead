@@ -15,8 +15,9 @@ const lastWeekday = weekdays.filter(h => !['Saturday','Sunday'].includes(h.day))
 const saturday = OPENING_HOURS.find(h => h.day === 'Saturday');
 ---
 
-<section class="bg-charcoal overflow-hidden">
-  <div class="container">
+<section class="bg-charcoal overflow-hidden relative">
+  <div class="absolute inset-0 opacity-[0.05]" style="background-image: repeating-linear-gradient(-45deg, transparent, transparent 30px, white 30px, white 31px);"></div>
+  <div class="container relative z-10">
     <div class="grid lg:grid-cols-2 gap-0 min-h-[420px]">
 
       <!-- Left: headline -->
