@@ -67,7 +67,7 @@ const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.n
           <div class="space-y-6">
             <div>
               <label for="finder-project" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-3">What type of project?</label>
-              <select id="finder-project" name="project" class="w-full bg-section border border-border rounded-lg px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+              <select id="finder-project" name="project" class="w-full bg-section border border-border px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer">
                 <option value="">Select a project type...</option>
                 <option value="new-build">New build roof</option>
                 <option value="re-roof">Re-roof / replacement</option>
@@ -81,7 +81,7 @@ const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.n
             <div class="grid sm:grid-cols-2 gap-6">
               <div>
                 <label for="finder-product" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-3">What do you need?</label>
-                <select id="finder-product" name="product" class="w-full bg-section border border-border rounded-lg px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                <select id="finder-product" name="product" class="w-full bg-section border border-border px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer">
                   <option value="">Select a product...</option>
                   {productOptions.map(p => (
                     <option value={p.value}>{p.label}</option>
@@ -91,7 +91,7 @@ const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.n
               
               <div>
                 <label for="finder-area" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-3">Delivery area?</label>
-                <select id="finder-area" name="area" class="w-full bg-section border border-border rounded-lg px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                <select id="finder-area" name="area" class="w-full bg-section border border-border px-4 py-3.5 text-charcoal focus:outline-none focus:border-primary transition-colors appearance-none cursor-pointer">
                   <option value="">Select your area...</option>
                   {areaOptions.map(a => (
                     <option value={a.value}>{a.label}</option>
@@ -111,7 +111,7 @@ const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.n
               </a>
             </div>
             
-            <button type="submit" class="w-full bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-lg text-lg">
+            <button type="submit" class="w-full bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-4 transition-all duration-300 hover:shadow-lg text-lg">
               Find the Right Supplies
             </button>
           </div>

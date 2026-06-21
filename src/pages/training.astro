@@ -202,10 +202,10 @@ const hostedBenefits = [
           </ul>
 
           <div class="flex flex-wrap gap-3">
-            <a href={PHONE_HREF} class="inline-flex items-center justify-center gap-2 bg-white hover:bg-section text-primary font-semibold px-6 py-3 rounded-md transition-colors">
+            <a href={PHONE_HREF} class="inline-flex items-center justify-center gap-2 bg-white hover:bg-section text-primary font-semibold px-6 py-3 transition-colors">
               Call {PHONE}
             </a>
-            <a href="/contact" class="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-6 py-3 rounded-md transition-colors">
+            <a href="/contact" class="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-semibold px-6 py-3 transition-colors">
               Register Interest
             </a>
           </div>
@@ -222,21 +222,21 @@ const hostedBenefits = [
               <p class="hidden"><label>Don't fill this in: <input name="bot-field" /></label></p>
               <div>
                 <label for="name" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-2">Name</label>
-                <input type="text" id="name" name="name" required class="w-full border border-border rounded-lg px-4 py-3 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" />
+                <input type="text" id="name" name="name" required class="w-full border border-border px-4 py-3 text-charcoal focus:outline-none focus:border-primary transition-colors" />
               </div>
               <div class="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label for="company" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-2">Company</label>
-                  <input type="text" id="company" name="company" class="w-full border border-border rounded-lg px-4 py-3 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" />
+                  <input type="text" id="company" name="company" class="w-full border border-border px-4 py-3 text-charcoal focus:outline-none focus:border-primary transition-colors" />
                 </div>
                 <div>
                   <label for="email" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-2">Email *</label>
-                  <input type="email" id="email" name="email" required class="w-full border border-border rounded-lg px-4 py-3 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" />
+                  <input type="email" id="email" name="email" required class="w-full border border-border px-4 py-3 text-charcoal focus:outline-none focus:border-primary transition-colors" />
                 </div>
               </div>
               <div>
                 <label for="interest" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-2">I'm interested in</label>
-                <select id="interest" name="interest" class="w-full border border-border rounded-lg px-4 py-3 text-charcoal focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors bg-white appearance-none">
+                <select id="interest" name="interest" class="w-full border border-border px-4 py-3 text-charcoal focus:outline-none focus:border-primary transition-colors bg-white appearance-none">
                   <option value="">Select an option</option>
                   <option value="tile-and-slate">Tile & slate training</option>
                   <option value="flat-roofing">Flat roofing training</option>
@@ -246,7 +246,7 @@ const hostedBenefits = [
                   <option value="trade-mornings">Depot trade mornings</option>
                 </select>
               </div>
-              <button type="submit" class="w-full bg-primary hover:bg-primary-hover text-white font-bold py-4 rounded-lg text-lg transition-colors">
+              <button type="submit" class="w-full bg-primary hover:bg-primary-hover text-white font-bold py-4 text-lg transition-colors">
                 Register Interest
               </button>
             </form>
