@@ -63,7 +63,7 @@ const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.n
       </div>
       
       <div class="gsap-reveal">
-        <form id="supplies-finder" class="bg-white rounded-2xl p-8 md:p-10 shadow-xl">
+        <form id="supplies-finder" class="bg-white p-8 md:p-10 shadow-xl border border-white/10">
           <div class="space-y-6">
             <div>
               <label for="finder-project" class="block text-charcoal font-heading font-bold uppercase tracking-wide text-sm mb-3">What type of project?</label>
@@ -100,7 +100,7 @@ const areaOptions: ProductOption[] = areas.map(a => ({ value: a.slug, label: a.n
               </div>
             </div>
             
-            <div id="finder-result" class="hidden bg-primary-light border border-primary/20 rounded-lg p-5">
+            <div id="finder-result" class="hidden bg-primary-light border border-primary/20 p-5">
               <h4 class="text-charcoal font-heading font-bold uppercase tracking-wide mb-2">Recommended Next Step</h4>
               <p id="finder-result-text" class="text-body"></p>
               <a id="finder-result-link" href="/contact" class="inline-flex items-center gap-2 text-primary font-semibold mt-3 hover:text-primary-hover transition-colors">

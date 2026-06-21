@@ -2,8 +2,10 @@
 import AreaCard from './AreaCard.astro';
 import AnimatedSection from './AnimatedSection.astro';
 import SectionLabel from './SectionLabel.astro';
-import { PHONE_HREF, PHONE } from '../data/site';
+import { getSiteSettings } from '../lib/siteSettings';
 import { areas } from '../data/areas';
+
+const { PHONE, PHONE_HREF } = await getSiteSettings();
 ---
 
 <section class="section-white section-padding overflow-hidden">
@@ -35,7 +37,7 @@ import { areas } from '../data/areas';
     <div class="grid lg:grid-cols-12 gap-8 mb-16">
       
       <!-- Embedded map -->
-      <AnimatedSection class="lg:col-span-7 relative rounded-2xl overflow-hidden border border-border min-h-[360px]">
+      <AnimatedSection class="lg:col-span-7 relative overflow-hidden border border-border min-h-[360px]">
         <iframe
           src="https://www.google.com/maps?q=Ashmead+Roofing+Supplies,Keynsham,BS31+1TU&output=embed"
           width="100%"
@@ -48,7 +50,7 @@ import { areas } from '../data/areas';
           title="Ashmead Roofing Supplies depot location"
         ></iframe>
         <div class="absolute top-4 left-4 z-10">
-          <span class="inline-flex items-center gap-2 bg-white rounded-full px-4 py-2 text-sm font-semibold text-charcoal shadow-md">
+          <span class="inline-flex items-center gap-2 bg-white px-4 py-2 text-sm font-semibold text-charcoal shadow-md">
             <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
             Keynsham Depot · BS31 1TU
           </span>
@@ -60,8 +62,8 @@ import { areas } from '../data/areas';
         <div class="grid sm:grid-cols-2 lg:grid-cols-1 gap-4">
           {areas.map((area, i) => (
             <AnimatedSection delay={i * 0.08}>
-              <a href={`/areas/${area.slug}`} class="group flex items-center gap-4 p-4 rounded-xl border border-border bg-white hover:border-primary hover:shadow-md transition-all duration-300">
-                <div class="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+              <a href={`/areas/${area.slug}`} class="group flex items-center gap-4 p-4 border border-border bg-white hover:border-primary hover:shadow-md transition-all duration-300">
+                <div class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
                   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -85,10 +87,10 @@ import { areas } from '../data/areas';
     
     <!-- Delivery promise bar -->
     <AnimatedSection>
-      <div class="bg-charcoal rounded-2xl p-8 md:p-10">
-        <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
-          <div class="flex flex-col md:flex-row items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
+      <div class="bg-charcoal p-8 md:p-10">
+        <div class="grid md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-white/10">
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-4 pt-8 md:pt-0 first:pt-0">
+            <div class="w-12 h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
               <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -99,9 +101,9 @@ import { areas } from '../data/areas';
             </div>
           </div>
           
-          <div class="flex flex-col md:flex-row items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-4 pt-8 md:pt-0 md:pl-8">
+            <div class="w-12 h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
               </svg>
@@ -112,9 +114,9 @@ import { areas } from '../data/areas';
             </div>
           </div>
           
-          <div class="flex flex-col md:flex-row items-center gap-4">
-            <div class="w-14 h-14 rounded-full bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-4 pt-8 md:pt-0 md:pl-8">
+            <div class="w-12 h-12 bg-white/10 text-accent flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
