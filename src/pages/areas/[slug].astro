@@ -10,6 +10,9 @@ import { BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
 import { areas } from '../../data/areas';
 import { brands } from '../../data/brands';
 import { getSiteSettings } from '../../lib/siteSettings';
+import { areaProducts } from '../../data/areaProducts';
+import { products } from '../../data/products';
+import { areaBrands } from '../../data/areaBrands';
 
 export function getStaticPaths() {
   return areas.map(area => ({
@@ -20,6 +23,13 @@ export function getStaticPaths() {
 
 const { area } = Astro.props;
 const { PHONE, PHONE_HREF } = await getSiteSettings();
+
+const areaBrandPages = areaBrands.filter(ab => ab.areaSlug === area.slug);
+
+const areaProductPages = areaProducts
+  .filter(ap => ap.areaSlug === area.slug)
+  .map(ap => ({ ...ap, product: products.find(p => p.slug === ap.productSlug)! }))
+  .filter(ap => ap.product);
 
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
@@ -99,6 +109,54 @@ const breadcrumbSchema = {
                     >
                       <span class="text-charcoal text-sm font-semibold group-hover:text-primary transition-colors duration-200">{suburb.name}</span>
                       <svg class="w-3.5 h-3.5 text-border group-hover:text-accent transition-colors duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          )}
+          {areaProductPages.length > 0 && (
+            <AnimatedSection delay={0.2} class="mt-14">
+              <div class="border-t border-border pt-10">
+                <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2">
+                  Products We Supply in {area.name}
+                </h3>
+                <p class="text-body text-sm mb-8">Local delivery information and trade advice for every product category.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {areaProductPages.map(ap => (
+                    <a href={`/areas/${area.slug}/products/${ap.productSlug}`}
+                       class="group flex items-center justify-between gap-3 bg-white border border-border px-4 py-3.5 hover:border-primary hover:shadow-sm transition-all duration-200">
+                      <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 bg-accent flex-shrink-0"></div>
+                        <span class="text-charcoal text-sm font-semibold group-hover:text-primary transition-colors">{ap.product.name}</span>
+                      </div>
+                      <svg class="w-3.5 h-3.5 text-body-light group-hover:text-accent transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </AnimatedSection>
+          )}
+          {areaBrandPages.length > 0 && (
+            <AnimatedSection delay={0.3} class="mt-14">
+              <div class="border-t border-border pt-10">
+                <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2">
+                  Key Brands for {area.name}
+                </h3>
+                <p class="text-body text-sm mb-8">Authorised stockist for these leading brands — local advice, trade pricing and fast delivery.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {areaBrandPages.map(ab => (
+                    <a href={`/areas/${area.slug}/brands/${ab.brandSlug}`}
+                       class="group flex items-center justify-between gap-3 bg-white border border-border px-4 py-3.5 hover:border-primary hover:shadow-sm transition-all duration-200">
+                      <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 bg-accent flex-shrink-0"></div>
+                        <span class="text-charcoal text-sm font-semibold group-hover:text-primary transition-colors">{ab.brandName}</span>
+                      </div>
+                      <svg class="w-3.5 h-3.5 text-body-light group-hover:text-accent transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                       </svg>
                     </a>

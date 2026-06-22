@@ -10,6 +10,8 @@ import { PHONE, PHONE_HREF, BUSINESS_NAME, CANONICAL_URL, heroImages } from '../
 import { areas } from '../../../data/areas';
 import { brands } from '../../../data/brands';
 import BrandMarquee from '../../../components/BrandMarquee.astro';
+import { areaProducts } from '../../../data/areaProducts';
+import { products } from '../../../data/products';
 
 export function getStaticPaths() {
   const paths: { params: { area: string; suburb: string }; props: { area: any; suburb: any } }[] = [];
@@ -27,6 +29,11 @@ export function getStaticPaths() {
 }
 
 const { area, suburb } = Astro.props;
+
+const countyProducts = areaProducts
+  .filter(ap => ap.areaSlug === area.slug)
+  .map(ap => ({ ...ap, product: products.find(p => p.slug === ap.productSlug)! }))
+  .filter(ap => ap.product);
 
 // Pick up to 4 other suburbs from the same area for the "nearby" section
 const nearbySuburbs = (area.suburbs ?? [])
@@ -162,6 +169,25 @@ const breadcrumbSchema = {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
+            </AnimatedSection>
+          )}
+        </div>
+
+          {countyProducts.length > 0 && (
+            <AnimatedSection delay={0.3} class="mt-12">
+              <h3 class="text-charcoal font-heading text-xl font-bold uppercase tracking-wide mb-2">
+                Products We Supply in {area.name}
+              </h3>
+              <p class="text-body text-sm mb-6">Local delivery and trade advice for every product category across {area.name}.</p>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {countyProducts.map(cp => (
+                  <a href={`/areas/${area.slug}/products/${cp.productSlug}`}
+                     class="group flex items-center gap-2 bg-section border border-border px-3 py-2.5 hover:border-primary hover:bg-white transition-all duration-200">
+                    <div class="w-1.5 h-1.5 bg-accent flex-shrink-0"></div>
+                    <span class="text-charcoal text-xs font-semibold group-hover:text-primary transition-colors leading-tight">{cp.product.name}</span>
+                  </a>
+                ))}
+              </div>
             </AnimatedSection>
           )}
         </div>

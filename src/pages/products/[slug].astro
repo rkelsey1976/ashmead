@@ -10,6 +10,8 @@ import { BUSINESS_NAME, CANONICAL_URL, heroImages } from '../../data/site';
 import { brandByName, brands } from '../../data/brands';
 import { reader } from '../../lib/reader';
 import { getSiteSettings, productImagePath } from '../../lib/siteSettings';
+import { areaProducts } from '../../data/areaProducts';
+import { areas } from '../../data/areas';
 
 export async function getStaticPaths() {
   const slugs = await reader.collections.products.list();
@@ -21,6 +23,11 @@ const product = await reader.collections.products.read(slug as string);
 if (!product) return Astro.redirect('/404');
 
 const { PHONE, PHONE_HREF } = await getSiteSettings();
+
+const localPages = areaProducts
+  .filter(ap => ap.productSlug === slug)
+  .map(ap => ({ ...ap, area: areas.find(a => a.slug === ap.areaSlug)! }))
+  .filter(ap => ap.area);
 
 const heroImage = productImagePath(slug as string) || heroImages.products;
 
@@ -179,6 +186,34 @@ const breadcrumbSchema = {
       </div>
     </div>
   </section>
+
+  {localPages.length > 0 && (
+    <section class="section-grey section-padding">
+      <div class="container">
+        <AnimatedSection>
+          <SectionLabel text="Local Supply" />
+          <h2 class="text-charcoal font-heading text-2xl md:text-3xl font-bold uppercase tracking-wide mb-2">
+            {product.name} by Area
+          </h2>
+          <p class="text-body mb-8">Local information, delivery details and area-specific advice for your county.</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {localPages.map(lp => (
+              <a href={`/areas/${lp.areaSlug}/products/${lp.productSlug}`}
+                 class="group flex items-center justify-between gap-4 bg-white border border-border p-5 hover:border-primary hover:shadow-md transition-all duration-200">
+                <div>
+                  <p class="text-charcoal font-heading font-bold uppercase tracking-wide text-sm group-hover:text-primary transition-colors">{lp.h1}</p>
+                  <p class="text-body text-xs mt-1 line-clamp-2">{lp.intro}</p>
+                </div>
+                <svg class="w-5 h-5 text-body-light group-hover:text-primary transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            ))}
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  )}
 
   <BrandMarquee label="Brands We Supply" brands={brands} theme="white" speed={45} />
 

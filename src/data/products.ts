@@ -338,6 +338,26 @@ export const products: Product[] = [
     ],
     metaTitle: "Fatra PVC Membrane Bristol | Single-Ply Flat Roofing | Ashmead Roofing Supplies",
     metaDescription: "Buy Fatra PVC flat roofing membrane in Bristol at Ashmead Roofing Supplies. Commercial-grade, hot-air welded, trade prices, expert advice, fast delivery."
+  },
+  {
+    slug: "calor-gas",
+    name: "Calor Gas",
+    h1: "Calor Gas Bristol",
+    shortDesc: "Authorised Calor dealer in Keynsham — propane and butane cylinders for roofing torches, site heating and domestic use across Bristol, Bath and Somerset.",
+    longDesc: "Ashmead Roofing Supplies is an authorised Calor Gas dealer, supplying propane and butane cylinders from our Keynsham depot. Whether you need propane for roofing torches and flat roof work, or butane for site heating and domestic appliances, we carry a range of cylinder sizes for immediate collection. As a trade counter serving roofers across Bristol, Bath, Somerset, Gloucester and Wiltshire, we understand the demands of working with gas on site — and we stock the cylinders that working roofers rely on day to day. Our Calor dealership means you can pick up your roofing materials and your gas from the same counter, saving time on your way to site. We supply Calor propane cylinders in 6kg, 13kg and 19kg sizes, and butane in 4.5kg, 7kg and 15kg sizes. Exchange your empty cylinder at the counter — no waiting, no ordering ahead for standard sizes. We also supply Calor regulators and accessories. Call us on 0117 986 0600 to confirm current stock before visiting.",
+    image: productImage("calor-gas"),
+    brands: ["Calor"],
+    features: [
+      "Authorised Calor Gas dealer",
+      "Propane cylinders — 6kg, 13kg and 19kg",
+      "Butane cylinders — 4.5kg, 7kg and 15kg",
+      "Same-day exchange on standard cylinder sizes",
+      "Regulators and gas accessories in stock",
+      "Ideal for roofing torches, site heating and domestic use",
+      "Collection from Keynsham depot, Mon–Fri 7am–4:30pm"
+    ],
+    metaTitle: "Calor Gas Bristol | Authorised Dealer | Ashmead Roofing Supplies Keynsham",
+    metaDescription: "Authorised Calor Gas dealer in Keynsham, Bristol. Propane and butane cylinders for trade and domestic use. Same-day cylinder exchange. Open Mon–Fri 7am–4:30pm."
   }
 ];
 
